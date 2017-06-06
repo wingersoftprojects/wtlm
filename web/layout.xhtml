@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/custom.css"/>
+        <h:outputStylesheet name="./css/style.css"/>
+
+        <title>WTL MANAGER</title>
+    </h:head>
+
+    <h:body class="pattern">
+        <div class="wrapper">
+            <div id="top" class="top">
+                <div id="header">
+
+                    <!--LOGO-->
+                    <div id="logo">
+
+                        <h1>
+                            <h:form id="frmheader">
+                                <span style="">  <a class="text_logo" href="http://wingersoft.co.ug">WTL MANAGER</a></span>
+                            </h:form>
+                        </h1>
+                    </div>
+
+                </div>
+
+            </div>
+            <div>
+                <ui:insert name="top">
+                    <ui:include src="menu.xhtml"/>
+                </ui:insert>
+            </div>
+            <div id="content" class="center_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+        <footer id="copyright">
+            <center>
+                <h:outputText value="Copyright ©2017 WINGERsoft | Powered by " style="font-weight: bolder"/>
+                <a href="http://www.wingersoft.co.ug" target="_blank">WINGERsoft Technologies</a>
+            </center>
+        </footer> 
+    </h:body>
+</html>

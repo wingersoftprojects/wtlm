@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>WTL MANAGER</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="form_menu">
+                <p:growl id="messages"/>
+                <p:menubar>
+                    <p:menuitem value="Home" icon="ui-icon-home"/>
+                    <p:submenu label="Task Tracker" icon="ui-icon-document">
+                        <p:menuitem value="New Task" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="View Tasks" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="Domain Tracker" icon="ui-icon-person">
+                        <p:menuitem value="New Domain" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="View Domains" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="License Tracker" icon="ui-icon-person">
+                        <p:menuitem value="Generate License" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="View License Details" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="Settings" icon="ui-icon-gear">
+                        <p:submenu label="User Management" icon="ui-icon-person">
+                            <p:menuitem value="User Details"/>
+                        </p:submenu>                      
+                        <p:submenu label="Package Settings" icon="ui-icon-cart">
+                            <p:menuitem value="New Package"/>
+                            <p:menuitem value="Edit Package"/>                                                    
+                        </p:submenu>
+                        <p:submenu label="Service Category Settings" icon="ui-icon-cart">
+                            <p:menuitem value="New Service Category"/>
+                            <p:menuitem value="Edit Service Category"/>                                                    
+                        </p:submenu>
+                    </p:submenu>
+                    <f:facet name="options">
+                        <p:menubar>
+                            <p:submenu label="Username" icon="ui-icon-person">              
+                                <p:menuitem value="Change Password"  icon="ui-icon-pencil"/>
+                                <p:menuitem value="Log Out" icon="ui-icon-extlink"/>
+                            </p:submenu>
+                        </p:menubar>
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 18, 2017, 6:09:32 PM
+    Author     : bajuna
+*/
+
+#logo a, #topmenu ul li a, #footmenu ul li a, #comments, body {
+    color: #3e3e3e!important;
+}
+
+/*#form_menu .ui-helper-clearfix{
+    display: -webkit-box !important;
+}*/
+
+.wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.grayed_out{
+    background: aliceblue;
+    height: 25px;
+    font-size: large;
+    font-weight: bold;
+}
+
+input[type=text],select {
+    font-size: 15px !important;
+}
+
+.ui-datatable {
+    display: table;
+    width: 100%;
+}
+
+.ui-datatable table {
+    table-layout: auto !important;
+}
