@@ -69,7 +69,18 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:outputLabel value="Assigned To:" style="font-weight: bolder"/>
+                                <p:outputLabel value="Client Name: " for="client_name" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu id="client_name">
+                                    <f:selectItem itemLabel="" itemValue=""/>
+                                    <f:selectItem itemLabel="Wence" itemValue="Wence" />
+                                    <f:selectItem itemLabel="Phillip" itemValue="Phillip" />
+                                    <f:selectItem itemLabel="Solomon" itemValue="Solomon" />
+                                </p:selectOneMenu>
+                            </td>
+                            <td>
+                                <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
                             </td>
                             <td>
                                 <p:selectCheckboxMenu id="assigned_to" label="Please Select" style="font-weight: bolder"> 
@@ -82,19 +93,22 @@
                             </td>
                         </tr>
                     </table>
-                    <table>
-                        <center>
-                            <tr>
-                                <td>
-                                    <p:commandButton value="ADD TASK" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
-                                </td>
-                                <td>
-                                    <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
-                                </td>
-                            </tr>
-                        </center>
-                    </table>
-                  
+                    <br></br>
+                    <center>
+                        <table>
+                            <center>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="ADD TASK" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                                    </td>
+                                </tr>
+                            </center>
+                        </table>
+                    </center>
+
                 </fieldset>
             </h:form>
         </div>

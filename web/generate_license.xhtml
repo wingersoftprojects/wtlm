@@ -21,15 +21,34 @@
                             <f:selectItem itemLabel="Phillip" itemValue="Phillip" />
                             <f:selectItem itemLabel="Solomon" itemValue="Solomon" />
                         </p:selectOneMenu>
+                        <p:outputLabel value="Application Name:" for="app_name"/>
+                        <p:selectOneMenu id="app_name">
+                            <f:selectItem itemLabel="--select app" itemValue="--select app"/>
+                            <f:selectItem itemLabel="Inventory Edge" itemValue="Inventory Edge" />
+                            <f:selectItem itemLabel="WTLM" itemValue="WTLM" />
+                            <f:selectItem itemLabel="BMS" itemValue="BMS" />
+                        </p:selectOneMenu>
                         <p:outputLabel value="Package Name:" for="package_name"/>
                         <p:selectOneMenu id="package_name">
-                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="--select package" itemValue="--select app"/>
                             <f:selectItem itemLabel="WTL 1GB" itemValue="WTL 1GB" />
                             <f:selectItem itemLabel="WTL 2GB" itemValue="WTL 2GB" />
                             <f:selectItem itemLabel="WTL 3GB" itemValue="WTL 3GB" />
                         </p:selectOneMenu>
+                        <p:outputLabel value="Amount Payable:" for="amount_payable"/>
+                        <p:inputText id="amount_payable"/>
+                        <p:outputLabel value="Years Payable:" for="years_payable"/>
+                        <p:inputText id="years_payable"/>
+                        <p:outputLabel value="Start Date:"/>
+                        <p:calendar styleClass="clsInput" id="start_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar>
                         <p:outputLabel value="Expiry Date:"/>
                         <p:calendar styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar>
+                        <p:outputLabel value="Last Renew Date:"/>
+                        <p:calendar styleClass="clsInput" id="last_renew_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <p:outputLabel value="Is Active?:" for="is_active"/>
@@ -38,24 +57,31 @@
                             <f:selectItem itemLabel="Yes" itemValue="1" />
                             <f:selectItem itemLabel="No" itemValue="0" />
                         </p:selectOneMenu>
-
-                        <p:commandButton value="Generate License Key" icon="ui-icon-disk"/>
-                        <p:commandButton value="CLEAR"  icon="ui-icon-cancel"/>
                     </p:panelGrid>
+                    <br></br>
+                    <table>
+                        <td></td>
+                        <td>
+                            <p:commandButton value="CLEAR"  icon="ui-icon-cancel" style="font-weight: bolder; font-size: 20px"/>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>                            
+                            <p:commandButton value="Generate Key" icon="ui-icon-disk" style="font-weight: bolder; font-size: 20px"/>
+                        </td>
+                    </table>
+
                 </p:fieldset>
                 <p:dataTable id="license_detail_table" var="item">
                     <p:column headerText="License Client-ID:">
-
                     </p:column>
-                    <p:column headerText="License Client Name:">
-
+                    <p:column headerText="License Code:">
+                        #{xf20bvded9iugkehdgysd879wvcyusadldsydgyhgvhavdhvcxuygycdhjds8eeweuebhhdsfuids889}
                     </p:column>
-                    <p:column headerText="Package Name:">
 
-                    </p:column>
-                    <p:column headerText="License Expiry Date">
-
-                    </p:column>                                        
                     <p:column headerText="">
                         <p:commandButton value="Edit" icon="ui-icon-pencil" title="View">
                         </p:commandButton>

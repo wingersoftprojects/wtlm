@@ -14,16 +14,16 @@
                 <p:menubar>
                     <p:menuitem value="Home" icon="ui-icon-home"/>
                     <p:submenu label="Task Tracker" icon="ui-icon-document">
-                        <p:menuitem value="New Task" icon="ui-icon-plusthick"/>                      
-                        <p:menuitem value="View Tasks" icon="ui-icon-folder-open"/>
+                        <p:menuitem value="New Task" action="task_detail?faces-redirect=true" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="View Tasks" action="task_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Domain Tracker" icon="ui-icon-person">
                         <p:menuitem value="New Domain" icon="ui-icon-plusthick"/>                      
                         <p:menuitem value="View Domains" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="License Tracker" icon="ui-icon-person">
-                        <p:menuitem value="Generate License" icon="ui-icon-plusthick"/>                      
-                        <p:menuitem value="View License Details" icon="ui-icon-folder-open"/>
+                        <p:menuitem value="Generate License" action="generate_license?faces-redirect=true" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="View License Details" action="license_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">
                         <p:submenu label="User Management" icon="ui-icon-person">
