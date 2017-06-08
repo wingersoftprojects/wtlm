@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="./Layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <h:form id="main_form">
+            <p:growl id="messages" showDetail="true" />
+            <p:panelGrid columns="2">                                
+                <p:fieldset legend="License Key Generator">
+                    <p:panelGrid columns="2" id="user_detail">                                                
+                        <p:outputLabel value="Client-ID:" for="client_id"/>
+                        <p:inputText id="client_id"/>
+                        <p:outputLabel value="Client Name:" for="client_name"/>
+                        <p:selectOneMenu id="client_name">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Wence" itemValue="Wence" />
+                            <f:selectItem itemLabel="Phillip" itemValue="Phillip" />
+                            <f:selectItem itemLabel="Solomon" itemValue="Solomon" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Package Name:" for="package_name"/>
+                        <p:selectOneMenu id="package_name">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="WTL 1GB" itemValue="WTL 1GB" />
+                            <f:selectItem itemLabel="WTL 2GB" itemValue="WTL 2GB" />
+                            <f:selectItem itemLabel="WTL 3GB" itemValue="WTL 3GB" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Expiry Date:"/>
+                        <p:calendar styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                            <p:ajax event="dateSelect" process="@this"/>
+                        </p:calendar>
+                        <p:outputLabel value="Is Active?:" for="is_active"/>
+                        <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                            <f:selectItem itemLabel="No" itemValue="0" />
+                        </p:selectOneMenu>
+
+                        <p:commandButton value="Generate License Key" icon="ui-icon-disk"/>
+                        <p:commandButton value="CLEAR"  icon="ui-icon-cancel"/>
+                    </p:panelGrid>
+                </p:fieldset>
+                <p:dataTable id="license_detail_table" var="item">
+                    <p:column headerText="License Client-ID:">
+
+                    </p:column>
+                    <p:column headerText="License Client Name:">
+
+                    </p:column>
+                    <p:column headerText="Package Name:">
+
+                    </p:column>
+                    <p:column headerText="License Expiry Date">
+
+                    </p:column>                                        
+                    <p:column headerText="">
+                        <p:commandButton value="Edit" icon="ui-icon-pencil" title="View">
+                        </p:commandButton>
+                        <p:commandButton value="Delete" process="@this">
+                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+

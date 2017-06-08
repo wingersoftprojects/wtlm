@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+        <div style="width: 100%;">
+            <h:form id="form_task_detail">
+                <p:growl showDetail="true" id="task_detail_messages"/>
+                <fieldset> 
+                    <legend>TASK DETAILS</legend>
+                    <table border="0" width="50%">
+                        <tr>
+                            <td>
+                                <h:outputText value="Description" style="font-weight: bolder"/>                                
+                            </td>
+                            <td>
+                                <h:inputTextarea cols="70" rows="4">
+                                    <f:ajax execute="@this"/>.
+                                </h:inputTextarea>
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
+                            </td>
+                            <td>
+                                <p:selectOneMenu id="task_category"  required="true" requiredMessage="Priority field is required!">
+                                    <f:selectItem itemLabel="Please Select" />                                    
+                                    <f:selectItem itemLabel="Web Design" itemValue="Web Design"/>
+                                    <f:selectItem itemLabel="Hosting" itemValue="Hosting"/>
+                                    <f:selectItem itemLabel="Domain Migration" itemValue="Domain Migration"/>
+                                    <f:selectItem itemLabel="Marketing" itemValue="Marketing"/>
+                                    <f:selectItem itemLabel="Proposal Writitng" itemValue="Proposal Writing"/>
+                                    <f:ajax execute="@this"/>
+                                </p:selectOneMenu>
+                            </td>
+                            <td>
+                                <h:outputText value="Priority:" style="font-weight: bolder"/>                            
+                            </td>
+                            <td>
+                                <p:selectOneMenu id="task_priority"  required="true" requiredMessage="Priority field is required!">
+                                    <f:selectItem itemLabel="Please Select" />                                    
+                                    <f:selectItem itemLabel="H" itemValue="H"/>
+                                    <f:selectItem itemLabel="M" itemValue="M"/>
+                                    <f:selectItem itemLabel="L" itemValue="L"/>                                   
+                                    <f:ajax execute="@this"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
+                            </td>
+                            <td>
+                                <p:calendar styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                                    <p:ajax event="dateSelect" process="@this"/>
+                                </p:calendar>
+                            </td>
+                            <td>
+                                <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
+                            </td>
+                            <td>
+                                <p:inputText value="" style="font-weight: bolder"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="Assigned To:" style="font-weight: bolder"/>
+                            </td>
+                            <td>
+                                <p:selectCheckboxMenu id="assigned_to" label="Please Select" style="font-weight: bolder"> 
+                                    <f:selectItem itemLabel="Phillip" itemValue="Phillip"/>
+                                    <f:selectItem itemLabel="Solomon" itemValue="Solomon"/>
+                                    <f:selectItem itemLabel="Lumber Jack" itemValue="Lumber Jack"/>                                   
+                                    <f:selectItem itemLabel="Lumber Jack Johns" itemValue="Lumber Jack Johns"/>                                   
+                                    <f:ajax execute="@this"/>
+                                </p:selectCheckboxMenu>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <center>
+                            <tr>
+                                <td>
+                                    <p:commandButton value="ADD TASK" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                                </td>
+                                <td>
+                                    <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                                </td>
+                            </tr>
+                        </center>
+                    </table>
+                  
+                </fieldset>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+
