@@ -13,85 +13,193 @@
                 <fieldset> 
                     <legend>TASK DETAILS</legend>
                     <table border="0" width="50%">
-                        <tr>
-                            <td>
-                                <h:outputText value="Description" style="font-weight: bolder"/>                                
-                            </td>
-                            <td>
-                                <h:inputTextarea cols="70" rows="4">
-                                    <f:ajax execute="@this"/>.
-                                </h:inputTextarea>
-                            </td>                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
-                            </td>
-                            <td>
-                                <p:selectOneMenu id="task_category"  required="true" requiredMessage="Priority field is required!">
-                                    <f:selectItem itemLabel="Please Select" />                                    
-                                    <f:selectItem itemLabel="Web Design" itemValue="Web Design"/>
-                                    <f:selectItem itemLabel="Hosting" itemValue="Hosting"/>
-                                    <f:selectItem itemLabel="Domain Migration" itemValue="Domain Migration"/>
-                                    <f:selectItem itemLabel="Marketing" itemValue="Marketing"/>
-                                    <f:selectItem itemLabel="Proposal Writitng" itemValue="Proposal Writing"/>
-                                    <f:ajax execute="@this"/>
-                                </p:selectOneMenu>
-                            </td>
-                            <td>
-                                <h:outputText value="Priority:" style="font-weight: bolder"/>                            
-                            </td>
-                            <td>
-                                <p:selectOneMenu id="task_priority"  required="true" requiredMessage="Priority field is required!">
-                                    <f:selectItem itemLabel="Please Select" />                                    
-                                    <f:selectItem itemLabel="H" itemValue="H"/>
-                                    <f:selectItem itemLabel="M" itemValue="M"/>
-                                    <f:selectItem itemLabel="L" itemValue="L"/>                                   
-                                    <f:ajax execute="@this"/>
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
-                            </td>
-                            <td>
-                                <p:calendar styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                                    <p:ajax event="dateSelect" process="@this"/>
-                                </p:calendar>
-                            </td>
-                            <td>
-                                <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
-                            </td>
-                            <td>
-                                <p:inputText value="" style="font-weight: bolder"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:outputLabel value="Client Name: " for="client_name" style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu id="client_name">
-                                    <f:selectItem itemLabel="" itemValue=""/>
-                                    <f:selectItem itemLabel="Wence" itemValue="Wence" />
-                                    <f:selectItem itemLabel="Phillip" itemValue="Phillip" />
-                                    <f:selectItem itemLabel="Solomon" itemValue="Solomon" />
-                                </p:selectOneMenu>
-                            </td>
-                            <td>
-                                <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
-                            </td>
-                            <td>
-                                <p:selectCheckboxMenu id="assigned_to" label="Please Select" style="font-weight: bolder"> 
-                                    <f:selectItem itemLabel="Phillip" itemValue="Phillip"/>
-                                    <f:selectItem itemLabel="Solomon" itemValue="Solomon"/>
-                                    <f:selectItem itemLabel="Lumber Jack" itemValue="Lumber Jack"/>                                   
-                                    <f:selectItem itemLabel="Lumber Jack Johns" itemValue="Lumber Jack Johns"/>                                   
-                                    <f:ajax execute="@this"/>
-                                </p:selectCheckboxMenu>
-                            </td>
-                        </tr>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Description" style="font-weight: bolder"/>                                
+                                </td>
+                                <td>
+                                    <h:inputTextarea value="#{task_detail.task_description}" cols="70" rows="4">
+                                        <f:ajax execute="@this"/>.
+                                    </h:inputTextarea>
+                                </td>                            
+                            </tr>
+                        </table>
+                        <br></br>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="task_category" value="#{task_detail.task_category_id}"  required="true" requiredMessage="Priority field is required!">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItem itemLabel="Hosting" itemValue="1"/>
+                                        <f:selectItem itemLabel="Website Design" itemValue="2"/>
+                                        <f:selectItem itemLabel="Proposal Writting" itemValue="3"/>
+                                        <f:selectItem itemLabel="CMS" itemValue="4"/>
+                                        <f:selectItem itemLabel="Training" itemValue="5"/>
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h:outputText value="Priority:" style="font-weight: bolder"/>                            
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="task_priority" value="#{task_detail.priority}" required="true" requiredMessage="Priority field is required!">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItem itemLabel="H" itemValue="H"/>
+                                        <f:selectItem itemLabel="M" itemValue="M"/>
+                                        <f:selectItem itemLabel="L" itemValue="L"/>                                   
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
+                                </td>                                
+                                <td>
+                                    <p:calendar value="#{task_detail.raise_date}" styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                                        <p:ajax event="dateSelect" process="@this"/>
+                                    </p:calendar>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
+                                </td>
+                                <td>
+                                    <p:inputText value="#{task_detail.raised_by}" style="font-weight: bolder"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="assigned_to" value="#{task_detail.assigned_to}" label="Please Select" style="font-weight: bolder"> 
+                                        <f:selectItem itemLabel="Please Select" /> 
+                                        <f:selectItem itemLabel="Phillip" itemValue="1"/>
+                                        <f:selectItem itemLabel="Solomon" itemValue="2"/>
+                                        <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
+                                        <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+
+                                <td>
+                                    <p:outputLabel value="Current Status: " style="font-weight: bolder"/>
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="status" value="#{task_detail.current_status}" style="font-weight: bolder"> 
+                                        <f:selectItem itemLabel="--select status" itemValue="--select status"/>
+                                        <f:selectItem itemLabel="PEND" itemValue="PEND"/>
+                                        <f:selectItem itemLabel="PROG" itemValue="PROG"/>
+                                        <f:selectItem itemLabel="COMP" itemValue="COMP"/>                                   
+
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                </td>
+                                <td></td>
+                                <td></td>                                
+                                <td></td>
+                                <td></td>
+
+                                <td>
+                                    <p:outputLabel value="Is Active?:" for="is_active" style="font-weight: bolder"/>
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="is_active" value="#{task_detail.is_active}" required="true" requiredMessage="Is active field is required">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                                        <f:selectItem itemLabel="No" itemValue="0" />
+                                    </p:selectOneMenu>
+
+                                </td>
+
+                            </tr>
+                        </table>
                     </table>
                     <br></br>
                     <center>
@@ -99,7 +207,11 @@
                             <center>
                                 <tr>
                                     <td>
-                                        <p:commandButton value="ADD TASK" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                                        <p:commandButton value="ADD TASK" action="#{task_detailBean.save_task(task_detail)}" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">
+                                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                                <p:graphicImage name="/images/ajax-loader.gif"/>
+                                            </p:dialog>
+                                        </p:commandButton>                                                                                                                                         
                                     </td>
                                     <td>
                                         <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         

@@ -8,38 +8,34 @@
     <ui:define name="content">
         <f:view>
             <h:form id="form_task_detail_view">
-                <p:dataTable id="task_detail_table" widgetVar="widget_task_detail_table"  var="item" rows="10"
+                <p:dataTable id="task_detail_table" value="#{task_detailBean.task_details}" widgetVar="widget_task_detail_table"  var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <p:column headerText="Task Number" filterMatchMode="contains"  style="width: 10px">
-
-                    </p:column>
-                    <p:column headerText="Client Name"  >
-
+                    #{item.task_detail_id}    
                     </p:column>
                     <p:column headerText="Assigned To" style="width: 30px" >
-
+                    #{item.assigned_to}     
                     </p:column>
                     <p:column headerText="Task Category" style="width: 20px" >
-
+                    #{item.task_category_id}     
                     </p:column>
                     <p:column headerText="Current Status" style="width: 15px">
-
+                    #{item.current_status}     
                     </p:column> 
                     <p:column headerText="Priority" filterMatchMode="contains"  style="width: 5px">
-
+                    #{item.priority} 
                     </p:column> 
                     <p:column   headerText="Raised Date" style="width: 20px">
-
+                    #{item.raise_date}     
                     </p:column>
-                    <p:column headerText="Completed Date" style="width: 20px">
-
+                    <p:column headerText="Raised By" style="width: 20px">
+                    #{item.raised_by}     
                     </p:column>
-                    <p:column headerText="Completed By" style="width: 30px">
-
+                    <p:column headerText="Is Active?" style="width: 30px">
+                    #{item.is_active}     
                     </p:column>
-
                     <p:column headerText="">
                         <p:commandLink id="view_task_detail" value="View">
                         </p:commandLink>
@@ -49,7 +45,7 @@
                         <p:commandLink  value=" | Completed">
                         </p:commandLink>
                         <p:commandLink  value=" | Cancel">
-                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this job?" icon="ui-icon-alert" />
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Yes"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
