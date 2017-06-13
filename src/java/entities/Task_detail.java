@@ -5,8 +5,6 @@
  */
 package entities;
 
-import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,14 +28,14 @@ public class Task_detail {
     private String Raised_by;
     private Date Raise_date;
     private int Completed_by;
-    private java.util.Date Complete_date;
+    private Date Complete_date;
     private String Comment;
-    private BigInteger Transactor_id;
+    private long Transactor_id;
     private int Is_active;
     private int Is_deleted;
-    private java.util.Date Add_date;
+    private Date Add_date;
     private int Add_by;
-    private java.util.Date Last_edit_date;
+    private Date Last_edit_date;
     private int Last_edit_by;
 
     public int getTask_detail_id() {
@@ -129,14 +127,6 @@ public class Task_detail {
         this.Comment = Comment;
     }
 
-    public BigInteger getTransactor_id() {
-        return Transactor_id;
-    }
-
-    public void setTransactor_id(BigInteger Transactor_id) {
-        this.Transactor_id = Transactor_id;
-    }
-
     public int getIs_active() {
         return Is_active;
     }
@@ -183,6 +173,20 @@ public class Task_detail {
 
     public void setLast_edit_by(int Last_edit_by) {
         this.Last_edit_by = Last_edit_by;
+    }
+
+    /**
+     * @return the Transactor_id
+     */
+    public long getTransactor_id() {
+        return Transactor_id;
+    }
+
+    /**
+     * @param Transactor_id the Transactor_id to set
+     */
+    public void setTransactor_id(long Transactor_id) {
+        this.Transactor_id = Transactor_id;
     }
 
 }

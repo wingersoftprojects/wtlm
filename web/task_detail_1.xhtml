@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+        <div style="width: 100%;">
+            <h:form id="form_task_detail">
+                <p:growl showDetail="true" id="task_detail_messages"/>
+                <fieldset title="TASK DETAILS"> 
+                                    <h:outputText value="Description" style="font-weight: bolder"/>                                
+                                    <h:inputTextarea value="#{task_detail.task_description}" cols="70" rows="4">
+                                        <f:ajax execute="@this"/>.
+                                    </h:inputTextarea>
+                                    <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
+                                    <p:selectOneMenu id="task_category" value="#{task_detail.task_category_id}"  required="true" requiredMessage="Priority field is required!">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItem itemLabel="Hosting" itemValue="1"/>
+                                        <f:selectItem itemLabel="Website Design" itemValue="2"/>
+                                        <f:selectItem itemLabel="Proposal Writting" itemValue="3"/>
+                                        <f:selectItem itemLabel="CMS" itemValue="4"/>
+                                        <f:selectItem itemLabel="Training" itemValue="5"/>
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                    <h:outputText value="Priority:" style="font-weight: bolder"/>                            
+                                    <p:selectOneMenu id="task_priority" value="#{task_detail.priority}" required="true" requiredMessage="Priority field is required!">
+                                        <f:selectItem itemLabel="Please Select" />                                    
+                                        <f:selectItem itemLabel="H" itemValue="H"/>
+                                        <f:selectItem itemLabel="M" itemValue="M"/>
+                                        <f:selectItem itemLabel="L" itemValue="L"/>                                   
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                    <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
+                                    <p:calendar value="#{task_detail.raise_date}" styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                                        <p:ajax event="dateSelect" process="@this"/>
+                                    </p:calendar>
+                                    <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
+                                    <p:inputText value="#{task_detail.raised_by}" style="font-weight: bolder"/>
+                                    <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
+                                    <p:selectOneMenu id="assigned_to" value="#{task_detail.assigned_to}" label="Please Select" style="font-weight: bolder"> 
+                                        <f:selectItem itemLabel="Please Select" /> 
+                                        <f:selectItem itemLabel="Phillip" itemValue="1"/>
+                                        <f:selectItem itemLabel="Solomon" itemValue="2"/>
+                                        <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
+                                        <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Current Status: " style="font-weight: bolder"/>
+                                    <p:selectOneMenu id="status" value="#{task_detail.current_status}" style="font-weight: bolder"> 
+                                        <f:selectItem itemLabel="--select status" itemValue="--select status"/>
+                                        <f:selectItem itemLabel="PEND" itemValue="PEND"/>
+                                        <f:selectItem itemLabel="PROG" itemValue="PROG"/>
+                                        <f:selectItem itemLabel="COMP" itemValue="COMP"/>                                   
+
+                                        <f:ajax execute="@this"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Is Active?:" for="is_active" style="font-weight: bolder"/>
+                                    <p:selectOneMenu id="is_active" value="#{task_detail.is_active}" required="true" requiredMessage="Is active field is required">
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                                        <f:selectItem itemLabel="No" itemValue="0" />
+                                    </p:selectOneMenu>
+                                        <p:commandButton value="ADD TASK" action="#{task_detailBean.save_task(task_detail)}" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">
+                                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                                <p:graphicImage name="/images/ajax-loader.gif"/>
+                                            </p:dialog>
+                                        </p:commandButton>                                                                                                                                         
+                                        <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>                                                                                                                                         
+                </fieldset>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+
