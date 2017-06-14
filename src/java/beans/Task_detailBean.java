@@ -37,22 +37,104 @@ public class Task_detailBean {
 
     public void saveTask_detail(Task_detail task_detail) {
         String sql = "";
-        sql = "INSERT INTO task_detail(assigned_to,task_description,task_category_id,current_status,priority,raised_by,raise_date,is_active,is_deleted,add_date,add_by) VALUES(?,?,?,?,?,?,?,?,0,now(),1)";
+        sql = "INSERT INTO task_detail(task_detail_id,assigned_to,task_description,task_category_id,current_status,priority,raised_by,raise_date,completed_by,complete_date,comment,transactor_id,is_active,is_deleted,add_date,add_by,last_edit_date,last_edit_by) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,0,NOW(),1,?,?)";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
-            Task_detail task_detail1 = new Task_detail();
-            //conn = DBConnection.getMySQLConnection();
+//            Task_detail task_detail1 = new Task_detail();
             //ps = conn.prepareStatement(sql);
-            ps.setInt(1, task_detail.getAssigned_to());
-            ps.setString(2, task_detail.getTask_description());
-            ps.setInt(3, task_detail.getTask_category_id());
-            ps.setString(4, task_detail.getCurrent_status());
-            ps.setString(5, task_detail.getPriority());
-            ps.setString(6, task_detail.getRaised_by());
-            ps.setDate(7, new java.sql.Date(task_detail.getRaise_date().getTime()));
-            ps.setInt(8, task_detail.getIs_active());
-            i = ps.executeUpdate();
+            try {
+            //conn = DBConnection.getMySQLConnection();
+                ps.setInt(1, task_detail.getTask_detail_id());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(2, task_detail.getAssigned_to());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setString(3, task_detail.getTask_description());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(4, task_detail.getTask_category_id());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                 ps.setString(5, task_detail.getCurrent_status());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setString(6, task_detail.getPriority());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setString(7, task_detail.getRaised_by());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setDate(8, new java.sql.Date(task_detail.getRaise_date().getTime()));
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(9, task_detail.getCompleted_by());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setDate(10, new java.sql.Date(task_detail.getComplete_date().getTime()));
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setLong(11, task_detail.getTransactor_id());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(12, task_detail.getIs_active());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(13, task_detail.getIs_deleted());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setDate(14, new java.sql.Date(task_detail.getAdd_date().getTime()));
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(15, task_detail.getAdd_by());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setDate(16, new java.sql.Date(task_detail.getLast_edit_date().getTime()));
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                ps.setInt(17, task_detail.getLast_edit_by());
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                i = ps.executeUpdate();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+             
             this.clearTask_detail(task_detail);
             System.out.println("Added succesfully!!!");
         } catch (SQLException se) {
@@ -67,7 +149,7 @@ public class Task_detailBean {
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
-            rs=ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Task_detail td = new Task_detail();
                 this.setTask_detailFromResultset(td, rs);
