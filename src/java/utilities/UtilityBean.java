@@ -1,7 +1,13 @@
 package utilities;
 
+import connections.DBConnection;
 import java.io.Serializable;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import static java.sql.Types.VARCHAR;
 import java.text.DecimalFormat;
+import java.util.Date;
 import javax.faces.bean.*;
 
 @ManagedBean
@@ -44,6 +50,21 @@ public class UtilityBean implements Serializable {
         } else {
             return "";
         }
+    }
+
+    public Date getCURRENT_SERVER_DATE() {
+        Date aDate = null;
+        String sql = "{call sp_get_current_system_datetime(?)}";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                CallableStatement cs = conn.prepareCall(sql);) {
+            cs.registerOutParameter("out_current_system_datetime", VARCHAR);
+            cs.executeQuery();
+            aDate = new Date(cs.getTimestamp("out_current_system_datetime").getTime());
+        } catch (SQLException sqe) {
+            aDate = null;
+        }
+        return aDate;
     }
 
 }

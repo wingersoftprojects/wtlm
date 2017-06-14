@@ -69,13 +69,14 @@
 
                 </p:panelGrid>
                 <p:panelGrid columns="3">
-                    <p:commandButton value="SAVE (ALT+S)" action="#{task_detailBean.saveTask_detail(task_detail)}" accesskey="s" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                    <p:commandButton value="SAVE (ALT+S)" action="#{task_detailBean.insertTask_detail(task_detail)}" accesskey="s" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                         <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                             <p:graphicImage name="/images/ajax-loader.gif"/>
                         </p:dialog>
                     </p:commandButton>
-                    <p:commandButton value="CLEAR" style="font-weight: bolder; font-size: 20px"/>  
+                    <p:commandButton value="CLEAR (ALT+C)" action="#{task_detailBean.clearTask_detail(task_detail)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
                 </p:panelGrid>
+                <p:messages/>
             </h:form>
         </div>
     </ui:define>
