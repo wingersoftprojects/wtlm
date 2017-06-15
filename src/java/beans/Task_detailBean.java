@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
+import org.joda.time.Days;
 import utilities.UtilityBean;
 
 /**
@@ -30,11 +32,20 @@ import utilities.UtilityBean;
 @SessionScoped
 public class Task_detailBean {
 
+    private Task_detail task_detail = new Task_detail();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
     private DataSource ds;
+
+    public Task_detail getTask_detail() {
+        return task_detail;
+    }
+
+    public void setTask_detail(Task_detail task_detail) {
+        this.task_detail = task_detail;
+    }
 
     public Task_detailBean() {
     }
@@ -288,6 +299,15 @@ public class Task_detailBean {
             aTask_detail.setRaised_by("");
             aTask_detail.setIs_active(0);
         }
+    }
+    private int task_age;
+
+    public int getTask_age() {
+        return task_age;
+    }
+
+    public void setTask_age(int task_age) {
+        this.task_age = task_age;
     }
 
 }
