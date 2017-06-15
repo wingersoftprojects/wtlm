@@ -15,11 +15,11 @@
                 </p:panel>
                 <p:panelGrid columns="2">
                     <h:outputText value="Description" style="font-weight: bolder"/>                                
-                    <h:inputTextarea value="#{task_detail.task_description}" cols="70" rows="4">
+                    <h:inputTextarea value="#{task_detailBean.task_detailObject.task_description}" cols="70" rows="4">
                         <f:ajax execute="@this"/>.
                     </h:inputTextarea>
                     <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
-                    <p:selectOneMenu id="task_category" value="#{task_detail.task_category_id}"  required="true" requiredMessage="Priority field is required!">
+                    <p:selectOneMenu id="task_category" value="#{task_detailBean.task_detailObject.task_category_id}"  required="true" requiredMessage="Priority field is required!">
                         <f:selectItem itemLabel="Please Select" />                                    
                         <f:selectItem itemLabel="Hosting" itemValue="1"/>
                         <f:selectItem itemLabel="Website Design" itemValue="2"/>
@@ -29,7 +29,7 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <h:outputText value="Priority:" style="font-weight: bolder"/>                            
-                    <p:selectOneMenu id="task_priority" value="#{task_detail.priority}" required="true" requiredMessage="Priority field is required!">
+                    <p:selectOneMenu id="task_priority" value="#{task_detailBean.task_detailObject.priority}" required="true" requiredMessage="Priority field is required!">
                         <f:selectItem itemLabel="Please Select" />                                    
                         <f:selectItem itemLabel="H" itemValue="H"/>
                         <f:selectItem itemLabel="M" itemValue="M"/>
@@ -37,13 +37,13 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
-                    <p:calendar value="#{task_detail.raise_date}" styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                    <p:calendar value="#{task_detailBean.task_detailObject.raise_date}" styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
                     <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
-                    <p:inputText value="#{task_detail.raised_by}" style="font-weight: bolder"/>
+                    <p:inputText value="#{task_detailBean.task_detailObject.raised_by}" style="font-weight: bolder"/>
                     <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
-                    <p:selectOneMenu id="assigned_to" value="#{task_detail.assigned_to}" label="Please Select" style="font-weight: bolder"> 
+                    <p:selectOneMenu id="assigned_to" value="#{task_detailBean.task_detailObject.assigned_to}" label="Please Select" style="font-weight: bolder"> 
                         <f:selectItem itemLabel="Please Select" /> 
                         <f:selectItem itemLabel="Phillip" itemValue="1"/>
                         <f:selectItem itemLabel="Solomon" itemValue="2"/>
@@ -52,7 +52,7 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Current Status: " style="font-weight: bolder"/>
-                    <p:selectOneMenu id="status" value="#{task_detail.current_status}" style="font-weight: bolder"> 
+                    <p:selectOneMenu id="status" value="#{task_detailBean.task_detailObject.current_status}" style="font-weight: bolder"> 
                         <f:selectItem itemLabel="--select status" itemValue="--select status"/>
                         <f:selectItem itemLabel="PEND" itemValue="PEND"/>
                         <f:selectItem itemLabel="PROG" itemValue="PROG"/>
@@ -60,7 +60,7 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Is Active?:" for="is_active" style="font-weight: bolder"/>
-                    <p:selectOneMenu id="is_active" value="#{task_detail.is_active}" required="true" requiredMessage="Is active field is required">
+                    <p:selectOneMenu id="is_active" value="#{task_detailBean.task_detailObject.is_active}" required="true" requiredMessage="Is active field is required">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItem itemLabel="Yes" itemValue="1" />
                         <f:selectItem itemLabel="No" itemValue="0" />
@@ -68,12 +68,12 @@
 
                 </p:panelGrid>
                 <p:panelGrid columns="3">
-                    <p:commandButton value="SAVE (ALT+S)" action="#{task_detailBean.insertTask_detail(task_detail)}" accesskey="s" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                    <p:commandButton value="SAVE (ALT+S)" action="#{task_detailBean.insertTask_detail(task_detailBean.task_detailObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                         <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                             <p:graphicImage name="/images/ajax-loader.gif"/>
                         </p:dialog>
                     </p:commandButton>
-                    <p:commandButton value="CLEAR (ALT+C)" action="#{task_detailBean.clearTask_detail(task_detail)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
+                    <p:commandButton value="CLEAR (ALT+C)" action="#{task_detailBean.clearTask_detail(task_detailBean.task_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
                 </p:panelGrid>
                 <p:messages/>
             </h:form>

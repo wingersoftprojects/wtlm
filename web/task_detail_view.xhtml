@@ -4,52 +4,56 @@
                 template="./layout.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
-
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
         <f:view>
             <f:event listener="#{task_detailBean.clearTask_detail(aTask_detail)}" type="preRenderView" />   
             <h:form id="form_task_detail_view">
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
-                    <p:outputLabel value="All Tasks View" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
+                    <p:outputLabel value="Task View" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
-                <h:panelGrid/>
-                <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">
-                    <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="add_date_from" value="AddDate(From):" style="font-weight: bolder"/>
-                    <p:calendar styleClass="clsInputTaskFilter" id="calAddDateFrom" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{task_detail.add_date}">
-                    </p:calendar>
-                    <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="add_date_to" value="AddDate(To):" style="font-weight: bolder"/>
-                    <p:calendar styleClass="clsInputTaskFilter" id="calAddDateTo" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{task_detail.add_date}">
-                    </p:calendar>
-                    <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="priority" value="Priority:" style="font-weight: bolder"/>
-                    <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.priority}">
-                        <f:selectItem itemLabel="Please Select" />                                    
-                        <f:selectItem itemLabel="H" itemValue="H"/>
-                        <f:selectItem itemLabel="M" itemValue="M"/>
-                        <f:selectItem itemLabel="L" itemValue="L"/>                                   
-                        <f:ajax execute="@this"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="assigned_to" value="Assigned To:" style="font-weight: bolder"/>
-                    <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.priority}">
-                        <f:selectItem itemLabel="Please Select" /> 
-                        <f:selectItem itemLabel="Phillip" itemValue="1"/>
-                        <f:selectItem itemLabel="Solomon" itemValue="2"/>
-                        <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
-                        <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
-                        <f:ajax execute="@this"/>
-                    </p:selectOneMenu>      
-                    <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="status" value="Current Status:" style="font-weight: bolder"/>
-                    <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.current_status}">
-                        <f:selectItem itemLabel="--select status" itemValue="--select status"/>
-                        <f:selectItem itemLabel="PEND" itemValue="PEND"/>
-                        <f:selectItem itemLabel="PROG" itemValue="PROG"/>
-                        <f:selectItem itemLabel="COMP" itemValue="COMP"/> 
-                        <f:ajax execute="@this"/>
-                    </p:selectOneMenu>      
-                    <p:commandButton styleClass="clsButtonTaskFilter" id="cmdbSearch" value="Search" update="task_detail_table" />
-                </h:panelGrid>
-                <h:panelGrid/>                
-                <p:dataTable id="task_detail_table" value="#{task_detailBean.task_details}" widgetVar="widget_task_detail_table"  var="item" rows="10"
+                <div class="ui-fluid">
+                    <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="add_date_from" value="From Raise Date:" style="font-weight: bolder"/>
+                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateFrom" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{task_detail.raise_date}">
+                        </p:calendar>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="add_date_to" value="To Raise Date:" style="font-weight: bolder"/>
+                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateTo" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{task_detail.raise_date2}">
+                        </p:calendar>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="priority" value="Priority:" style="font-weight: bolder"/>
+                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.priority}">
+                            <f:selectItem itemLabel="Please Select" />                                    
+                            <f:selectItem itemLabel="H" itemValue="H"/>
+                            <f:selectItem itemLabel="M" itemValue="M"/>
+                            <f:selectItem itemLabel="L" itemValue="L"/>                                   
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="assigned_to" value="Assigned To:" style="font-weight: bolder"/>
+                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.assigned_to}">
+                            <f:selectItem itemLabel="Please Select" /> 
+                            <f:selectItem itemLabel="Phillip" itemValue="1"/>
+                            <f:selectItem itemLabel="Solomon" itemValue="2"/>
+                            <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
+                            <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>      
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="status" value="Current Status:" style="font-weight: bolder"/>
+                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.current_status}">
+                            <f:selectItem itemLabel="--select status"/>
+                            <f:selectItem itemLabel="PEND" itemValue="PEND"/>
+                            <f:selectItem itemLabel="PROG" itemValue="PROG"/>
+                            <f:selectItem itemLabel="COMP" itemValue="COMP"/> 
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>   
+                        <p:outputLabel value=""/>
+
+                        <p:commandButton styleClass="clsButtonTaskFilter" id="cmdbSearch" value="Search">
+                            <p:ajax listener="#{task_detailBean.searchTask_detail(task_detail)}" process="search_filter" update="task_detail_table"/>
+                        </p:commandButton>
+                    </h:panelGrid>
+                </div>
+                <p:dataTable id="task_detail_table" value="#{task_detailBean.task_detailList}" widgetVar="widget_task_detail_table"  var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
@@ -85,8 +89,7 @@
                         <p:commandLink id="view_task_detail" value="View">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Edit">
-
+                        <p:commandLink  value=" | Edit" action="#{task_detailBean.redirectEdit(item)}">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Cancel">
