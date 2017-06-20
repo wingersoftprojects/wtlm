@@ -1,0 +1,15 @@
+
+.clsPanelTaskFilterTitle{
+    width: 100%;
+    text-align: center;
+    background-color: bisque;
+}
+.clsLabelTaskFilterTitle{
+    color: black;
+}
+.clsInputTaskFilter{
+    float: left;
+}
+.clsButtonTaskFilter{
+    text-align: center;
+}

@@ -14,7 +14,7 @@
                 <p:menubar>
                     <p:menuitem value="Home" icon="ui-icon-home"/>
                     <p:submenu label="Task Tracker" icon="ui-icon-document">
-                        <p:menuitem value="New Task" action="task_detail?faces-redirect=true" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="New Task" action="#{task_detailBean.redirectNew()}" icon="ui-icon-plusthick"/>                      
                         <p:menuitem value="View Tasks" action="task_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Domain Tracker" icon="ui-icon-person">

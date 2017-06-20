@@ -12,11 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
@@ -30,13 +28,35 @@ import utilities.UtilityBean;
 @SessionScoped
 public class Task_detailBean {
 
+    private Task_detail task_detail = new Task_detail();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
-    private DataSource ds;
+    private List<Task_detail> Task_detailList;
+    private Task_detail Task_detailObject;
+    private int task_age;
+
+    public Task_detail getTask_detail() {
+        return task_detail;
+    }
+
+    public void setTask_detail(Task_detail task_detail) {
+        this.task_detail = task_detail;
+    }
 
     public Task_detailBean() {
+        this.Task_detailObject=new Task_detail();
+    }
+    
+    public String redirectEdit(Task_detail aTask_detail) {
+       this.Task_detailObject=aTask_detail; 
+        return "task_detail?faces-redirect=true";
+    }
+    
+    public String redirectNew() {
+       this.Task_detailObject=new Task_detail(); 
+        return "task_detail?faces-redirect=true";
     }
 
     public void insertTask_detail(Task_detail task_detail) {
@@ -249,7 +269,7 @@ public class Task_detailBean {
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
-            rs = ps.executeQuery();
+            rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Task_detail td = new Task_detail();
                 this.setTask_detailFromResultset(td, rs);
@@ -264,6 +284,7 @@ public class Task_detailBean {
     public void setTask_detailFromResultset(Task_detail aTask_detail, ResultSet rs) {
         try {
             aTask_detail.setTask_detail_id(rs.getInt("task_detail_id"));
+            aTask_detail.setTask_description(rs.getString("task_description"));
             aTask_detail.setAssigned_to(rs.getInt("assigned_to"));
             aTask_detail.setTask_category_id(rs.getInt("task_category_id"));
             aTask_detail.setCurrent_status(rs.getString("current_status"));
@@ -288,6 +309,77 @@ public class Task_detailBean {
             aTask_detail.setRaised_by("");
             aTask_detail.setIs_active(0);
         }
+    }
+
+    public void searchTask_detail(Task_detail aTask_detail) {
+        ResultSet res = null;
+        this.Task_detailList = new ArrayList<>();
+        String sql = "SELECT * FROM task_detail WHERE is_deleted=0 AND is_active=1";
+        String wheresql = "";
+        String orderby = "";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            if (aTask_detail.getPriority().length() > 0) {
+                wheresql = wheresql + " AND priority='" + aTask_detail.getPriority() + "'";
+            }
+            if (aTask_detail.getAssigned_to() > 0) {
+                wheresql = wheresql + " AND assigned_to=" + aTask_detail.getAssigned_to();
+            }
+            if (aTask_detail.getCurrent_status().length() > 0) {
+                wheresql = wheresql + " AND current_status='" + aTask_detail.getCurrent_status() + "'";
+            }
+            if (aTask_detail.getRaise_date() != null && aTask_detail.getRaise_date2() != null) {
+                wheresql = wheresql + " AND raise_date BETWEEN '" + new java.sql.Date(aTask_detail.getRaise_date().getTime()) + "' AND '" + new java.sql.Date(aTask_detail.getRaise_date2().getTime()) + "'";
+            }
+            orderby = " ORDER BY raise_date DESC";
+            sql = sql + wheresql + orderby;
+            res = ps.executeQuery(sql);
+            Task_detail td;
+            while (res.next()) {
+                td = new Task_detail();
+                this.setTask_detailFromResultset(td, res);
+                this.Task_detailList.add(td);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public int getTask_age() {
+        return task_age;
+    }
+
+    public void setTask_age(int task_age) {
+        this.task_age = task_age;
+    }
+
+    /**
+     * @return the Task_detailList
+     */
+    public List<Task_detail> getTask_detailList() {
+        return Task_detailList;
+    }
+
+    /**
+     * @param Task_detailList the Task_detailList to set
+     */
+    public void setTask_detailList(List<Task_detail> Task_detailList) {
+        this.Task_detailList = Task_detailList;
+    }
+
+    /**
+     * @return the Task_detailObject
+     */
+    public Task_detail getTask_detailObject() {
+        return Task_detailObject;
+    }
+
+    /**
+     * @param Task_detailObject the Task_detailObject to set
+     */
+    public void setTask_detailObject(Task_detail Task_detailObject) {
+        this.Task_detailObject = Task_detailObject;
     }
 
 }

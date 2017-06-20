@@ -37,6 +37,8 @@ public class Task_detail {
     private int Add_by;
     private Date Last_edit_date;
     private int Last_edit_by;
+    //not from table
+    private Date Raise_date2;
 
     public int getTask_detail_id() {
         return Task_detail_id;
@@ -187,6 +189,20 @@ public class Task_detail {
      */
     public void setTransactor_id(long Transactor_id) {
         this.Transactor_id = Transactor_id;
+    }
+
+    /**
+     * @return the Raise_date2
+     */
+    public Date getRaise_date2() {
+        return Raise_date2;
+    }
+
+    /**
+     * @param Raise_date2 the Raise_date2 to set
+     */
+    public void setRaise_date2(Date Raise_date2) {
+        this.Raise_date2 = Raise_date2;
     }
 
 }
