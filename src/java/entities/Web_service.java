@@ -5,11 +5,9 @@
  */
 package entities;
 
-import java.math.BigInteger;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 
 /**
  *
@@ -19,6 +17,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 
 public class Web_service {
+
+    private static final long serialVersionUID = 1L;
+    
     private int Web_service_id;
     private int Host_platform_id;
     private long Transactor_id;
@@ -27,7 +28,7 @@ public class Web_service {
     private int Service_category_id;
     private int Package_detail_id;
     private Date Start_date;
-    private Date Expiry_date;
+    private Date Expire_date;
     private Date Last_renew_date;
     private float Amount_payable;
     private int Years_payable;
@@ -106,14 +107,15 @@ public class Web_service {
         this.Start_date = Start_date;
     }
 
-    public Date getExpiry_date() {
-        return Expiry_date;
+    public Date getExpire_date() {
+        return Expire_date;
     }
 
-    public void setExpiry_date(Date Expiry_date) {
-        this.Expiry_date = Expiry_date;
+    public void setExpire_date(Date Expire_date) {
+        this.Expire_date = Expire_date;
     }
 
+    
     public Date getLast_renew_date() {
         return Last_renew_date;
     }
@@ -217,6 +219,5 @@ public class Web_service {
     public void setLast_edit_by(int Last_edit_by) {
         this.Last_edit_by = Last_edit_by;
     }
-    
-    
+
 }

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <f:view>
+            <h:form id="form_view_web_service_detail">
+                <p:dataTable id="web_service_detail_table" widgetVar="widget_web_service_detail_table"  var="item" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,30,50,100">
+                    <p:column headerText="Domain No." filterMatchMode="contains"  style="width: 20px">
+
+                    </p:column>
+
+                    <p:column headerText="Domain Name">
+
+                    </p:column> 
+                    <p:column headerText="Host Platform" style="width: 20px" >
+
+                    </p:column>
+                    <p:column headerText="Package Name" filterMatchMode="contains"  style="width: 20px">
+
+                    </p:column> 
+                    <p:column   headerText="Start Date" style="width: 20px">
+
+                    </p:column>
+                    <p:column headerText="Expiry Date" style="width: 20px">
+
+                    </p:column>
+                    <p:column headerText="Last Renew Date" style="width: 20px">
+
+                    </p:column>
+                    <p:column headerText="Years Payable" style="width: 20px">
+
+                    </p:column>
+                    <p:column headerText="Narration">
+
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandLink id="view_web_service_detail" value="View">
+                        </p:commandLink>
+
+                        <p:commandLink  value=" | In-progress">
+                        </p:commandLink>
+                        <p:commandLink  value=" | Completed">
+                        </p:commandLink>
+                        <p:commandLink  value=" | Cancel">
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert" />
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>                                               
+
+                        <p:commandLink  value=" | Edit">
+
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+        <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+            <f:facet name="default">
+                <h:outputText value="Status: StandBy" />
+            </f:facet>
+
+            <f:facet name="start">
+
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="Status: Completed" />
+            </f:facet>
+        </p:ajaxStatus>
+
+    </ui:define>
+
+</ui:composition>
+
