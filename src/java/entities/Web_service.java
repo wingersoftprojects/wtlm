@@ -28,6 +28,7 @@ public class Web_service {
     private int Service_category_id;
     private int Package_detail_id;
     private Date Start_date;
+    private Date Start_date2;
     private Date Expire_date;
     private Date Last_renew_date;
     private float Amount_payable;
@@ -218,6 +219,20 @@ public class Web_service {
 
     public void setLast_edit_by(int Last_edit_by) {
         this.Last_edit_by = Last_edit_by;
+    }
+
+    /**
+     * @return the Start_date2
+     */
+    public Date getStart_date2() {
+        return Start_date2;
+    }
+
+    /**
+     * @param Start_date2 the Start_date2 to set
+     */
+    public void setStart_date2(Date Start_date2) {
+        this.Start_date2 = Start_date2;
     }
 
 }

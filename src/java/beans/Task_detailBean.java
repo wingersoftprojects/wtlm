@@ -165,8 +165,7 @@ public class Task_detailBean {
 
     public void updateTask_detail(Task_detail task_detail) {
         String sql = "";
-        sql = "UPDATE task_detail SET "
-                + "assigned_to=?,task_description=?,task_category_id=?,current_status=?,"
+        sql = "UPDATE task_detail SET assigned_to=?,task_description=?,task_category_id=?,current_status=?,"
                 + "priority=?,raised_by=?,raise_date=?,completed_by=?,"
                 + "complete_date=?,comment=?,transactor_id=?,is_active=?,"
                 + "is_deleted=?,last_edit_date=?,last_edit_by=? "
@@ -291,23 +290,42 @@ public class Task_detailBean {
             aTask_detail.setPriority(rs.getString("priority"));
             aTask_detail.setRaise_date(rs.getDate("raise_date"));
             aTask_detail.setRaised_by(rs.getString("raised_by"));
+            aTask_detail.setComplete_date(rs.getDate("complete_date"));
+            aTask_detail.setCompleted_by(rs.getInt("completed_by"));
+            aTask_detail.setComment(rs.getString("comment"));
+            aTask_detail.setTransactor_id(rs.getLong("transactor_id"));
             aTask_detail.setIs_active(rs.getInt("is_active"));
+            aTask_detail.setIs_deleted(rs.getInt("is_deleted"));
+            aTask_detail.setAdd_date(rs.getDate("add_date"));
+            aTask_detail.setAdd_by(rs.getInt("add_by"));
+            aTask_detail.setLast_edit_date(rs.getDate("last_edit_date"));
+            aTask_detail.setLast_edit_by(rs.getInt("last_edit_by"));
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
 
     public void clearTask_detail(Task_detail aTask_detail) {
-        if (null != aTask_detail) {
+        if (null != aTask_detail) {            
             aTask_detail.setTask_detail_id(0);
-            aTask_detail.setAssigned_to(0);
             aTask_detail.setTask_description("");
+            aTask_detail.setAssigned_to(0);
             aTask_detail.setTask_category_id(0);
             aTask_detail.setCurrent_status("");
             aTask_detail.setPriority("");
             aTask_detail.setRaise_date(null);
             aTask_detail.setRaised_by("");
+            aTask_detail.setComplete_date(null);
+            aTask_detail.setCompleted_by(0);
+            aTask_detail.setComment("");
+            aTask_detail.setTransactor_id(0);
             aTask_detail.setIs_active(0);
+            aTask_detail.setIs_deleted(0);
+            aTask_detail.setAdd_date(null);
+            aTask_detail.setAdd_by(0);
+            aTask_detail.setLast_edit_date(null);
+            aTask_detail.setLast_edit_by(0);
+            
         }
     }
 

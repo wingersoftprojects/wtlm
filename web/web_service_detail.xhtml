@@ -9,111 +9,97 @@
     <ui:define name="content">
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
-             <p:panel style="background-color:bisque">
-                    <h:outputText value="DOMAIN DETAILS" style="font-weight: bolder"/> 
-                </p:panel>
-            <p:panelGrid columns="2" style="width:100%">                                
-                <p:fieldset  style="width: 92%">
-                    <p:panelGrid columns="2" id="domain_detail">                                                
-                        <p:outputLabel value="Client Name:" for="transactor_id"/>
-                        <p:selectOneMenu id="transactor_id" value="#{web_service.transactor_id}">
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItem itemLabel="Solomon" itemValue="1" />
-                            <f:selectItem itemLabel="Phillip" itemValue="2" />
-                        </p:selectOneMenu>
+            <p:fieldset  legend="Domain Details" style="width: 92%">                   
+                <p:panelGrid columns="4" id="domain_detail">                                                
+                    <p:outputLabel value="Client Name:" for="transactor_id"/>
+                    <p:selectOneMenu id="transactor_id" value="#{web_serviceBean.web_serviceObject.transactor_id}" required="true" requiredMessage="Client Name field is required!">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="Solomon" itemValue="1" />
+                        <f:selectItem itemLabel="Phillip" itemValue="2" />
+                    </p:selectOneMenu>
 
-                        <p:outputLabel value="Domain Name:" for="web_service_id"/>
-                        <p:inputText id="web_service_id" value="#{web_service.domain_name}"/>
+                    <p:outputLabel value="Domain Name:" for="web_service_id"/>
+                    <p:inputText id="web_service_id" value="#{web_serviceBean.web_serviceObject.domain_name}" required="true" requiredMessage="Domain Name field is required!"/>
 
-                        <p:outputLabel value="Host Platform:" for="host_platform_id"/>
-                        <p:selectOneMenu id="host_platform_id" value="#{web_service.host_platform_id}">
-                            <f:selectItem itemLabel="--select host" itemValue="--select host"/>
-                            <f:selectItem itemLabel="Wingersoft" itemValue="1" />
-                        </p:selectOneMenu>
+                    <p:outputLabel value="Host Platform:" for="host_platform_id"/>
+                    <p:selectOneMenu id="host_platform_id" value="#{web_serviceBean.web_serviceObject.host_platform_id}" required="true" requiredMessage="Host Platform field is required!">
+                        <f:selectItem itemLabel="--select host" itemValue="--select host"/>
+                        <f:selectItem itemLabel="Just Host" itemValue="1" />
+                        <f:selectItem itemLabel="Good Host" itemValue="2" />
+                    </p:selectOneMenu>
 
-                        <p:outputLabel value="Service Category:" for="service_category_id"/>
-                        <p:selectOneMenu id="service_category_id" value="#{web_service.service_category_id}">
-                            <f:selectItem itemLabel="--select service" itemValue="--select service"/>
-                            <f:selectItem itemLabel="Domain Registration" itemValue="1"/>
-                            <f:selectItem itemLabel="Domain Hosting" itemValue="2"/>
-                            <f:selectItem itemLabel="Designing" itemValue="3"/>
-                        </p:selectOneMenu>
+                    <p:outputLabel value="Service Category:" for="service_category_id"/>
+                    <p:selectOneMenu id="service_category_id" value="#{web_serviceBean.web_serviceObject.service_category_id}" required="true" requiredMessage="Service Category field is required!">
+                        <f:selectItem itemLabel="--select service" itemValue="--select service"/>
+                        <f:selectItem itemLabel="Domain Registration" itemValue="1"/>
+                        <f:selectItem itemLabel="Domain Hosting" itemValue="2"/>
+                        <f:selectItem itemLabel="Designing" itemValue="3"/>
+                    </p:selectOneMenu>
 
-                        <p:outputLabel value="Package Name:" for="package_detail_id"/>
-                        <p:selectOneMenu id="package_detail_id" value="#{web_service.package_detail_id}">
-                            <f:selectItem itemLabel="--select package" itemValue="--select package"/>
-                            <f:selectItem itemLabel="WTL 1GB" itemValue="1"/>
-                            <f:selectItem itemLabel="WTL 2GB" itemValue="2"/>
-                            <f:selectItem itemLabel="WTL 3GB" itemValue="3"/>
-                            <f:selectItem itemLabel="WTL 4GB" itemValue="4"/>
-                        </p:selectOneMenu>
+                    <p:outputLabel value="Package Name:" for="package_detail_id"/>
+                    <p:selectOneMenu id="package_detail_id" value="#{web_serviceBean.web_serviceObject.package_detail_id}" required="true" requiredMessage="Package Name field is required!">
+                        <f:selectItem itemLabel="--select package" itemValue="--select package"/>
+                        <f:selectItem itemLabel="WTL 1GB" itemValue="1"/>
+                        <f:selectItem itemLabel="WTL 2GB" itemValue="2"/>
+                        <f:selectItem itemLabel="WTL 3GB" itemValue="3"/>
+                        <f:selectItem itemLabel="WTL 4GB" itemValue="4"/>
+                    </p:selectOneMenu>
 
-                        <p:outputLabel value="Start Date:"/>
-                        <p:calendar styleClass="clsInput" value="#{web_service.start_date}" id="start_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
+                    <p:outputLabel value="Start Date:"/>
+                    <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.start_date}" id="start_date"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
 
-                        <p:outputLabel value="Expire Date:"/>
-                        <p:calendar styleClass="clsInput" value="#{web_service.expire_date}" id="expire_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
+                    <p:outputLabel value="Expire Date:"/>
+                    <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.expire_date}" id="expire_date"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Expiry Date field is required!">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
 
-                        <p:outputLabel value="Last Renew Date:"/>
-                        <p:calendar styleClass="clsInput" value="#{web_service.last_renew_date}" id="last_renew_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
+                    <p:outputLabel value="Last Renew Date:"/>
+                    <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.last_renew_date}" id="last_renew_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
 
-                        <p:outputLabel value="Amount Payable:" for="amount_payable"/>
-                        <p:inputText id="amount_payable" value="#{web_service.amount_payable}"/>
+                    <p:outputLabel value="Amount Payable:" for="amount_payable"/>
+                    <p:inputText id="amount_payable" value="#{web_serviceBean.web_serviceObject.amount_payable}"/>
 
-                        <p:outputLabel value="Years Payable:" for="years_payable" />
-                        <p:inputText id="years_payable" value="#{web_service.years_payable}"/>
+                    <p:outputLabel value="Years Payable:" for="years_payable" />
+                    <p:inputText id="years_payable" value="#{web_serviceBean.web_serviceObject.years_payable}" required="true" requiredMessage="Years Payable field is required!"/>
 
-                        <p:outputLabel value="Narration:" for="narration" />
-                        <p:inputText id="narration" value="#{web_service.narration}"/>
+                    <p:outputLabel value="Narration:" for="narration" />
+                    <p:inputText id="narration" value="#{web_serviceBean.web_serviceObject.narration}"/>
 
-                        <p:outputLabel value="Cpanel Login:" for="cpanel_login" />
-                        <p:inputText id="cpanel_login" value="#{web_service.cpanel_login}"/>
+                    <p:outputLabel value="Cpanel Login:" for="cpanel_login"/>
+                    <p:inputText id="cpanel_login" value="#{web_serviceBean.web_serviceObject.cpanel_login}"/>
 
-                        <p:outputLabel value="Account Manager:" for="account_manager" />
-                        <p:inputText id="account_manager" value="#{web_service.account_manager}"/>
+                    <p:outputLabel value="Account Manager:" for="account_manager"/>
+                    <p:inputText id="account_manager" value="#{web_serviceBean.web_serviceObject.account_manager}" required="true" requiredMessage="Account Manager field is required!"/>
 
-                        <p:outputLabel value="Wp Login:" for="wp_login" />
-                        <p:inputText id="wp_login" value="#{web_service.wp_login}"/>
+                    <p:outputLabel value="Wp Login:" for="wp_login" />
+                    <p:inputText id="wp_login" value="#{web_serviceBean.web_serviceObject.wp_login}"/>
 
-                        <p:outputLabel value="Is Active?:" for="is_active" />
-                        <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required" value="#{web_service.is_active}">
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItem itemLabel="Yes" itemValue="1" />
-                            <f:selectItem itemLabel="No" itemValue="0" />
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                    <br></br>
-                    <p:panelGrid columns="3">
-                        <p:commandButton value="SAVE (ALT+S)" action="#{web_serviceBean.insertWeb_service(web_service)}" accesskey="s" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
-                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                <p:graphicImage name="/images/ajax-loader.gif"/>
-                            </p:dialog>
-                        </p:commandButton>
-                        <p:commandButton value="CLEAR (ALT+C)" accesskey="c" style="font-weight: bolder; font-size: 20px" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
-                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                <p:graphicImage name="/images/ajax-loader.gif"/>
-                            </p:dialog>
-                        </p:commandButton>
-                    </p:panelGrid>
-                    <p:messages/>
-                </p:fieldset>
-                <p:dataTable id="domain_detail_table" var="item" emptyMessage="No records dispalyed.">
-                    <p:column headerText="Domain Name">
-                    </p:column>
-                    <p:column headerText="Host Platform">
-                    </p:column>
-                    <p:column headerText="Package Name">
-                    </p:column>
-                    <p:column headerText="Expiry Date">
-                    </p:column>
-                </p:dataTable>
-            </p:panelGrid>
+                    <p:outputLabel value="Is Active?:" for="is_active" />
+                    <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required" value="#{web_serviceBean.web_serviceObject.is_active}">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                        <f:selectItem itemLabel="No" itemValue="0" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </p:fieldset>            
+                <p:panelGrid columns="3" style="background-color:bisque; width: 94%">
+                    <p:commandButton value="SAVE (ALT+S)" action="#{web_serviceBean.insertWeb_service(web_serviceBean.web_serviceObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{web_serviceBean.web_serviceObject.web_service_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                        <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage name="/images/ajax-loader.gif"/>
+                        </p:dialog>
+                    </p:commandButton>
+                    <p:commandButton value="UPDATE (ALT+U)" action="#{web_serviceBean.updateWeb_service(web_serviceBean.web_serviceObject)}" accesskey="u" style="font-weight: bolder; font-size: 20px"  rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                        <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage name="/images/ajax-loader.gif"/>
+                        </p:dialog>
+                    </p:commandButton>
+                    <p:commandButton value="CLEAR (ALT+C)" action="#{web_serviceBean.clearWeb_service(web_serviceBean.web_serviceObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
+                </p:panelGrid>
+                <p:messages/>
         </h:form>
     </ui:define>
 </ui:composition>
