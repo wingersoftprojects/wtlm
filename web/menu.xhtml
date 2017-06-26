@@ -22,7 +22,8 @@
                         <p:menuitem value="View Domains" action="web_service_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="License Tracker" icon="ui-icon-person">
-                        <p:menuitem value="Generate License" action="generate_license?faces-redirect=true" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="Generate License Key" action="license_generator?faces-redirect=true" icon="ui-icon-plusthick"/>                      
+                        <p:menuitem value="Add License Details" action="#{license_detailBean.redirectNew()}" icon="ui-icon-folder-open"/>
                         <p:menuitem value="View License Details" action="license_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">
@@ -30,8 +31,8 @@
                             <p:menuitem value="User Details"/>
                         </p:submenu>                      
                         <p:submenu label="Package Settings" icon="ui-icon-cart">
-                            <p:menuitem value="WTL App Package" action="wtl_app?faces-redirect=true"/>
-                            <p:menuitem value="Domain Hosting Package"/>                                                    
+                            <p:menuitem value="Hosting Package Details" action="package_detail?faces-redirect=true"/>                                                                               
+                            <p:menuitem value="WTL App Details" action="wtl_app?faces-redirect=true"/>                                                                               
                         </p:submenu>
                         <p:submenu label="Category Settings" icon="ui-icon-cart">
                             <p:menuitem value="Task Category" action="task_category_detail?faces-redirect=true"/>

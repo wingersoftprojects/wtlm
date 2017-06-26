@@ -86,7 +86,8 @@
                     </p:selectOneMenu>
                 </p:panelGrid>
             </p:fieldset>            
-                <p:panelGrid columns="3" style="background-color:bisque; width: 94%">
+            <p:panel style="background-color:bisque; width: 94%">
+                <center>
                     <p:commandButton value="SAVE (ALT+S)" action="#{web_serviceBean.insertWeb_service(web_serviceBean.web_serviceObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{web_serviceBean.web_serviceObject.web_service_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                         <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                             <p:graphicImage name="/images/ajax-loader.gif"/>
@@ -98,8 +99,9 @@
                         </p:dialog>
                     </p:commandButton>
                     <p:commandButton value="CLEAR (ALT+C)" action="#{web_serviceBean.clearWeb_service(web_serviceBean.web_serviceObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
-                </p:panelGrid>
-                <p:messages/>
+                </center>
+            </p:panel>
+            <p:messages/>
         </h:form>
     </ui:define>
 </ui:composition>

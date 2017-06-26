@@ -9,97 +9,79 @@
     <ui:define name="content">
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
-            <p:panelGrid columns="2">                                
-                <p:fieldset legend="License Key Generator">
-                    <p:panelGrid columns="2" id="user_detail">                                                
-                        <p:outputLabel value="Client-ID:" for="client_id"/>
-                        <p:inputText id="client_id"/>
-                        <p:outputLabel value="Client Name:" for="client_name"/>
-                        <p:selectOneMenu id="client_name">
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItem itemLabel="Wence" itemValue="Wence" />
-                            <f:selectItem itemLabel="Phillip" itemValue="Phillip" />
-                            <f:selectItem itemLabel="Solomon" itemValue="Solomon" />
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Application Name:" for="app_name"/>
-                        <p:selectOneMenu id="app_name">
-                            <f:selectItem itemLabel="--select app" itemValue="--select app"/>
-                            <f:selectItem itemLabel="Inventory Edge" itemValue="Inventory Edge" />
-                            <f:selectItem itemLabel="WTLM" itemValue="WTLM" />
-                            <f:selectItem itemLabel="BMS" itemValue="BMS" />
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Package Name:" for="package_name"/>
-                        <p:selectOneMenu id="package_name">
-                            <f:selectItem itemLabel="--select package" itemValue="--select app"/>
-                            <f:selectItem itemLabel="WTL 1GB" itemValue="WTL 1GB" />
-                            <f:selectItem itemLabel="WTL 2GB" itemValue="WTL 2GB" />
-                            <f:selectItem itemLabel="WTL 3GB" itemValue="WTL 3GB" />
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Amount Payable:" for="amount_payable"/>
-                        <p:inputText id="amount_payable"/>
-                        <p:outputLabel value="Years Payable:" for="years_payable"/>
-                        <p:inputText id="years_payable"/>
-                        <p:outputLabel value="Start Date:"/>
-                        <p:calendar styleClass="clsInput" id="start_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
-                        <p:outputLabel value="Expiry Date:"/>
-                        <p:calendar styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
-                        <p:outputLabel value="Last Renew Date:"/>
-                        <p:calendar styleClass="clsInput" id="last_renew_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
-                            <p:ajax event="dateSelect" process="@this"/>
-                        </p:calendar>
-                        <p:outputLabel value="Is Active?:" for="is_active"/>
-                        <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required">
-                            <f:selectItem itemLabel="" itemValue=""/>
-                            <f:selectItem itemLabel="Yes" itemValue="1" />
-                            <f:selectItem itemLabel="No" itemValue="0" />
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                    <br></br>
-                    <table>
-                        <td></td>
-                        <td>
-                            <p:commandButton value="CLEAR"  icon="ui-icon-cancel" style="font-weight: bolder; font-size: 20px"/>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>                            
-                            <p:commandButton value="Generate Key" icon="ui-icon-disk" style="font-weight: bolder; font-size: 20px"/>
-                        </td>
-                    </table>
+            <p:fieldset  legend="License Details" style="width: 92%">                   
+                <h:panelGrid columns="4" id="license_detail">                                                
+                    <p:outputLabel value="Client Name:" for="client_name" style="font-weight: bolder"/>
+                    <p:selectOneMenu id="client_name" value="#{license_detailBean.license_detailObject.transactor_id}" required="true" requiredMessage="Client Name field is required!">
+                        <f:selectItem itemLabel="--select client--" itemValue=""/>
+                        <f:selectItem itemLabel="Solomon" itemValue="1" />
+                        <f:selectItem itemLabel="Phillip" itemValue="2" />
+                    </p:selectOneMenu>
 
-                </p:fieldset>
-                <p:dataTable id="license_detail_table" var="item">
-                    <p:column headerText="License Client-ID:">
-                    </p:column>
-                    <p:column headerText="License Code:">
-                       
-                    </p:column>
-
-                    <p:column headerText="">
-                        <p:commandButton value="Edit" icon="ui-icon-pencil" title="View">
-                        </p:commandButton>
-                        <p:commandButton value="Delete" process="@this">
-                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
-                        </p:commandButton>
-
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
-                    </p:column>
-                </p:dataTable>
-
-            </p:panelGrid>
+                    <p:outputLabel value="Client ID:" for="client_id" style="font-weight: bolder"/>
+                    <p:inputText id="client_id" value="#{license_detailBean.license_detailObject.license_client_id}" required="true" requiredMessage="Client ID field is required!"/>
+                    <p:outputLabel value="Client License Code:" style="font-weight: bolder" for="client_license_code"/>
+                    <p:inputText id="client_license_code" value="#{license_detailBean.license_detailObject.license_code}" required="true" requiredMessage="Client License Code field is required!"/>
+                    <p:outputLabel value="Application Name:" style="font-weight: bolder" for="app_name"/>
+                    <p:selectOneMenu id="app_name" value="#{license_detailBean.license_detailObject.wtl_app_id}" required="true" requiredMessage="Application Name field is required!">
+                        <f:selectItem itemLabel="--select app"/>
+                        <f:selectItem itemLabel="InventoryEdge" itemValue="1"/>
+                        <f:selectItem itemLabel="BMS" itemValue="2"/>
+                        <f:ajax execute="@this"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>
+                    <p:inputText id="package_name" value="#{license_detailBean.license_detailObject.license_package}" required="true" requiredMessage="Client License Code field is required!"/>
+                    <p:outputLabel value="Start Date:" style="font-weight: bolder"/>
+                    <p:calendar styleClass="clsInput" id="start_date" value="#{license_detailBean.license_detailObject.start_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
+                    <p:outputLabel value="Expiry Date:" style="font-weight: bolder"/>
+                    <p:calendar styleClass="clsInput" id="expire_date" value="#{license_detailBean.license_detailObject.expire_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Expiry Date field is required!">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
+                    <p:outputLabel value="Last Renew Date:" style="font-weight: bolder"/>
+                    <p:calendar styleClass="clsInput" id="last_renew_date" value="#{license_detailBean.license_detailObject.last_renew_date}"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                        <p:ajax event="dateSelect" process="@this"/>
+                    </p:calendar>
+                    <p:outputLabel value="Amount Payable:" style="font-weight: bolder" for="amount_payable"/>
+                    <p:inputText id="amount_payable" value="#{license_detailBean.license_detailObject.amount_payable}" required="true" requiredMessage="Amount Payable field is required!"/>
+                    <p:outputLabel value="Years Payable:" style="font-weight: bolder" for="years_payable" />
+                    <p:inputText id="years_payable" value="#{license_detailBean.license_detailObject.years_payable}" required="true" requiredMessage="Years Payable field is required!"/>
+                    <p:outputLabel value="Server Credentials:" style="font-weight: bolder" for="server_credentials"/>
+                    <p:inputText id="server_credentials" value="#{license_detailBean.license_detailObject.credentials_server}"/>
+                    <p:outputLabel value="Network Credentials:" style="font-weight: bolder" for="network_credentials"/>
+                    <p:inputText id="network_credentials" value="#{license_detailBean.license_detailObject.credentials_network}" required="false"/>
+                    <p:outputLabel value="Narration:" style="font-weight: bolder" for="narration" />
+                    <p:inputText id="narration" value="#{license_detailBean.license_detailObject.narration}"/>                    
+                    <p:outputLabel value="Is Active?:" style="font-weight: bolder" for="is_active" />
+                    <p:selectOneMenu id="is_active" value="#{license_detailBean.license_detailObject.is_active}" required="true" requiredMessage="Is active field is required">
+                        <f:selectItem itemLabel="" itemValue=""/>
+                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                        <f:selectItem itemLabel="No" itemValue="0" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:fieldset>            
+            <p:panel style="background-color:bisque; width: 94%">
+                <center>
+                    <p:commandButton value="SAVE (ALT+S)" action="#{license_detailBean.insertLicense_detail(license_detailBean.license_detailObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{license_detailBean.license_detailObject.license_detail_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                        <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage name="/images/ajax-loader.gif"/>
+                        </p:dialog>
+                    </p:commandButton>
+                    <td></td>
+                    <p:commandButton value="UPDATE (ALT+U)" action="#{license_detailBean.updateLicense_detail(license_detailBean.license_detailObject)}" accesskey="u" style="font-weight: bolder; font-size: 20px"  rendered="#{license_detailBean.license_detailObject.license_detail_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                        <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage name="/images/ajax-loader.gif"/>
+                        </p:dialog>
+                    </p:commandButton>
+                    <td></td>
+                    <p:commandButton value="CLEAR (ALT+C)" action="#{license_detailBean.clearLicense_detail(license_detailBean.license_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
+                </center>
+            </p:panel>
+            <p:messages/>
         </h:form>
     </ui:define>
-
 </ui:composition>
+
 
 

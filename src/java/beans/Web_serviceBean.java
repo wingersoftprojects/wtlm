@@ -284,17 +284,22 @@ public class Web_serviceBean {
                 ps.setInt(17, 0);
             }
             try {
-                ps.setDate(18, null);
+                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
             } catch (NullPointerException npe) {
-                ps.setDate(18, null);
+                ps.setTimestamp(18, null);
             }
             try {
                 ps.setInt(19, 0);
             } catch (NullPointerException npe) {
                 ps.setInt(19, 0);
             }
-
-            i = ps.executeUpdate();
+            try {
+                ps.setInt(20, web_service.getWeb_service_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(20, 0);
+            }
+            System.out.println(sql);
+////            i = ps.executeUpdate();
             this.clearWeb_service(web_service);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {

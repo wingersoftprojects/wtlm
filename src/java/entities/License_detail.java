@@ -7,6 +7,7 @@ package entities;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -17,19 +18,26 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class License_detail {
+
     private static final long serialVersionUID = 1L;
+
+    private String ClientId;
+    private String PackageName;
+    private String ExpiryDate;
+    private String ClientName;
+    private Date Start_date2;
 
     private int License_detail_id;
     private int Wtl_app_id;
-    private BigInteger Transactor_id;
+    private long Transactor_id;
     private String License_client_id;
     private String License_client_name;
     private String License_package;
-    private String License_expiry_code;
+    private String License_expire_code;
     private String License_code;
-    private Timestamp Start_date;
-    private Timestamp Expire_date;
-    private Timestamp Last_renew_date;
+    private Date Start_date;
+    private Date Expire_date;
+    private Date Last_renew_date;
     private float Amount_payable;
     private int Years_payable;
     private String Credentials_server;
@@ -37,9 +45,9 @@ public class License_detail {
     private String Narration;
     private int Is_active;
     private int Is_deleted;
-    private Timestamp Add_date;
+    private Date Add_date;
     private int Add_by;
-    private Timestamp Last_edit_date;
+    private Date Last_edit_date;
     private int Last_edit_by;
 
     public int getLicense_detail_id() {
@@ -56,14 +64,6 @@ public class License_detail {
 
     public void setWtl_app_id(int Wtl_app_id) {
         this.Wtl_app_id = Wtl_app_id;
-    }
-
-    public BigInteger getTransactor_id() {
-        return Transactor_id;
-    }
-
-    public void setTransactor_id(BigInteger Transactor_id) {
-        this.Transactor_id = Transactor_id;
     }
 
     public String getLicense_client_id() {
@@ -90,44 +90,12 @@ public class License_detail {
         this.License_package = License_package;
     }
 
-    public String getLicense_expiry_code() {
-        return License_expiry_code;
-    }
-
-    public void setLicense_expiry_code(String License_expiry_code) {
-        this.License_expiry_code = License_expiry_code;
-    }
-
     public String getLicense_code() {
         return License_code;
     }
 
     public void setLicense_code(String License_code) {
         this.License_code = License_code;
-    }
-
-    public Timestamp getStart_date() {
-        return Start_date;
-    }
-
-    public void setStart_date(Timestamp Start_date) {
-        this.Start_date = Start_date;
-    }
-
-    public Timestamp getExpire_date() {
-        return Expire_date;
-    }
-
-    public void setExpire_date(Timestamp Expire_date) {
-        this.Expire_date = Expire_date;
-    }
-
-    public Timestamp getLast_renew_date() {
-        return Last_renew_date;
-    }
-
-    public void setLast_renew_date(Timestamp Last_renew_date) {
-        this.Last_renew_date = Last_renew_date;
     }
 
     public float getAmount_payable() {
@@ -186,28 +154,12 @@ public class License_detail {
         this.Is_deleted = Is_deleted;
     }
 
-    public Timestamp getAdd_date() {
-        return Add_date;
-    }
-
-    public void setAdd_date(Timestamp Add_date) {
-        this.Add_date = Add_date;
-    }
-
     public int getAdd_by() {
         return Add_by;
     }
 
     public void setAdd_by(int Add_by) {
         this.Add_by = Add_by;
-    }
-
-    public Timestamp getLast_edit_date() {
-        return Last_edit_date;
-    }
-
-    public void setLast_edit_date(Timestamp Last_edit_date) {
-        this.Last_edit_date = Last_edit_date;
     }
 
     public int getLast_edit_by() {
@@ -217,8 +169,173 @@ public class License_detail {
     public void setLast_edit_by(int Last_edit_by) {
         this.Last_edit_by = Last_edit_by;
     }
-    
-    
-    
+
+    /**
+     * @return the ClientId
+     */
+    public String getClientId() {
+        return ClientId;
+    }
+
+    /**
+     * @param ClientId the ClientId to set
+     */
+    public void setClientId(String ClientId) {
+        this.ClientId = ClientId;
+    }
+
+    /**
+     * @return the PackageName
+     */
+    public String getPackageName() {
+        return PackageName;
+    }
+
+    /**
+     * @param PackageName the PackageName to set
+     */
+    public void setPackageName(String PackageName) {
+        this.PackageName = PackageName;
+    }
+
+    /**
+     * @return the ExpiryDate
+     */
+    public String getExpiryDate() {
+        return ExpiryDate;
+    }
+
+    /**
+     * @param ExpiryDate the ExpiryDate to set
+     */
+    public void setExpiryDate(String ExpiryDate) {
+        this.ExpiryDate = ExpiryDate;
+    }
+
+    /**
+     * @return the ClientName
+     */
+    public String getClientName() {
+        return ClientName;
+    }
+
+    /**
+     * @param ClientName the ClientName to set
+     */
+    public void setClientName(String ClientName) {
+        this.ClientName = ClientName;
+    }
+
+    /**
+     * @return the Start_date
+     */
+    public Date getStart_date() {
+        return Start_date;
+    }
+
+    /**
+     * @param Start_date the Start_date to set
+     */
+    public void setStart_date(Date Start_date) {
+        this.Start_date = Start_date;
+    }
+
+    /**
+     * @return the Expire_date
+     */
+    public Date getExpire_date() {
+        return Expire_date;
+    }
+
+    /**
+     * @param Expire_date the Expire_date to set
+     */
+    public void setExpire_date(Date Expire_date) {
+        this.Expire_date = Expire_date;
+    }
+
+    /**
+     * @return the Last_renew_date
+     */
+    public Date getLast_renew_date() {
+        return Last_renew_date;
+    }
+
+    /**
+     * @param Last_renew_date the Last_renew_date to set
+     */
+    public void setLast_renew_date(Date Last_renew_date) {
+        this.Last_renew_date = Last_renew_date;
+    }
+
+    /**
+     * @return the Add_date
+     */
+    public Date getAdd_date() {
+        return Add_date;
+    }
+
+    /**
+     * @param Add_date the Add_date to set
+     */
+    public void setAdd_date(Date Add_date) {
+        this.Add_date = Add_date;
+    }
+
+    /**
+     * @return the Last_edit_date
+     */
+    public Date getLast_edit_date() {
+        return Last_edit_date;
+    }
+
+    /**
+     * @param Last_edit_date the Last_edit_date to set
+     */
+    public void setLast_edit_date(Date Last_edit_date) {
+        this.Last_edit_date = Last_edit_date;
+    }
+
+    /**
+     * @return the License_expire_code
+     */
+    public String getLicense_expire_code() {
+        return License_expire_code;
+    }
+
+    /**
+     * @param License_expire_code the License_expire_code to set
+     */
+    public void setLicense_expire_code(String License_expire_code) {
+        this.License_expire_code = License_expire_code;
+    }
+
+    /**
+     * @return the Transactor_id
+     */
+    public long getTransactor_id() {
+        return Transactor_id;
+    }
+
+    /**
+     * @param Transactor_id the Transactor_id to set
+     */
+    public void setTransactor_id(long Transactor_id) {
+        this.Transactor_id = Transactor_id;
+    }
+
+    /**
+     * @return the Start_date2
+     */
+    public Date getStart_date2() {
+        return Start_date2;
+    }
+
+    /**
+     * @param Start_date2 the Start_date2 to set
+     */
+    public void setStart_date2(Date Start_date2) {
+        this.Start_date2 = Start_date2;
+    }
 
 }
