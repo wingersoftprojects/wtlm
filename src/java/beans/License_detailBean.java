@@ -63,9 +63,9 @@ public class License_detailBean {
         sql = "INSERT INTO license_detail(wtl_app_id,transactor_id,license_client_id,license_client_name,"
                 + "license_package,license_expire_code,license_code,start_date,expire_date,"
                 + "last_renew_date,amount_payable,years_payable,credentials_server,"
-                + "crendentials_network,narration,is_active,"
+                + "credentials_network,narration,is_active,"
                 + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'0000-00-00 00:00',?,?,?)";
 
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -156,25 +156,25 @@ public class License_detailBean {
             } catch (NullPointerException npe) {
                 ps.setInt(17, 0);
             }
+//            try {
+//                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+//            } catch (NullPointerException npe) {
+//                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+//            }
             try {
-                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+                ps.setInt(18, license_detail.getAdd_by());
             } catch (NullPointerException npe) {
-                ps.setDate(18, null);
+                ps.setInt(18, 0);
             }
             try {
-                ps.setInt(19, license_detail.getAdd_by());
+                ps.setDate(19, null);
             } catch (NullPointerException npe) {
-                ps.setInt(19, 0);
+                ps.setDate(19, null);
             }
             try {
-                ps.setDate(20, null);
+                ps.setInt(20, 0);
             } catch (NullPointerException npe) {
-                ps.setDate(20, null);
-            }
-            try {
-                ps.setInt(21, 0);
-            } catch (NullPointerException npe) {
-                ps.setInt(21, 0);
+                ps.setInt(20, 0);
             }
             i = ps.executeUpdate();
             this.clearLicense_detail(license_detail);
@@ -328,7 +328,7 @@ public class License_detailBean {
     public void setLicense_detailFromResultset(License_detail aLicense_detail, ResultSet rs) {
         try {
             aLicense_detail.setLicense_detail_id(rs.getInt("license_detail_id"));
-            aLicense_detail.setWtl_app_id(rs.getInt("wtl_app_d"));
+            aLicense_detail.setWtl_app_id(rs.getInt("wtl_app_id"));
             aLicense_detail.setTransactor_id(rs.getLong("transactor_id"));
             aLicense_detail.setLicense_client_id(rs.getString("license_detail_id"));
             aLicense_detail.setLicense_client_name(rs.getString("license_client_name"));

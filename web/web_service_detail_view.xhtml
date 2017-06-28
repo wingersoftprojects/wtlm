@@ -11,7 +11,7 @@
             <f:event listener="#{web_serviceBean.clearWeb_service(aWeb_service)}" type="preRenderView" />   
             <h:form id="form_web_service_detail_view">
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
-                    <p:outputLabel value="Task View" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
+                    <p:outputLabel value="DOMAIN LISTING" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
                 <div class="ui-fluid">
                     <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">
@@ -56,7 +56,7 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
-                        WEB SERVICES VIEW
+                        ACCOUNT LISTING
                     </f:facet>
 
                     <p:column headerText="Service Number" filterMatchMode="contains"  style="width: 10px">
@@ -84,7 +84,7 @@
                         #{item.account_manager}     
                     </p:column >
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_web_service" value="View">
+                        <p:commandLink id="view_web_service" value="View" process="@this" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">
@@ -103,6 +103,7 @@
 
             </h:form>
         </f:view>
+        <ui:include src="dialog_view_web_service_detail.xhtml"/>
         <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
             <f:facet name="default">
                 <h:outputText value="Status: StandBy" />

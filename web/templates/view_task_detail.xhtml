@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition> 
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <p:commandButton styleClass="clsButtonBigLonger" value="Print (ALT+P)" icon="ui-icon-print" type="button" accesskey="p">
+                            <p:printer target="toprint" />
+                        </p:commandButton>            
+                    </td>
+                </tr>
+            </table>
+        </center>
+        <br/>
+        <p:panel id="toprint">
+            <h:panelGrid columns="4">
+                <h:panelGrid columns="1">
+                    <img src="../resources/images/LogoL.png" alt="" width="150"/>
+                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="Merging Technology With Business"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Plot 1812, Hill Crest Apartments" style="font-weight: bolder"/>                
+                    <p:outputLabel value="Tel: +256 392 000708" style="font-weight: bolder"/>
+                    <p:outputLabel value="Mob: +256 789 939442" style="font-weight: bolder"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value=""/>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="WTL TASK SHEET" style="font-weight: bolder; font-size: larger; font-style: italic;"/>
+                    <p:outputLabel value="Date: #{utilityBean.CURRENT_SERVER_DATE}">
+                        <f:convertDateTime pattern="YYYY-MM-DD"/>
+                    </p:outputLabel>
+                </h:panelGrid>
+            </h:panelGrid>
+            <hr/>
+            <fieldset>
+                <legend>TASK DETAILS</legend>               
+                <p:dataTable id="task_item_table" resizableColumns="true" value="#{task_detailBean.task_details}" var="item">
+                    <p:column headerText="TASK ITEM" width="10">
+                        <h:outputText value="Task Number" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Task Description" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Task Category" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Priority" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Raise Date" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Raised By" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Current Status" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Complete Date" rendered="#{item.current_status =='COMP'}" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Completed By" rendered="#{item.current_status =='COMP'}" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Assigned To" style="font-weight: bolder"/><br/>
+                        <h:outputLabel value="Client Name: " style="font-weight: bolder"/>
+                    </p:column>
+                    <p:column headerText="TASK ITEM DETAILS">
+                        <h:outputText value="#{item.task_detail_id}"/><br/>
+                        <h:outputText value="#{item.task_description}"/><br/>
+                        <h:outputText value="#{item.task_category_id}"/><br/>
+                        <h:outputText value="#{item.priority}"/><br/>
+                        <h:outputText value="#{item.raise_date}"/><br/>
+                        <h:outputText value="#{item.raised_by}"/><br/>
+                        <h:outputText value="#{item.current_status}"/><br/>
+                        <h:outputText value="#{item.complete_date}" rendered="#{item.current_status =='COMP'}"/><br/>
+                        <h:outputText value="#{item.completed_by}" rendered="#{item.current_status =='COMP'}"/><br/>                        
+                        <h:outputText value="#{item.assigned_to}"/><br/>                       
+                        <h:outputText value="#{item.transactor_id}"/>                       
+                    </p:column>
+                </p:dataTable>
+            </fieldset>
+        </p:panel>
+        <footer id="copyright">
+            <center>
+                <h:outputText value="Copyright ©2017 WINGERsoft Technologies Ltd" style="font-weight: bolder; color: #3E9BD5"/>               
+            </center>
+        </footer> 
+    </ui:composition>
+</html>
+

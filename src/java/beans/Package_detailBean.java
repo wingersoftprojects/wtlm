@@ -56,7 +56,7 @@ public class Package_detailBean {
 
     public void insertPackage_detail(Package_detail package_detail) {
         String sql = "";
-        sql = "INSERT INTO package_detail(package_detail_name,quota_mbs,bw_mbs,emails,ftp,dbs,other_details)"
+        sql = "INSERT INTO package_detail(package_name,quota_mbs,bw_mbs,emails,ftp,dbs,other_details)"
                 + " VALUES(?,?,?,?,?,?,?)";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -107,7 +107,7 @@ public class Package_detailBean {
 
     public void updatePackage_detail(Package_detail package_detail) {
         String sql = "";
-        sql = "UPDATE package_detail SET package_detail_name=?,quota_mbs=?,bw_mbs=?,emails=?,ftp=?,dbs=?,other_details=?"
+        sql = "UPDATE package_detail SET package_name=?,quota_mbs=?,bw_mbs=?,emails=?,ftp=?,dbs=?,other_details=?"
                 + " WHERE package_detail_id=?";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -177,7 +177,7 @@ public class Package_detailBean {
     public void setPackage_detailFromResultset(Package_detail aPackage_detail, ResultSet rs) {
         try {
             aPackage_detail.setPackage_detail_id(rs.getInt("package_detail_id"));
-            aPackage_detail.setPackage_detail_name(rs.getString("package_detail_name"));
+            aPackage_detail.setPackage_detail_name(rs.getString("package_name"));
             aPackage_detail.setQuota_mbs(rs.getFloat("quota_mbs"));
             aPackage_detail.setBw_mbs(rs.getFloat("bw_mbs"));
             aPackage_detail.setEmails(rs.getInt("emails"));

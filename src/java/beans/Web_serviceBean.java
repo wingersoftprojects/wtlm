@@ -6,6 +6,7 @@
 package beans;
 
 import connections.DBConnection;
+import entities.Package_detail;
 import entities.Web_service;
 import entities.Web_service;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +31,7 @@ import utilities.UtilityBean;
 public class Web_serviceBean {
 
     private Web_service web_service = new Web_service();
+    private Package_detail package_detail = new Package_detail();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
@@ -66,7 +69,7 @@ public class Web_serviceBean {
                 + "last_renew_date,amount_payable,years_payable,is_active,"
                 + "narration,account_manager,wp_login,cpanel_login,"
                 + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'0000-00-00 00:00',?,?,?)";
 
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -157,25 +160,25 @@ public class Web_serviceBean {
             } catch (NullPointerException npe) {
                 ps.setInt(17, 0);
             }
+//            try {
+//                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+//            } catch (NullPointerException npe) {
+//                ps.setDate(18, );
+//            }
             try {
-                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+                ps.setInt(18, web_service.getAdd_by());
             } catch (NullPointerException npe) {
-                ps.setDate(18, null);
+                ps.setInt(18, 0);
             }
             try {
-                ps.setInt(19, web_service.getAdd_by());
+                ps.setDate(19, null);
             } catch (NullPointerException npe) {
-                ps.setInt(19, 0);
+                ps.setDate(19, null);
             }
             try {
-                ps.setDate(20, null);
+                ps.setInt(20, 0);
             } catch (NullPointerException npe) {
-                ps.setDate(20, null);
-            }
-            try {
-                ps.setInt(21, 0);
-            } catch (NullPointerException npe) {
-                ps.setInt(21, 0);
+                ps.setInt(20, 0);
             }
             i = ps.executeUpdate();
             this.clearWeb_service(web_service);
@@ -188,12 +191,12 @@ public class Web_serviceBean {
 
     public void updateWeb_service(Web_service web_service) {
         String sql = "";
-        sql = "UPDATE web_service SET host_platform_id=?,transactor_id=?,admin_transactor_id=?,domain_name=?,"
+        sql = "UPDATE task_detail SET host_platform_id=?,transactor_id=?,admin_transactor_id=?,domain_name=?,"
                 + "service_category_id=?,package_detail_id=?,start_date=?,expire_date=?,last_renew_date=?,"
                 + "amount_payable=?,years_payable=?,is_active=?,narration=?,"
                 + "account_manager=?,wp_login=?,cpanel_login=?,"
-                + "is_deleted=?,last_edit_date=?,last_edit_by=?"
-                + "where web_service_id =?";
+                + "is_deleted=?,last_edit_date=?,last_edit_by=? "
+                + "WHERE web_service_id=?";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -210,7 +213,7 @@ public class Web_serviceBean {
             try {
                 ps.setLong(3, web_service.getAdmin_transactor_id());
             } catch (NullPointerException npe) {
-                ps.setInt(3, 0);
+                ps.setLong(3, 0);
             }
             try {
                 ps.setString(4, web_service.getDomain_name());
@@ -299,7 +302,7 @@ public class Web_serviceBean {
                 ps.setInt(20, 0);
             }
             System.out.println(sql);
-////            i = ps.executeUpdate();
+            i = ps.executeUpdate();
             this.clearWeb_service(web_service);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
@@ -448,6 +451,20 @@ public class Web_serviceBean {
      */
     public void setWeb_serviceObject(Web_service Web_serviceObject) {
         this.Web_serviceObject = Web_serviceObject;
+    }
+
+    /**
+     * @return the package_detail
+     */
+    public Package_detail getPackage_detail() {
+        return package_detail;
+    }
+
+    /**
+     * @param package_detail the package_detail to set
+     */
+    public void setPackage_detail(Package_detail package_detail) {
+        this.package_detail = package_detail;
     }
 
 }

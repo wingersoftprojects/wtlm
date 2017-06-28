@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -46,16 +48,21 @@ public class Task_detailBean {
     }
 
     public Task_detailBean() {
-        this.Task_detailObject=new Task_detail();
+        this.Task_detailObject = new Task_detail();
     }
-    
+
     public String redirectEdit(Task_detail aTask_detail) {
-       this.Task_detailObject=aTask_detail; 
+        this.Task_detailObject = aTask_detail;
         return "task_detail?faces-redirect=true";
     }
-    
+
+    public void redirectView(Task_detail aTask_detail) {
+        this.Task_detailObject = aTask_detail;
+
+    }
+
     public String redirectNew() {
-       this.Task_detailObject=new Task_detail(); 
+        this.Task_detailObject = new Task_detail();
         return "task_detail?faces-redirect=true";
     }
 
@@ -65,7 +72,7 @@ public class Task_detailBean {
                 + "priority,raised_by,raise_date,completed_by,"
                 + "complete_date,comment,transactor_id,is_active,"
                 + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,'0000-00-00 00:00',?,?,?)";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -306,7 +313,7 @@ public class Task_detailBean {
     }
 
     public void clearTask_detail(Task_detail aTask_detail) {
-        if (null != aTask_detail) {            
+        if (null != aTask_detail) {
             aTask_detail.setTask_detail_id(0);
             aTask_detail.setTask_description("");
             aTask_detail.setAssigned_to(0);
@@ -325,7 +332,7 @@ public class Task_detailBean {
             aTask_detail.setAdd_by(0);
             aTask_detail.setLast_edit_date(null);
             aTask_detail.setLast_edit_by(0);
-            
+
         }
     }
 

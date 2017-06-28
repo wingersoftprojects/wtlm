@@ -65,7 +65,7 @@
                         #{item.years_payable}     
                     </p:column>
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_license_detail" value="View">
+                        <p:commandLink id="view_license_detail" value="View" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{license_detailBean.redirectEdit(item)}">
@@ -84,6 +84,7 @@
 
             </h:form>
         </f:view>
+        <ui:include src="dialog_view_license_detail.xhtml"/>
         <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
             <f:facet name="default">
                 <h:outputText value="Status: StandBy" />

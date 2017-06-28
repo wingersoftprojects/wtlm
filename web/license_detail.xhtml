@@ -22,6 +22,8 @@
                     <p:inputText id="client_id" value="#{license_detailBean.license_detailObject.license_client_id}" required="true" requiredMessage="Client ID field is required!"/>
                     <p:outputLabel value="Client License Code:" style="font-weight: bolder" for="client_license_code"/>
                     <p:inputText id="client_license_code" value="#{license_detailBean.license_detailObject.license_code}" required="true" requiredMessage="Client License Code field is required!"/>
+                    <p:outputLabel value="Client License Name:" style="font-weight: bolder" for="client_license_name"/>
+                    <p:inputText id="client_license_name" value="#{license_detailBean.license_detailObject.license_client_name}" required="true" requiredMessage="Client License Code field is required!"/>
                     <p:outputLabel value="Application Name:" style="font-weight: bolder" for="app_name"/>
                     <p:selectOneMenu id="app_name" value="#{license_detailBean.license_detailObject.wtl_app_id}" required="true" requiredMessage="Application Name field is required!">
                         <f:selectItem itemLabel="--select app"/>
