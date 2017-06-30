@@ -26,13 +26,15 @@ import utilities.UtilityBean;
 @ManagedBean
 @RequestScoped
 public class Service_categoryBean {
+
     private Service_category service_category = new Service_category();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
     private List<Service_category> Service_categoryList;
-    private Service_category Service_categoryObject;   
+    private Service_category Service_categoryObject;
+
     public Service_category getService_category() {
         return service_category;
     }
@@ -42,16 +44,16 @@ public class Service_categoryBean {
     }
 
     public Service_categoryBean() {
-        this.Service_categoryObject=new Service_category();
+        this.Service_categoryObject = new Service_category();
     }
-    
+
     public String redirectEdit(Service_category aService_category) {
-       this.Service_categoryObject=aService_category; 
+        this.Service_categoryObject = aService_category;
         return "service_category?faces-redirect=true";
     }
-    
+
     public String redirectNew() {
-       this.Service_categoryObject=new Service_category(); 
+        this.Service_categoryObject = new Service_category();
         return "service_category?faces-redirect=true";
     }
 
@@ -63,12 +65,12 @@ public class Service_categoryBean {
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             try {
                 ps.setString(1, service_category.getService_category_name());
+                i = ps.executeUpdate();
+                this.clearService_category(service_category);
+                FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
             } catch (NullPointerException npe) {
-                ps.setInt(1, 0);
+                FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
             }
-            i = ps.executeUpdate();
-            this.clearService_category(service_category);
-            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
             se.printStackTrace();
@@ -76,6 +78,7 @@ public class Service_categoryBean {
     }
 
     public void updateService_category(Service_category service_category) {
+        System.out.println("||||||");
         String sql = "";
         sql = "UPDATE service_category SET service_category_name=? WHERE service_category_id=?";
         try (
@@ -85,6 +88,11 @@ public class Service_categoryBean {
                 ps.setString(1, service_category.getService_category_name());
             } catch (NullPointerException npe) {
                 ps.setString(1, "");
+            }
+            try {
+                ps.setInt(2, service_category.getService_category_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(2, 0);
             }
             i = ps.executeUpdate();
             this.clearService_category(service_category);
@@ -124,10 +132,10 @@ public class Service_categoryBean {
     }
 
     public void clearService_category(Service_category aService_category) {
-        if (null != aService_category) {            
+        if (null != aService_category) {
             aService_category.setService_category_id(0);
             aService_category.setService_category_name("");
-            
+
         }
     }
 
