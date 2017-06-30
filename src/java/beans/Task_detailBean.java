@@ -72,7 +72,7 @@ public class Task_detailBean {
                 + "priority,raised_by,raise_date,completed_by,"
                 + "complete_date,comment,transactor_id,is_active,"
                 + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,'0000-00-00 00:00',?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
