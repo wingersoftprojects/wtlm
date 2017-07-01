@@ -61,7 +61,7 @@
                         TASKS VIEW
                     </f:facet>
 
-                    <p:column headerText="Task Number" filterMatchMode="contains"  style="width: 10px">
+                    <p:column headerText="Task No." style="width: 5px">
                         #{item.task_detail_id}    
                     </p:column>
                     <p:column headerText="Assigned To" style="width: 30px" >
@@ -70,10 +70,10 @@
                     <p:column headerText="Task Category" style="width: 20px" >
                         #{item.task_category_id}     
                     </p:column>
-                    <p:column headerText="Current Status" style="width: 15px">
+                    <p:column headerText="Current Status" style="width: 5px">
                         #{item.current_status}     
                     </p:column> 
-                    <p:column headerText="Priority" filterMatchMode="contains"  style="width: 1px">
+                    <p:column headerText="Priority" filterMatchMode="contains"  style="width: 5px">
                         #{item.priority} 
                     </p:column> 
                     <p:column   headerText="Raised Date" style="width: 20px">
@@ -82,9 +82,15 @@
                     <p:column headerText="Raised By" style="width: 20px">
                         #{item.raised_by}     
                     </p:column>
-                    <p:column headerText="Task Age(days)" style="width: 30px">
-
-                    </p:column >
+                    <p:column headerText="Completed Date" style="width: 20px">
+                        #{item.complete_date}      
+                    </p:column>
+                    <p:column headerText="Completed By" style="width: 20px">
+                        #{item.completed_by}     
+                    </p:column>
+                    <p:column headerText="Task Age(days)" style="width: 5px">
+                          
+                    </p:column>
                     <p:column headerText="" style="width: 100px">
                         <p:commandLink id="view_task_detail" value="View" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">
                         </p:commandLink>

@@ -330,7 +330,7 @@ public class Web_serviceBean {
     }
 
     public void setWeb_serviceFromResultset(Web_service aWeb_service, ResultSet rs) {
-        try {                
+        try {
             aWeb_service.setWeb_service_id(rs.getInt("web_service_id"));
             aWeb_service.setHost_platform_id(rs.getInt("host_platform_id"));
             aWeb_service.setTransactor_id(rs.getInt("transactor_id"));
@@ -347,10 +347,10 @@ public class Web_serviceBean {
             aWeb_service.setNarration(rs.getString("narration"));
             aWeb_service.setAccount_manager(rs.getString("account_manager"));
             aWeb_service.setWp_login(rs.getString("wp_login"));
-            aWeb_service.setCpanel_login(rs.getString("cpanel_login"));          
+            aWeb_service.setCpanel_login(rs.getString("cpanel_login"));
             aWeb_service.setIs_deleted(rs.getInt("is_deleted"));
             aWeb_service.setLast_edit_date(rs.getDate("last_edit_date"));
-            aWeb_service.setLast_edit_by(rs.getInt("last_edit_by"));            
+            aWeb_service.setLast_edit_by(rs.getInt("last_edit_by"));
         } catch (SQLException se) {
             se.printStackTrace();
         }
@@ -377,7 +377,7 @@ public class Web_serviceBean {
             aWeb_service.setCpanel_login("");
             aWeb_service.setIs_deleted(0);
             aWeb_service.setLast_edit_date(null);
-            aWeb_service.setLast_edit_by(0);            
+            aWeb_service.setLast_edit_by(0);
         }
     }
 
@@ -391,15 +391,15 @@ public class Web_serviceBean {
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             if (aWeb_service.getHost_platform_id() > 0) {
-                wheresql = wheresql + " AND host_platform_id='" + aWeb_service.getHost_platform_id()+ "'";
+                wheresql = wheresql + " AND host_platform_id='" + aWeb_service.getHost_platform_id() + "'";
             }
-            if (aWeb_service.getService_category_id()> 0) {
+            if (aWeb_service.getService_category_id() > 0) {
                 wheresql = wheresql + " AND service_category_id=" + aWeb_service.getService_category_id();
             }
             if (aWeb_service.getPackage_detail_id() > 0) {
-                wheresql = wheresql + " AND package_detail_id='" + aWeb_service.getPackage_detail_id()+ "'";
+                wheresql = wheresql + " AND package_detail_id='" + aWeb_service.getPackage_detail_id() + "'";
             }
-            if (aWeb_service.getStart_date()!= null && aWeb_service.getStart_date2()!= null) {
+            if (aWeb_service.getStart_date() != null && aWeb_service.getStart_date2() != null) {
                 wheresql = wheresql + " AND start_date BETWEEN '" + new java.sql.Date(aWeb_service.getStart_date().getTime()) + "' AND '" + new java.sql.Date(aWeb_service.getStart_date2().getTime()) + "'";
             }
             orderby = " ORDER BY start_date DESC";

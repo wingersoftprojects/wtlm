@@ -27,8 +27,7 @@
                     <p:outputLabel value="Application Name:" style="font-weight: bolder" for="app_name"/>
                     <p:selectOneMenu id="app_name" value="#{license_detailBean.license_detailObject.wtl_app_id}" required="true" requiredMessage="Application Name field is required!">
                         <f:selectItem itemLabel="--select app"/>
-                        <f:selectItem itemLabel="InventoryEdge" itemValue="1"/>
-                        <f:selectItem itemLabel="BMS" itemValue="2"/>
+                        <f:selectItems value="#{wtl_appBean.wtl_apps}" var="item" itemValue="#{item.wtl_app_id}" itemLabel="#{item.wtl_app_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>

@@ -24,28 +24,22 @@
 
                     <p:outputLabel value="Host Platform:" for="host_platform_id"/>
                     <p:selectOneMenu id="host_platform_id" value="#{web_serviceBean.web_serviceObject.host_platform_id}" required="true" requiredMessage="Host Platform field is required!">
-                        <f:selectItem itemLabel="--select host" itemValue="--select host"/>
-                        <f:selectItem itemLabel="Just Host" itemValue="1" />
-                        <f:selectItem itemLabel="Good Host" itemValue="2" />
+                        <f:selectItem itemLabel="--select host"/>
+                        <f:selectItems value="#{host_platformBean.host_platforms}" var="item" itemValue="#{item.host_platform_id}" itemLabel="#{item.host_platform_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Service Category:" for="service_category_id"/>
                     <p:selectOneMenu id="service_category_id" value="#{web_serviceBean.web_serviceObject.service_category_id}" required="true" requiredMessage="Service Category field is required!">
-                        <f:selectItem itemLabel="--select service" itemValue="--select service"/>
-                        <f:selectItem itemLabel="Domain Registration" itemValue="1"/>
-                        <f:selectItem itemLabel="Domain Hosting" itemValue="2"/>
-                        <f:selectItem itemLabel="Designing" itemValue="3"/>
+                        <f:selectItem itemLabel="--select service"/>
+                        <f:selectItems value="#{service_categoryBean.service_categorys}" var="item" itemValue="#{item.service_category_id}" itemLabel="#{item.service_category_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Package Name:" for="package_detail_id"/>
                     <p:selectOneMenu id="package_detail_id" value="#{web_serviceBean.web_serviceObject.package_detail_id}" required="true" requiredMessage="Package Name field is required!">
-                        <f:selectItem itemLabel="--select package" itemValue="--select package"/>
-                        <f:selectItem itemLabel="WTL 1GB" itemValue="1"/>
-                        <f:selectItem itemLabel="WTL 2GB" itemValue="2"/>
-                        <f:selectItem itemLabel="WTL 3GB" itemValue="3"/>
-                        <f:selectItem itemLabel="WTL 4GB" itemValue="4"/>
+                        <f:selectItem itemLabel="--select package"/>
+                        <f:selectItems value="#{package_detailBean.package_details}" var="item" itemValue="#{item.package_detail_id}" itemLabel="#{item.package_detail_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
