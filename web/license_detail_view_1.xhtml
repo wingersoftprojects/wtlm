@@ -8,66 +8,51 @@
                 xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
         <f:view>
-            <f:event listener="#{license_detailBean.clearLicense_detail(aLicense_detail)}" type="preRenderView" />   
+            <f:event listener="#{license_detailBean1.clearLicense_detail(aLicense_detail)}" type="preRenderView" />   
             <h:form id="form_license_detail_view">
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
-                    <p:outputLabel value="LICENSE LISTING" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
+                    <p:outputLabel value="DOMAIN VIEW" style="font-weight: bolder; font-size: 20px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
                 <div class="ui-fluid">
                     <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="start_date_from" value="From Start Date:" style="font-weight: bolder"/>
-                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateFrom" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{license_detailBean.license_detailObject.start_date}">
+                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateFrom" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{license_detail.start_date}">
                         </p:calendar>
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="start_date_to" value="To Start Date:" style="font-weight: bolder"/>
-                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateTo" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{license_detailBean.license_detailObject.start_date2}">
+                        <p:calendar styleClass="clsInputTaskFilter" id="calAddDateTo" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{license_detail.start_date2}">
                         </p:calendar>
-                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="priority" value="Application:" style="font-weight: bolder"/>
-                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{license_detailBean.license_detailObject.wtl_app_id}">
-                        <f:selectItem itemLabel="--select app"/>
-                        <f:selectItems value="#{wtl_appBean.wtl_apps}" var="item" itemValue="#{item.wtl_app_id}" itemLabel="#{item.wtl_app_name}"/>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Application Name:" for="app_name" style="font-weight: bolder"/>
+                        <p:selectOneMenu id="app_name" value="#{license_detail.wtl_app_id}" required="false">
+                            <f:selectItem itemLabel="--select package"/>
+                            <f:selectItems value="#{wtl_appBean.wtl_apps}" var="item" itemValue="#{item.wtl_app_id}" itemLabel="#{item.wtl_app_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value=""/>
-
+                        
                         <p:commandButton styleClass="clsButtonTaskFilter" id="cmdbSearch" value="Search">
-                            <p:ajax listener="#{license_detailBean.searchLicense_detail(license_detailBean.license_detailObject)}" process="search_filter" update="license_detail_table"/>
+                            <p:ajax listener="#{license_detailBean1.searchLicense_detail(license_detail)}" process="search_filter" update="license_detail_table"/>
                         </p:commandButton>
                     </h:panelGrid>
                 </div>
-                <p:dataTable id="license_detail_table" value="#{license_detailBean.license_detailList}" widgetVar="widget_license_detail_table"  var="item" rows="10"
+                <p:dataTable id="license_detail_table" value="#{license_detailBean1.license_detailList}" widgetVar="widget_license_detail_table"  var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
-                        LICENSE DETAILS LISTING
+                        DOMAIN LISTING
                     </f:facet>
 
-                    <p:column headerText="License Number" filterMatchMode="contains"  style="width: 10px">
+                    <p:column headerText="Domain ID" filterMatchMode="contains"  style="width: 10px">
                         #{item.license_detail_id}    
                     </p:column>
-                    <p:column headerText="Client Name" style="width: 30px" >
-                        #{item.license_client_name}     
-                    </p:column>
-                    <p:column headerText="App Name" style="width: 20px" >
-                        #{item.wtl_app_id}     
-                    </p:column>
-                    <p:column headerText="Package" style="width: 15px">
+                    <p:column headerText="Host Platform" style="width: 30px" >
                         #{item.license_package}     
-                    </p:column> 
-                    <p:column headerText="Start Date" filterMatchMode="contains"  style="width: 1px">
-                        #{item.start_date} 
-                    </p:column> 
-                    <p:column   headerText="Expiry Date" style="width: 20px">
-                        #{item.expire_date}     
                     </p:column>
-                    <p:column headerText="Years Payable" style="width: 20px">
-                        #{item.years_payable}     
-                    </p:column>
+                   
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_license_detail" value="View" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">
+                        <p:commandLink id="view_license_detail" value="View" action="#{license_detailBean1.redirectView(item)}" process="@this">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Edit" action="#{license_detailBean.redirectEdit(item)}">
+                        <p:commandLink  value=" | Edit" action="#{license_detailBean1.redirectEdit(item)}">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Cancel">
@@ -101,3 +86,4 @@
     </ui:define>
 
 </ui:composition>
+

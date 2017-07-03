@@ -6,17 +6,21 @@
 package beans;
 
 import connections.DBConnection;
+import entities.Package_detail;
 import entities.License_detail;
-import entities.Wtl_app;
+import entities.License_detail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import utilities.UtilityBean;
@@ -26,11 +30,11 @@ import utilities.UtilityBean;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class License_detailBean {
+@SessionScoped
+public class License_detailBean1 {
 
     private License_detail license_detail = new License_detail();
-    private Wtl_app wtl_app = new Wtl_app();
+    private Package_detail package_detail = new Package_detail();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
@@ -47,152 +51,25 @@ public class License_detailBean {
         this.license_detail = license_detail;
     }
 
-    public License_detailBean() {
+    public License_detailBean1() {
         this.License_detailObject = new License_detail();
     }
 
     public String redirectEdit(License_detail aLicense_detail) {
         this.License_detailObject = aLicense_detail;
-        return "license_detail?faces-redirect=true";
+        return "license_detail_detail?faces-redirect=true";
     }
-        public void redirectView(License_detail aLicense_detail) {
+
+    public void redirectView(License_detail aLicense_detail) {
         this.License_detailObject = aLicense_detail;
 //        return "PF('Dialog_View_Web_Service_Detail').show()";
        RequestContext.getCurrentInstance().execute("PF('Dialog_View_License_Detail').show()");
 
     }
 
-
     public String redirectNew() {
         this.License_detailObject = new License_detail();
-        return "license_detail?faces-redirect=true";
-    }
-
-    public void insertLicense_detail(License_detail license_detail) {
-        String sql = "";
-        sql = "INSERT INTO license_detail(wtl_app_id,transactor_id,license_client_id,license_client_name,"
-                + "license_package,license_expire_code,license_code,start_date,expire_date,"
-                + "last_renew_date,amount_payable,years_payable,credentials_server,"
-                + "credentials_network,narration,is_active,"
-                + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        try (
-                Connection conn = DBConnection.getMySQLConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);) {
-            try {
-                ps.setInt(1, license_detail.getWtl_app_id());
-            } catch (NullPointerException npe) {
-                ps.setInt(1, 0);
-            }
-            try {
-                ps.setLong(2, license_detail.getTransactor_id());
-            } catch (NullPointerException npe) {
-                ps.setLong(2, 0);
-            }
-            try {
-                ps.setString(3, license_detail.getLicense_client_id());
-            } catch (NullPointerException npe) {
-                ps.setString(3, "");
-            }
-            try {
-                ps.setString(4, license_detail.getLicense_client_name());
-            } catch (NullPointerException npe) {
-                ps.setString(4, "");
-            }
-            try {
-                ps.setString(5, license_detail.getLicense_package());
-            } catch (NullPointerException npe) {
-                ps.setString(5, "");
-            }
-            try {
-                ps.setString(6, license_detail.getLicense_expire_code());
-            } catch (NullPointerException npe) {
-                ps.setString(6, "");
-            }
-            try {
-                ps.setString(7, license_detail.getLicense_code());
-            } catch (NullPointerException npe) {
-                ps.setString(7, "");
-            }
-            try {
-                ps.setDate(8, new java.sql.Date(license_detail.getStart_date().getTime()));
-            } catch (NullPointerException npe) {
-                ps.setDate(8, null);
-            }
-            try {
-                ps.setDate(9, new java.sql.Date(license_detail.getExpire_date().getTime()));
-            } catch (NullPointerException npe) {
-                ps.setDate(9, null);
-            }
-            try {
-                ps.setDate(10, new java.sql.Date(license_detail.getLast_renew_date().getTime()));
-            } catch (NullPointerException npe) {
-                ps.setDate(10, null);
-            }
-            try {
-                ps.setFloat(11, license_detail.getAmount_payable());
-            } catch (NullPointerException npe) {
-                ps.setFloat(11, 0);
-            }
-            try {
-                ps.setInt(12, license_detail.getYears_payable());
-            } catch (NullPointerException npe) {
-                ps.setInt(12, 0);
-            }
-
-            try {
-                ps.setString(13, license_detail.getCredentials_server());
-            } catch (NullPointerException npe) {
-                ps.setString(13, "");
-            }
-            try {
-                ps.setString(14, license_detail.getCredentials_network());
-            } catch (NullPointerException npe) {
-                ps.setString(14, "");
-            }
-            try {
-                ps.setString(15, license_detail.getNarration());
-            } catch (NullPointerException npe) {
-                ps.setString(15, "");
-            }
-            try {
-                ps.setInt(16, license_detail.getIs_active());
-            } catch (NullPointerException npe) {
-                ps.setInt(16, 0);
-            }
-            try {
-                ps.setInt(17, license_detail.getIs_deleted());
-            } catch (NullPointerException npe) {
-                ps.setInt(17, 0);
-            }
-            try {
-                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
-            } catch (NullPointerException npe) {
-                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
-            }
-            try {
-                ps.setInt(19, license_detail.getAdd_by());
-            } catch (NullPointerException npe) {
-                ps.setInt(19, 0);
-            }
-            try {
-                ps.setDate(20, null);
-            } catch (NullPointerException npe) {
-                ps.setDate(20, null);
-            }
-            try {
-                ps.setInt(21, 0);
-            } catch (NullPointerException npe) {
-                ps.setInt(21, 0);
-            }
-            i = ps.executeUpdate();
-            this.clearLicense_detail(license_detail);
-            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
-        } catch (SQLException se) {
-            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
-            se.printStackTrace();
-        }
+        return "license_detail_detail?faces-redirect=true";
     }
 
     public void updateLicense_detail(License_detail license_detail) {
@@ -397,7 +274,7 @@ public class License_detailBean {
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             if (aLicense_detail.getWtl_app_id()> 0) {
-                wheresql = wheresql + " AND wtl_app_id='" + aLicense_detail.getWtl_app_id()+ "'";
+                wheresql = wheresql + " AND wtl_app_id=" + aLicense_detail.getWtl_app_id();
             }
             if (aLicense_detail.getStart_date() != null && aLicense_detail.getStart_date2() != null) {
                 wheresql = wheresql + " AND start_date BETWEEN '" + new java.sql.Date(aLicense_detail.getStart_date().getTime()) + "' AND '" + new java.sql.Date(aLicense_detail.getStart_date2().getTime()) + "'";
@@ -417,7 +294,7 @@ public class License_detailBean {
         }
     }
 
-    public int getTask_age() {
+        public int getTask_age() {
         return task_age;
     }
 
@@ -454,17 +331,17 @@ public class License_detailBean {
     }
 
     /**
-     * @return the wtl_app
+     * @return the package_detail
      */
-    public Wtl_app getWtl_app() {
-        return wtl_app;
+    public Package_detail getPackage_detail() {
+        return package_detail;
     }
 
     /**
-     * @param wtl_app the wtl_app to set
+     * @param package_detail the package_detail to set
      */
-    public void setWtl_app(Wtl_app wtl_app) {
-        this.wtl_app = wtl_app;
+    public void setPackage_detail(Package_detail package_detail) {
+        this.package_detail = package_detail;
     }
 
 }

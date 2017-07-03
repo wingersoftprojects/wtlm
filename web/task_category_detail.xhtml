@@ -11,29 +11,34 @@
             <p:growl id="messages" showDetail="true" />
             <p:panelGrid columns="2" style="width: 100%;">                                
                 <p:fieldset legend="Task Category Detail">
-                    <p:panelGrid columns="2" id="cover_type">                                                
-                        <p:outputLabel value="Category Name:" for="category_name"/>
-                        <p:inputText  id="category_name" value="#{task_category.task_category_name}" required="true" requiredMessage="Category Name is required" />
-                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{task_categoryBean.save_task_category(task_category)}" process="@this,category_name" update="@form">
+                    <p:panelGrid columns="2">                                                
+                        <p:outputLabel value="Task Category Name:" for="task_category_name"/>
+                        <p:inputText  id="task_category_name" value="#{task_categoryBean1.task_categoryObject.task_category_name}" required="true" requiredMessage="Service Name is required" />                        
+                        <p:commandButton value="SAVE (ALT+S)" action="#{task_categoryBean1.insertTask_category(task_categoryBean1.task_categoryObject)}" accesskey="s" style="font-weight: bolder; font-size: 15px"  rendered="#{task_categoryBean1.task_categoryObject.task_category_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                             <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <p:graphicImage name="/images/ajax-loader.gif"/>
                             </p:dialog>
                         </p:commandButton>
-                        <p:commandButton value="CLEAR"  icon="ui-icon-cancel" process="@this" update="@form"/>
+                        <p:commandButton value="UPDATE (ALT+U)" action="#{task_categoryBean1.updateTask_categorys(task_categoryBean1.task_categoryObject)}" accesskey="u" style="font-weight: bolder; font-size: 15px"  rendered="#{task_categoryBean1.task_categoryObject.task_category_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <p:graphicImage name="/images/ajax-loader.gif"/>
+                            </p:dialog>
+                        </p:commandButton>
+                        <p:commandButton value="CLEAR (ALT+C)" action="#{task_categoryBean1.clearTask_category(task_categoryBean1.task_categoryObject)}" accesskey="c" style="font-weight: bolder; font-size: 15px" process="@this" update="@form"/>  
                     </p:panelGrid>
                 </p:fieldset>
-                <p:dataTable id="category_table" value="#{task_categoryBean.task_categorys}"  var="item" rows="10"
+                <p:dataTable id="category_table" value="#{task_categoryBean1.task_categorys}"  var="item" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
-                    <p:column headerText="Category ID">
+                    <p:column headerText="Service Category ID">
                         #{item.task_category_id}    
                     </p:column>
-                    <p:column headerText="Category Name">
+                    <p:column headerText="Service Category Name">
                         #{item.task_category_name}    
                     </p:column>
                     <p:column headerText="">
-                        <p:commandButton value="Edit"  process="@this" update="@form" icon="ui-icon-search" title="View">
+                        <p:commandButton action="#{task_categoryBean1.setTask_categoryObject(item)}" value="Edit"  process="@this" update="@form" icon="ui-icon-search" title="View">
                         </p:commandButton>
                         <p:commandButton value="Delete"  update="@form" process="@this">
                             <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
@@ -50,5 +55,3 @@
     </ui:define>
 
 </ui:composition>
-
-

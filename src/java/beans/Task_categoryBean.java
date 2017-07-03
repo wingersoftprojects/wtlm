@@ -29,6 +29,7 @@ public class Task_categoryBean {
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
+    private Task_category Task_categoryObject;
 
     /**
      * Creates a new instance of Task_categoryBean
@@ -41,9 +42,28 @@ public class Task_categoryBean {
             conn = DBConnection.getMySQLConnection();
             String sql = "INSERT INTO task_category(task_category_name) VALUES(?)";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, task_category.getTask_category_name());
-            
+            ps.setString(1, task_category.getTask_category_name());            
+            i = ps.executeUpdate();
+            System.out.println("Added succesfully!!!");
+        } catch (SQLException e) {           
+            System.out.println(e);
+        } finally {
+            try {
+                conn.close();
+                ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void updateTask_category(Task_category task_category){
+        try {
 
+            conn = DBConnection.getMySQLConnection();
+            String sql = "UPDATE task_category SET task_category_name=? WHERE task_category_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, task_category.getTask_category_name());            
+            ps.setInt(2, task_category.getTask_category_id());            
             i = ps.executeUpdate();
             System.out.println("Added succesfully!!!");
         } catch (SQLException e) {           
@@ -83,6 +103,20 @@ public class Task_categoryBean {
             e.printStackTrace();
         }
         return task_categorys;
+    }
+
+    /**
+     * @return the Task_categoryObject
+     */
+    public Task_category getTask_categoryObject() {
+        return Task_categoryObject;
+    }
+
+    /**
+     * @param Task_categoryObject the Task_categoryObject to set
+     */
+    public void setTask_categoryObject(Task_category Task_categoryObject) {
+        this.Task_categoryObject = Task_categoryObject;
     }
 
 }

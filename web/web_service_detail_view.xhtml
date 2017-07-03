@@ -11,7 +11,7 @@
             <f:event listener="#{web_serviceBean.clearWeb_service(aWeb_service)}" type="preRenderView" />   
             <h:form id="form_web_service_detail_view">
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
-                    <p:outputLabel value="DOMAIN LISTING" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
+                    <p:outputLabel value="DOMAIN VIEW" style="font-weight: bolder; font-size: 20px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
                 <div class="ui-fluid">
                     <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">
@@ -22,27 +22,21 @@
                         <p:calendar styleClass="clsInputTaskFilter" id="calAddDateTo" pattern="dd-MM-yyyy HH:mm" navigator="true" showButtonPanel="true" readonlyInput="false" value="#{web_service.start_date2}">
                         </p:calendar>
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Package Name:" for="package_detail_id" style="font-weight: bolder"/>
-                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" id="package_detail_id" value="#{web_service.package_detail_id}">
-                            <f:selectItem itemLabel="--select package" itemValue="--select package"/>
-                            <f:selectItem itemLabel="WTL 1GB" itemValue="1"/>
-                            <f:selectItem itemLabel="WTL 2GB" itemValue="2"/>
-                            <f:selectItem itemLabel="WTL 3GB" itemValue="3"/>
-                            <f:selectItem itemLabel="WTL 4GB" itemValue="4"/>
+                        <p:selectOneMenu id="package_detail_id" value="#{web_service.package_detail_id}" required="false">
+                            <f:selectItem itemLabel="--select package"/>
+                            <f:selectItems value="#{package_detailBean.package_details}" var="item" itemValue="#{item.package_detail_id}" itemLabel="#{item.package_detail_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
-                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="assigned_to" value="Host Platform:" style="font-weight: bolder"/>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Host Platform:" style="font-weight: bolder"/>
                         <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{web_service.host_platform_id}">
-                            <f:selectItem itemLabel="Please Select" /> 
-                            <f:selectItem itemLabel="Just Host" itemValue="1"/>
-                            <f:selectItem itemLabel="Good Host" itemValue="2"/>                                                           
+                            <f:selectItem itemLabel="--select category--" />
+                            <f:selectItems value="#{host_platformBean.host_platforms}" var="item" itemValue="#{item.host_platform_id}" itemLabel="#{item.host_platform_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Service Category:" for="service_category_id" style="font-weight: bolder"/>
-                        <p:selectOneMenu id="service_category_id" styleClass="clsPanelTaskFilterTitle" value="#{web_service.service_category_id}">
-                            <f:selectItem itemLabel="--select service" itemValue="--select service"/>
-                            <f:selectItem itemLabel="Domain Registration" itemValue="1"/>
-                            <f:selectItem itemLabel="Domain Hosting" itemValue="2"/>
-                            <f:selectItem itemLabel="Designing" itemValue="3"/>
+                        <p:selectOneMenu id="service_category_id" value="#{web_service.service_category_id}" required="false">
+                            <f:selectItem itemLabel="--select service"/>
+                            <f:selectItems value="#{service_categoryBean.service_categorys}" var="item" itemValue="#{item.service_category_id}" itemLabel="#{item.service_category_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
 
@@ -56,10 +50,10 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
-                        ACCOUNT LISTING
+                        DOMAIN LISTING
                     </f:facet>
 
-                    <p:column headerText="Service Number" filterMatchMode="contains"  style="width: 10px">
+                    <p:column headerText="Domain ID" filterMatchMode="contains"  style="width: 10px">
                         #{item.web_service_id}    
                     </p:column>
                     <p:column headerText="Host Platform" style="width: 30px" >
@@ -84,7 +78,7 @@
                         #{item.account_manager}     
                     </p:column >
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_web_service" value="View" process="@this" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
+                        <p:commandLink id="view_web_service" value="View" action="#{web_serviceBean.redirectView(item)}" process="@this">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">

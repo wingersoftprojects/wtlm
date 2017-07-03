@@ -16,10 +16,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 import utilities.UtilityBean;
 
 /**
@@ -57,6 +60,13 @@ public class Web_serviceBean {
         return "web_service_detail?faces-redirect=true";
     }
 
+    public void redirectView(Web_service aWeb_service) {
+        this.Web_serviceObject = aWeb_service;
+//        return "PF('Dialog_View_Web_Service_Detail').show()";
+       RequestContext.getCurrentInstance().execute("PF('Dialog_View_Web_Service_Detail').show()");
+
+    }
+
     public String redirectNew() {
         this.Web_serviceObject = new Web_service();
         return "web_service_detail?faces-redirect=true";
@@ -69,7 +79,7 @@ public class Web_serviceBean {
                 + "last_renew_date,amount_payable,years_payable,is_active,"
                 + "narration,account_manager,wp_login,cpanel_login,"
                 + "is_deleted,add_date,add_by,last_edit_date,last_edit_by) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'0000-00-00 00:00',?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -160,25 +170,25 @@ public class Web_serviceBean {
             } catch (NullPointerException npe) {
                 ps.setInt(17, 0);
             }
-//            try {
-//                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
-//            } catch (NullPointerException npe) {
-//                ps.setDate(18, );
-//            }
             try {
-                ps.setInt(18, web_service.getAdd_by());
+                ps.setTimestamp(18, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
             } catch (NullPointerException npe) {
-                ps.setInt(18, 0);
+                ps.setDate(18, null);
             }
             try {
-                ps.setDate(19, null);
+                ps.setInt(19, web_service.getAdd_by());
             } catch (NullPointerException npe) {
-                ps.setDate(19, null);
+                ps.setInt(19, 0);
             }
             try {
-                ps.setInt(20, 0);
+                ps.setDate(20, null);
             } catch (NullPointerException npe) {
-                ps.setInt(20, 0);
+                ps.setDate(20, null);
+            }
+            try {
+                ps.setInt(21, 0);
+            } catch (NullPointerException npe) {
+                ps.setInt(21, 0);
             }
             i = ps.executeUpdate();
             this.clearWeb_service(web_service);
@@ -191,7 +201,7 @@ public class Web_serviceBean {
 
     public void updateWeb_service(Web_service web_service) {
         String sql = "";
-        sql = "UPDATE task_detail SET host_platform_id=?,transactor_id=?,admin_transactor_id=?,domain_name=?,"
+        sql = "UPDATE web_service SET host_platform_id=?,transactor_id=?,admin_transactor_id=?,domain_name=?,"
                 + "service_category_id=?,package_detail_id=?,start_date=?,expire_date=?,last_renew_date=?,"
                 + "amount_payable=?,years_payable=?,is_active=?,narration=?,"
                 + "account_manager=?,wp_login=?,cpanel_login=?,"
@@ -391,32 +401,31 @@ public class Web_serviceBean {
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             if (aWeb_service.getHost_platform_id() > 0) {
-                wheresql = wheresql + " AND host_platform_id='" + aWeb_service.getHost_platform_id() + "'";
+                wheresql = wheresql + " AND host_platform_id=" + aWeb_service.getHost_platform_id();
             }
             if (aWeb_service.getService_category_id() > 0) {
                 wheresql = wheresql + " AND service_category_id=" + aWeb_service.getService_category_id();
             }
             if (aWeb_service.getPackage_detail_id() > 0) {
-                wheresql = wheresql + " AND package_detail_id='" + aWeb_service.getPackage_detail_id() + "'";
+                wheresql = wheresql + " AND package_detail_id=" + aWeb_service.getPackage_detail_id();
             }
             if (aWeb_service.getStart_date() != null && aWeb_service.getStart_date2() != null) {
                 wheresql = wheresql + " AND start_date BETWEEN '" + new java.sql.Date(aWeb_service.getStart_date().getTime()) + "' AND '" + new java.sql.Date(aWeb_service.getStart_date2().getTime()) + "'";
             }
             orderby = " ORDER BY start_date DESC";
             sql = sql + wheresql + orderby;
-            System.out.println("sql");
+            System.out.println(sql);
             res = ps.executeQuery(sql);
-            Web_service td;
+            Web_service ws;
             while (res.next()) {
-                td = new Web_service();
-                this.setWeb_serviceFromResultset(td, res);
-                this.Web_serviceList.add(td);
+                ws = new Web_service();
+                this.setWeb_serviceFromResultset(ws, res);
+                this.Web_serviceList.add(ws);
             }
         } catch (SQLException se) {
-            se.printStackTrace();
+            System.out.println(sql);
         }
     }
-
     public int getTask_age() {
         return task_age;
     }

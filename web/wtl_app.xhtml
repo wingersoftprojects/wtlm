@@ -9,11 +9,14 @@
     <ui:define name="content">
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
-            <p:panelGrid columns="2" style="width: 100%;">                                
-                <p:fieldset legend="Application Detail">
-                    <p:panelGrid columns="2">                                                
-                        <p:outputLabel value="Application Name:" for="app_name"/>
-                        <p:inputText  id="app_name" value="#{wtl_appBean.wtl_appObject.wtl_app_name}" required="true" requiredMessage="Service Name is required" />                        
+            <p:fieldset legend="Application Detail"> 
+                <p:panelGrid columns="2">                                
+                    <p:outputLabel value="Application Name:" style="font-weight: bolder" for="app_name"/>
+                    <p:inputText  id="app_name" value="#{wtl_appBean.wtl_appObject.wtl_app_name}" required="true" requiredMessage="Service Name is required" />                        
+                </p:panelGrid>
+                <br></br>
+                <p:panel style="background-color:bisque; width: 100%">
+                    <center>
                         <p:commandButton value="SAVE (ALT+S)" action="#{wtl_appBean.insertWtl_app(wtl_appBean.wtl_appObject)}" accesskey="s" style="font-weight: bolder; font-size: 15px"  rendered="#{wtl_appBean.wtl_appObject.wtl_app_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                             <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <p:graphicImage name="/images/ajax-loader.gif"/>
@@ -25,32 +28,37 @@
                             </p:dialog>
                         </p:commandButton>
                         <p:commandButton value="CLEAR (ALT+C)" action="#{wtl_appBean.clearWtl_app(wtl_appBean.wtl_appObject)}" accesskey="c" style="font-weight: bolder; font-size: 15px" process="@this" update="@form"/>  
-                    </p:panelGrid>
-                </p:fieldset>
-                <p:dataTable id="category_table" value="#{wtl_appBean.wtl_apps}"  var="item" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15,30,50,100">
-                    <p:column headerText="Application Number">
-                        #{item.wtl_app_id}    
-                    </p:column>
-                    <p:column headerText="Application Name">
-                        #{item.wtl_app_name}    
-                    </p:column>
-                    <p:column headerText="">
-                        <p:commandButton value="Edit"  process="@this" update="@form" icon="ui-icon-search" title="View">
-                        </p:commandButton>
-                        <p:commandButton value="Delete"  update="@form" process="@this">
-                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
-                        </p:commandButton>
+                    </center>
+                </p:panel>
+            </p:fieldset>
 
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
-                    </p:column>
-                </p:dataTable>
-            </p:panelGrid>
+            <p:dataTable id="category_table" value="#{wtl_appBean.wtl_apps}"  var="item" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,30,50,100">
+                <f:facet name="header">
+                    APPLICATIONS LISTING
+                </f:facet>
+
+                <p:column headerText="Application Number">
+                    #{item.wtl_app_id}    
+                </p:column>
+                <p:column headerText="Application Name">
+                    #{item.wtl_app_name}    
+                </p:column>
+                <p:column headerText="">
+                    <p:commandButton value="Edit"  process="@this" update="@form" icon="ui-icon-search" title="View">
+                    </p:commandButton>
+                    <p:commandButton value="Delete"  update="@form" process="@this">
+                        <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 
