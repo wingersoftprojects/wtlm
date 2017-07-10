@@ -7,19 +7,17 @@ package beans;
 
 import connections.DBConnection;
 import entities.Task_detail;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.sql.DataSource;
 import utilities.UtilityBean;
 
 /**
@@ -28,7 +26,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class Task_detailBean {
+public class Task_detailBean implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Task_detail task_detail = new Task_detail();
     PreparedStatement ps = null;

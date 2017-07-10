@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Wtl_app;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -23,8 +25,10 @@ import javax.faces.context.FacesContext;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class Wtl_appBean {
+@SessionScoped
+public class Wtl_appBean implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private Wtl_app wtl_app = new Wtl_app();
     PreparedStatement ps = null;
     Connection conn = null;
@@ -84,6 +88,11 @@ public class Wtl_appBean {
                 ps.setString(1, wtl_app.getWtl_app_name());
             } catch (NullPointerException npe) {
                 ps.setString(1, "");
+            }
+            try {
+                ps.setInt(2, wtl_app.getWtl_app_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(2, 0);
             }
             i = ps.executeUpdate();
             this.clearWtl_app(wtl_app);

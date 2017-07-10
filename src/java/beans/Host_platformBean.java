@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Host_platform;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -23,8 +24,9 @@ import javax.faces.context.FacesContext;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class Host_platformBean {
+@SessionScoped
+public class Host_platformBean implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Host_platform host_platform = new Host_platform();
     PreparedStatement ps = null;

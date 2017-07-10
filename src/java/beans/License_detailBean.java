@@ -8,17 +8,13 @@ package beans;
 import connections.DBConnection;
 import entities.Package_detail;
 import entities.License_detail;
-import entities.License_detail;
-import entities.Wtl_app;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -32,7 +28,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class License_detailBean {
+public class License_detailBean implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private License_detail license_detail = new License_detail();
     private Package_detail package_detail = new Package_detail();

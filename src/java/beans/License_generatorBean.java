@@ -6,9 +6,11 @@
 package beans;
 
 import entities.License_detail;
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import utilities.Security;
 
@@ -17,8 +19,9 @@ import utilities.Security;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class License_generatorBean {
+@SessionScoped
+public class License_generatorBean implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String ActionMessage="";
     private String EncryptedKey="";
     private String DecryptedKey="";

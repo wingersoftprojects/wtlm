@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Service_category;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import utilities.UtilityBean;
 
@@ -24,8 +26,9 @@ import utilities.UtilityBean;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class Service_categoryBean {
+@SessionScoped
+public class Service_categoryBean implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Service_category service_category = new Service_category();
     PreparedStatement ps = null;
@@ -78,7 +81,6 @@ public class Service_categoryBean {
     }
 
     public void updateService_category(Service_category service_category) {
-        System.out.println("||||||");
         String sql = "";
         sql = "UPDATE service_category SET service_category_name=? WHERE service_category_id=?";
         try (

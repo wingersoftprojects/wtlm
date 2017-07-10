@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Package_detail;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -23,9 +24,10 @@ import javax.faces.context.FacesContext;
  * @author philp
  */
 @ManagedBean
-@RequestScoped
-public class Package_detailBean {
-
+@SessionScoped
+public class Package_detailBean implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private Package_detail package_detail = new Package_detail();
     PreparedStatement ps = null;
     Connection conn = null;

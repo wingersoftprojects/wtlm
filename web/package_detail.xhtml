@@ -9,43 +9,43 @@
     <ui:define name="content">
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />                                          
-                <p:fieldset legend="Package Detail">
-                    <p:panelGrid columns="4" id="cover_type">                                                
-                        <p:outputLabel value="Package Name:" for="package_name"/>
-                        <p:inputText  id="package_name" value="#{package_detailBean.package_detailObject.package_detail_name}" required="true" requiredMessage="Package Name field is required" />
-                        <p:outputLabel value="Quota MBs:" for="quota_mbs"/>
-                        <p:inputText  id="quota_mbs" value="#{package_detailBean.package_detailObject.quota_mbs}" required="true" requiredMessage="Quota MBs field is required" />
-                        <p:outputLabel value="BW MBs:" for="bw_mbs"/>
-                        <p:inputText  id="bw_mbs" value="#{package_detailBean.package_detailObject.bw_mbs}" required="true" requiredMessage="BW MBs field is required" />
-                        <p:outputLabel value="Emails:" for="emails"/>
-                        <p:inputText  id="emails" value="#{package_detailBean.package_detailObject.emails}" required="true" requiredMessage="Emails field is required" />
-                        <p:outputLabel value="FTP:" for="ftp"/>
-                        <p:inputText  id="ftp" value="#{package_detailBean.package_detailObject.ftp}" required="true" requiredMessage="FTP field is required" />
-                        <p:outputLabel value="DBS:" for="dbs"/>
-                        <p:inputText  id="dbs" value="#{package_detailBean.package_detailObject.dbs}" required="true" requiredMessage="DBS field is required" />
-                        <p:outputLabel value="Other Details:" for="other_details"/>
-                        <p:inputText  id="other_details" value="#{package_detailBean.package_detailObject.other_details}" required="true" requiredMessage="Other Details field is required" />
-                    </p:panelGrid>
-                    <br></br>
-                    <p:panel style="background-color:bisque; width: 100%">
-                        <center>
-                            <p:commandButton value="SAVE (ALT+S)" action="#{package_detailBean.insertPackage_detail(package_detailBean.package_detailObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{package_detailBean.package_detailObject.package_detail_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
-                                <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                    <p:graphicImage name="/images/ajax-loader.gif"/>
-                                </p:dialog>
-                            </p:commandButton>
-                            <td></td>
-                            <p:commandButton value="UPDATE (ALT+U)" action="#{package_detailBean.updatePackage_detail(package_detailBean.package_detailObject)}" accesskey="u" style="font-weight: bolder; font-size: 20px"  rendered="#{package_detailBean.package_detailObject.package_detail_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
-                                <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                    <p:graphicImage name="/images/ajax-loader.gif"/>
-                                </p:dialog>
-                            </p:commandButton>
-                            <td></td>
-                            <p:commandButton value="CLEAR (ALT+C)" action="#{package_detailBean.clearPackage_detail(package_detailBean.package_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>  
-                        </center>
-                    </p:panel>
-                </p:fieldset>
-        
+            <p:fieldset legend="Package Detail">
+                <p:panelGrid columns="4" id="cover_type">                                                
+                    <p:outputLabel value="Package Name:" for="package_name"/>
+                    <p:inputText  id="package_name" value="#{package_detailBean.package_detailObject.package_detail_name}" required="true" requiredMessage="Package Name field is required" />
+                    <p:outputLabel value="Quota MBs:" for="quota_mbs"/>
+                    <p:inputText  id="quota_mbs" value="#{package_detailBean.package_detailObject.quota_mbs}" required="true" requiredMessage="Quota MBs field is required" />
+                    <p:outputLabel value="BW MBs:" for="bw_mbs"/>
+                    <p:inputText  id="bw_mbs" value="#{package_detailBean.package_detailObject.bw_mbs}" required="true" requiredMessage="BW MBs field is required" />
+                    <p:outputLabel value="Emails:" for="emails"/>
+                    <p:inputText  id="emails" value="#{package_detailBean.package_detailObject.emails}" required="true" requiredMessage="Emails field is required" />
+                    <p:outputLabel value="FTP:" for="ftp"/>
+                    <p:inputText  id="ftp" value="#{package_detailBean.package_detailObject.ftp}" required="true" requiredMessage="FTP field is required" />
+                    <p:outputLabel value="DBS:" for="dbs"/>
+                    <p:inputText  id="dbs" value="#{package_detailBean.package_detailObject.dbs}" required="true" requiredMessage="DBS field is required" />
+                    <p:outputLabel value="Other Details:" for="other_details"/>
+                    <p:inputText  id="other_details" value="#{package_detailBean.package_detailObject.other_details}" required="true" requiredMessage="Other Details field is required" />
+                </p:panelGrid>
+                <br></br>
+                <p:panel style="background-color:bisque; width: 100%">
+                    <center>
+                        <p:commandButton value="SAVE (ALT+S)" action="#{package_detailBean.insertPackage_detail(package_detailBean.package_detailObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{package_detailBean.package_detailObject.package_detail_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <p:graphicImage name="/images/ajax-loader.gif"/>
+                            </p:dialog>
+                        </p:commandButton>
+                        <td></td>
+                        <p:commandButton value="UPDATE (ALT+U)" action="#{package_detailBean.updatePackage_detail(package_detailBean.package_detailObject)}" accesskey="u" style="font-weight: bolder; font-size: 20px"  rendered="#{package_detailBean.package_detailObject.package_detail_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
+                            <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                <p:graphicImage name="/images/ajax-loader.gif"/>
+                            </p:dialog>
+                        </p:commandButton>
+                        <td></td>
+                        <p:commandButton value="CLEAR (ALT+C)" action="#{package_detailBean.clearPackage_detail(package_detailBean.package_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>  
+                    </center>
+                </p:panel>
+            </p:fieldset>
+
             <p:dataTable id="category_table" value="#{package_detailBean.package_details}"  var="item" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -79,16 +79,10 @@
                     #{item.other_details}    
                 </p:column>
                 <p:column headerText="">
-                    <p:commandButton value="Edit" action="#{package_detailBean.setPackage_detailObject(item)}" process="@this" update="@form" icon="ui-icon-search" title="View">
-                    </p:commandButton>
-                    <p:commandButton value="Delete"  update="@form" process="@this">
-                        <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
-                    </p:commandButton>
-
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
+                    <center>
+                        <p:commandButton value="Edit" action="#{package_detailBean.setPackage_detailObject(item)}" process="@this" update="@form" icon="ui-icon-search" title="View">
+                        </p:commandButton>
+                    </center>
                 </p:column>
             </p:dataTable>
         </h:form>

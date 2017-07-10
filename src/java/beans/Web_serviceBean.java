@@ -9,6 +9,7 @@ import connections.DBConnection;
 import entities.Package_detail;
 import entities.Web_service;
 import entities.Web_service;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +32,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class Web_serviceBean {
+public class Web_serviceBean implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Web_service web_service = new Web_service();
     private Package_detail package_detail = new Package_detail();
