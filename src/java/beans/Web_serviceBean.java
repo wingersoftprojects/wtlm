@@ -320,7 +320,44 @@ public class Web_serviceBean {
             se.printStackTrace();
         }
     }
+    public void deleteTask_detail(Web_service web_service) {
+        String sql = "";
+        sql = "UPDATE web_service SET is_deleted=?,last_edit_date=?,last_edit_by=?"
+                + " WHERE web_service_id=?";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            try {
+                ps.setInt(1, 1);
+            } catch (NullPointerException npe) {
+                ps.setInt(1, 0);
+            }
+            try {
+                ps.setTimestamp(2, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+            } catch (NullPointerException npe) {
+                ps.setTimestamp(2, null);
+            }
+            try {
+                ps.setInt(3, 0);
+            } catch (NullPointerException npe) {
+                ps.setInt(3, 0);
+            }
+            try {
+                ps.setInt(4, web_service.getWeb_service_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(4, 0);
+            }
+            System.out.println(sql);
+            i = ps.executeUpdate();
+            this.clearWeb_service(web_service);
+            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Deleted succesfully"));
+        } catch (SQLException se) {
+            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
+            se.printStackTrace();
+        }
+    }
 
+    
     public List<Web_service> getWeb_services() throws Exception {
         List<Web_service> web_services = new ArrayList<>();
         String sql = "SELECT * FROM web_service";

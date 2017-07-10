@@ -25,13 +25,15 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @RequestScoped
 public class Package_detailBean {
+
     private Package_detail package_detail = new Package_detail();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
     private List<Package_detail> Package_detailList;
-    private Package_detail Package_detailObject;   
+    private Package_detail Package_detailObject;
+
     public Package_detail getPackage_detail() {
         return package_detail;
     }
@@ -41,16 +43,16 @@ public class Package_detailBean {
     }
 
     public Package_detailBean() {
-        this.Package_detailObject=new Package_detail();
+        this.Package_detailObject = new Package_detail();
     }
-    
+
     public String redirectEdit(Package_detail aPackage_detail) {
-       this.Package_detailObject=aPackage_detail; 
+        this.Package_detailObject = aPackage_detail;
         return "package_detail?faces-redirect=true";
     }
-    
+
     public String redirectNew() {
-       this.Package_detailObject=new Package_detail(); 
+        this.Package_detailObject = new Package_detail();
         return "package_detail?faces-redirect=true";
     }
 
@@ -107,7 +109,8 @@ public class Package_detailBean {
 
     public void updatePackage_detail(Package_detail package_detail) {
         String sql = "";
-        sql = "UPDATE package_detail SET package_name=?,quota_mbs=?,bw_mbs=?,emails=?,ftp=?,dbs=?,other_details=?"
+        sql = "UPDATE package_detail SET package_name=?,quota_mbs=?,bw_mbs=?,emails=?,"
+                + "ftp=?,dbs=?,other_details=?"
                 + " WHERE package_detail_id=?";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
@@ -117,7 +120,7 @@ public class Package_detailBean {
             } catch (NullPointerException npe) {
                 ps.setString(1, "");
             }
-                        try {
+            try {
                 ps.setFloat(2, package_detail.getQuota_mbs());
             } catch (NullPointerException npe) {
                 ps.setFloat(2, 0);
@@ -125,7 +128,7 @@ public class Package_detailBean {
             try {
                 ps.setFloat(3, package_detail.getBw_mbs());
             } catch (NullPointerException npe) {
-                ps.setInt(3, 0);
+                ps.setFloat(3, 0);
             }
             try {
                 ps.setInt(4, package_detail.getEmails());
@@ -146,6 +149,11 @@ public class Package_detailBean {
                 ps.setString(7, package_detail.getOther_details());
             } catch (NullPointerException npe) {
                 ps.setString(7, "");
+            }
+            try {
+                ps.setInt(8, package_detail.getPackage_detail_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(8, 0);
             }
             i = ps.executeUpdate();
             this.clearPackage_detail(package_detail);
@@ -183,7 +191,7 @@ public class Package_detailBean {
             aPackage_detail.setEmails(rs.getInt("emails"));
             aPackage_detail.setFtp(rs.getInt("ftp"));
             aPackage_detail.setDbs(rs.getInt("dbs"));
-            aPackage_detail.setOther_details(rs.getString("other_details"));           
+            aPackage_detail.setOther_details(rs.getString("other_details"));
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -191,7 +199,7 @@ public class Package_detailBean {
     }
 
     public void clearPackage_detail(Package_detail aPackage_detail) {
-        if (null != aPackage_detail) {            
+        if (null != aPackage_detail) {
             aPackage_detail.setPackage_detail_id(0);
             aPackage_detail.setPackage_detail_name("");
             aPackage_detail.setQuota_mbs(0);
@@ -199,8 +207,8 @@ public class Package_detailBean {
             aPackage_detail.setEmails(0);
             aPackage_detail.setFtp(0);
             aPackage_detail.setDbs(0);
-            aPackage_detail.setOther_details("");           
-            
+            aPackage_detail.setOther_details("");
+
         }
     }
 

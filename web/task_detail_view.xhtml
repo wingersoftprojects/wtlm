@@ -10,6 +10,7 @@
         <f:view>
             <f:event listener="#{task_detailBean.clearTask_detail(aTask_detail)}" type="preRenderView" />   
             <h:form id="form_task_detail_view">
+                <p:growl showDetail="true" id="task_detail_view_messages"/>
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
                     <p:outputLabel value="Task View" style="font-weight: bolder; font-size: 30px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
@@ -88,9 +89,6 @@
                     <p:column headerText="Completed By" style="width: 20px">
                         #{item.completed_by}     
                     </p:column>
-                    <p:column headerText="Task Age(days)" style="width: 5px">
-                          
-                    </p:column>
                     <p:column headerText="" style="width: 100px">
                         <p:commandLink id="view_task_detail" value="View" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">
                         </p:commandLink>
@@ -98,17 +96,16 @@
                         <p:commandLink  value=" | Edit" action="#{task_detailBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Cancel">
+                        <p:commandLink  value=" | Delete" actionListener="#{task_detailBean.deleteTask_detail(item)}" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="Yes" actionListener="#{task_detailBean.deleteTask_detail(item)}" update="@form" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>                                               
 
                     </p:column>
                 </p:dataTable>
-
             </h:form>
         </f:view>
         <ui:include src="dialog_view_task_detail.xhtml"/>

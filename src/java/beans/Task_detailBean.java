@@ -269,6 +269,43 @@ public class Task_detailBean {
         }
     }
 
+    public void deleteTask_detail(Task_detail task_detail) {
+        String sql = "";
+        sql = "UPDATE task_detail SET is_deleted=?,last_edit_date=?,last_edit_by=?"
+                + " WHERE task_detail_id=?";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            try {
+                ps.setInt(1, 1);
+            } catch (NullPointerException npe) {
+                ps.setInt(1, 0);
+            }
+            try {
+                ps.setTimestamp(2, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
+            } catch (NullPointerException npe) {
+                ps.setTimestamp(2, null);
+            }
+            try {
+                ps.setInt(3, 0);
+            } catch (NullPointerException npe) {
+                ps.setInt(3, 0);
+            }
+            try {
+                ps.setInt(4, task_detail.getTask_detail_id());
+            } catch (NullPointerException npe) {
+                ps.setInt(4, 0);
+            }
+            System.out.println(sql);
+            i = ps.executeUpdate();
+            this.clearTask_detail(task_detail);
+            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Deleted succesfully"));
+        } catch (SQLException se) {
+            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
+            se.printStackTrace();
+        }
+    }
+
     public List<Task_detail> getTask_details() throws Exception {
         List<Task_detail> task_details = new ArrayList<>();
         String sql = "SELECT * FROM task_detail";

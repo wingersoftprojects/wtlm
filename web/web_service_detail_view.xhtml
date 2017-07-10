@@ -10,6 +10,7 @@
         <f:view>
             <f:event listener="#{web_serviceBean.clearWeb_service(aWeb_service)}" type="preRenderView" />   
             <h:form id="form_web_service_detail_view">
+                <p:growl showDetail="true" id="web_service_view_messages"/>
                 <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
                     <p:outputLabel value="DOMAIN VIEW" style="font-weight: bolder; font-size: 20px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
                 </h:panelGrid>
@@ -84,17 +85,16 @@
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Cancel">
-                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert" />
+                        <p:commandLink  value=" | Delete" actionListener="#{web_serviceBean.cancelTask_detail(item)}" update="@form">
+                            <p:confirm header="Confirmation" message="Are you sure you want to delete this domain?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="Yes" actionListener="#{web_serviceBean.deleteTask_detail(item)}" update="@form" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>                                               
 
                     </p:column>
                 </p:dataTable>
-
             </h:form>
         </f:view>
         <ui:include src="dialog_view_web_service_detail.xhtml"/>
@@ -111,8 +111,6 @@
                 <h:outputText value="Status: Completed" />
             </f:facet>
         </p:ajaxStatus>
-
     </ui:define>
-
 </ui:composition>
 
