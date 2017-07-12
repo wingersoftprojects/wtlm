@@ -10,8 +10,8 @@
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
             <p:fieldset  legend="Domain Details" style="width: 92%">                   
-                <p:panelGrid columns="4" id="domain_detail">                                                
-                    <p:outputLabel value="Client Name:" for="transactor_id"/>
+                <h:panelGrid columns="4" id="domain_detail">                                                
+                    <p:outputLabel value="Client Name:" for="transactor_id" style="font-weight: bolder"/>
                     <p:selectOneMenu id="transactor_id" value="#{web_serviceBean.web_serviceObject.transactor_id}" required="true" requiredMessage="Client Name field is required!">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItem itemLabel="Solomon" itemValue="1"/>
@@ -19,71 +19,71 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Domain Name:" for="web_service_id"/>
+                    <p:outputLabel value="Domain Name:" for="web_service_id" style="font-weight: bolder"/>
                     <p:inputText id="web_service_id" value="#{web_serviceBean.web_serviceObject.domain_name}" required="true" requiredMessage="Domain Name field is required!"/>
 
-                    <p:outputLabel value="Host Platform:" for="host_platform_id"/>
+                    <p:outputLabel value="Host Platform:" for="host_platform_id" style="font-weight: bolder"/>
                     <p:selectOneMenu id="host_platform_id" value="#{web_serviceBean.web_serviceObject.host_platform_id}" required="true" requiredMessage="Host Platform field is required!">
                         <f:selectItem itemLabel="--select host"/>
                         <f:selectItems value="#{host_platformBean.host_platforms}" var="item" itemValue="#{item.host_platform_id}" itemLabel="#{item.host_platform_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Service Category:" for="service_category_id"/>
+                    <p:outputLabel value="Service Category:" for="service_category_id" style="font-weight: bolder"/>
                     <p:selectOneMenu id="service_category_id" value="#{web_serviceBean.web_serviceObject.service_category_id}" required="true" requiredMessage="Service Category field is required!">
                         <f:selectItem itemLabel="--select service"/>
                         <f:selectItems value="#{service_categoryBean.service_categorys}" var="item" itemValue="#{item.service_category_id}" itemLabel="#{item.service_category_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Package Name:" for="package_detail_id"/>
+                    <p:outputLabel value="Package Name:" for="package_detail_id" style="font-weight: bolder"/>
                     <p:selectOneMenu id="package_detail_id" value="#{web_serviceBean.web_serviceObject.package_detail_id}" required="true" requiredMessage="Package Name field is required!">
                         <f:selectItem itemLabel="--select package"/>
                         <f:selectItems value="#{package_detailBean.package_details}" var="item" itemValue="#{item.package_detail_id}" itemLabel="#{item.package_detail_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Start Date:"/>
+                    <p:outputLabel value="Start Date:" style="font-weight: bolder"/>
                     <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.start_date}" id="start_date"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
 
-                    <p:outputLabel value="Expire Date:"/>
+                    <p:outputLabel value="Expire Date:" style="font-weight: bolder"/>
                     <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.expire_date}" id="expire_date"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Expiry Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
 
-                    <p:outputLabel value="Last Renew Date:"/>
+                    <p:outputLabel value="Last Renew Date:" style="font-weight: bolder"/>
                     <p:calendar styleClass="clsInput" value="#{web_serviceBean.web_serviceObject.last_renew_date}" id="last_renew_date"  navigator="true" showButtonPanel="true" readonlyInput="true">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
 
-                    <p:outputLabel value="Amount Payable:" for="amount_payable"/>
+                    <p:outputLabel value="Amount Payable:" for="amount_payable" style="font-weight: bolder"/>
                     <p:inputText id="amount_payable" value="#{web_serviceBean.web_serviceObject.amount_payable}"/>
 
-                    <p:outputLabel value="Years Payable:" for="years_payable" />
+                    <p:outputLabel value="Years Payable:" for="years_payable" style="font-weight: bolder"/>
                     <p:inputText id="years_payable" value="#{web_serviceBean.web_serviceObject.years_payable}" required="true" requiredMessage="Years Payable field is required!"/>
 
-                    <p:outputLabel value="Narration:" for="narration" />
-                    <p:inputText id="narration" value="#{web_serviceBean.web_serviceObject.narration}"/>
+                    <p:outputLabel value="Narration:" for="narration" style="font-weight: bolder"/>
+                    <p:inputTextarea id="narration" value="#{web_serviceBean.web_serviceObject.narration}"/>
 
-                    <p:outputLabel value="Cpanel Login:" for="cpanel_login"/>
-                    <p:inputText id="cpanel_login" value="#{web_serviceBean.web_serviceObject.cpanel_login}"/>
+                    <p:outputLabel value="Cpanel Login:" for="cpanel_login" style="font-weight: bolder"/>
+                    <p:inputTextarea id="cpanel_login" value="#{web_serviceBean.web_serviceObject.cpanel_login}"/>
 
-                    <p:outputLabel value="Account Manager:" for="account_manager"/>
+                    <p:outputLabel value="Wp Login:" for="wp_login" style="font-weight: bolder"/>
+                    <p:inputTextarea id="wp_login" value="#{web_serviceBean.web_serviceObject.wp_login}"/>
+                    
+                    <p:outputLabel value="Account Manager:" for="account_manager" style="font-weight: bolder"/>
                     <p:inputText id="account_manager" value="#{web_serviceBean.web_serviceObject.account_manager}" required="true" requiredMessage="Account Manager field is required!"/>
 
-                    <p:outputLabel value="Wp Login:" for="wp_login" />
-                    <p:inputText id="wp_login" value="#{web_serviceBean.web_serviceObject.wp_login}"/>
-
-                    <p:outputLabel value="Is Active?:" for="is_active" />
+                    <p:outputLabel value="Is Active?:" for="is_active" style="font-weight: bolder"/>
                     <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required" value="#{web_serviceBean.web_serviceObject.is_active}">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItem itemLabel="Yes" itemValue="1" />
                         <f:selectItem itemLabel="No" itemValue="0" />
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
-                </p:panelGrid>
+                </h:panelGrid>
             </p:fieldset>            
             <p:panel style="background-color:bisque; width: 94%">
                 <center>
@@ -92,15 +92,16 @@
                             <p:graphicImage name="/images/ajax-loader.gif"/>
                         </p:dialog>
                     </p:commandButton>
+                    <td></td>
                     <p:commandButton value="UPDATE (ALT+U)" action="#{web_serviceBean.updateWeb_service(web_serviceBean.web_serviceObject)}" accesskey="u" style="font-weight: bolder; font-size: 20px"  rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                         <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                             <p:graphicImage name="/images/ajax-loader.gif"/>
                         </p:dialog>
                     </p:commandButton>
+                    <td></td>
                     <p:commandButton value="CLEAR (ALT+C)" action="#{web_serviceBean.clearWeb_service(web_serviceBean.web_serviceObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
                 </center>
             </p:panel>
-            <p:messages/>
         </h:form>
     </ui:define>
 </ui:composition>

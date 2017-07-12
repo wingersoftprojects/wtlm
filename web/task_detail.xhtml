@@ -42,7 +42,7 @@
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
-                        <p:inputText value="#{task_detailBean.task_detailObject.raised_by}" style="font-weight: bolder"/>
+                        <p:inputText value="#{task_detailBean.task_detailObject.raised_by}" required="true" requiredMessage="Raised by field is required" style="font-weight: bolder"/>
                         <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
                         <p:selectOneMenu id="assigned_to" value="#{task_detailBean.task_detailObject.assigned_to}" label="Please Select" style="font-weight: bolder" required="true" requiredMessage="Assigned To field is required"> 
                             <f:selectItem itemLabel="Please Select" /> 
@@ -92,7 +92,6 @@
                         <p:commandButton value="CLEAR (ALT+C)" action="#{task_detailBean.clearTask_detail(task_detailBean.task_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
                     </center>
                 </p:panel>
-                <p:messages/>
             </h:form>
         </div>
     </ui:define>

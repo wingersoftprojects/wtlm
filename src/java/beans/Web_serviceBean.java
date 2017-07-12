@@ -322,7 +322,7 @@ public class Web_serviceBean implements Serializable{
             se.printStackTrace();
         }
     }
-    public void deleteTask_detail(Web_service web_service) {
+    public void deleteWeb_service(Web_service web_service) {
         String sql = "";
         sql = "UPDATE web_service SET is_deleted=?,last_edit_date=?,last_edit_by=?"
                 + " WHERE web_service_id=?";
@@ -433,7 +433,7 @@ public class Web_serviceBean implements Serializable{
     public void searchWeb_service(Web_service aWeb_service) {
         ResultSet res = null;
         this.Web_serviceList = new ArrayList<>();
-        String sql = "SELECT * FROM web_service WHERE is_deleted=0 AND is_active=1";
+        String sql = "SELECT * FROM web_service WHERE is_deleted=0";
         String wheresql = "";
         String orderby = "";
         try (

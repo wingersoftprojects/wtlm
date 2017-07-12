@@ -46,14 +46,14 @@
                     </p:calendar>
                     <p:outputLabel value="Amount Payable:" style="font-weight: bolder" for="amount_payable"/>
                     <p:inputText id="amount_payable" value="#{license_detailBean.license_detailObject.amount_payable}" required="true" requiredMessage="Amount Payable field is required!"/>
-                    <p:outputLabel value="Years Payable:" style="font-weight: bolder" for="years_payable" />
-                    <p:inputText id="years_payable" value="#{license_detailBean.license_detailObject.years_payable}" required="true" requiredMessage="Years Payable field is required!"/>
                     <p:outputLabel value="Server Credentials:" style="font-weight: bolder" for="server_credentials"/>
-                    <p:inputText id="server_credentials" value="#{license_detailBean.license_detailObject.credentials_server}"/>
+                    <p:inputTextarea id="server_credentials" value="#{license_detailBean.license_detailObject.credentials_server}"/>
+                    <p:outputLabel value="Years Payable:" style="font-weight: bolder" for="years_payable" />
+                    <p:inputText id="years_payable" value="#{license_detailBean.license_detailObject.years_payable}" required="true" requiredMessage="Years Payable field is required!"/>                    
                     <p:outputLabel value="Network Credentials:" style="font-weight: bolder" for="network_credentials"/>
-                    <p:inputText id="network_credentials" value="#{license_detailBean.license_detailObject.credentials_network}" required="false"/>
+                    <p:inputTextarea id="network_credentials" value="#{license_detailBean.license_detailObject.credentials_network}" required="false"/>
                     <p:outputLabel value="Narration:" style="font-weight: bolder" for="narration" />
-                    <p:inputText id="narration" value="#{license_detailBean.license_detailObject.narration}"/>                    
+                    <p:inputTextarea id="narration" value="#{license_detailBean.license_detailObject.narration}"/>                    
                     <p:outputLabel value="Is Active?:" style="font-weight: bolder" for="is_active" />
                     <p:selectOneMenu id="is_active" value="#{license_detailBean.license_detailObject.is_active}" required="true" requiredMessage="Is active field is required">
                         <f:selectItem itemLabel="" itemValue=""/>
@@ -79,7 +79,6 @@
                     <p:commandButton value="CLEAR (ALT+C)" action="#{license_detailBean.clearLicense_detail(license_detailBean.license_detailObject)}" accesskey="c" style="font-weight: bolder; font-size: 20px" process="@this" update="@form"/>
                 </center>
             </p:panel>
-            <p:messages/>
         </h:form>
     </ui:define>
 </ui:composition>

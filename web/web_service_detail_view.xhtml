@@ -78,6 +78,9 @@
                     <p:column headerText="Account Manager" style="width: 30px">
                         #{item.account_manager}     
                     </p:column >
+                    <p:column headerText="Is Active" style="width: 30px">
+                        #{item.is_active}     
+                    </p:column >
                     <p:column headerText="" style="width: 100px">
                         <p:commandLink id="view_web_service" value="View" action="#{web_serviceBean.redirectView(item)}" process="@this">
                         </p:commandLink>
@@ -85,11 +88,11 @@
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Delete" actionListener="#{web_serviceBean.cancelTask_detail(item)}" update="@form">
+                        <p:commandLink  value=" | Delete" actionListener="#{web_serviceBean.deleteWeb_service(item)}" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to delete this domain?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Yes" actionListener="#{web_serviceBean.deleteTask_detail(item)}" update="@form" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="Yes" actionListener="#{web_serviceBean.deleteWeb_service(item)}" update="@form" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>                                               
 
