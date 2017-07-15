@@ -17,7 +17,14 @@
                         <p:outputLabel value="Client Name:" style="font-weight: bolder" for="client_name"/>
                         <p:inputText id="client_name" value="#{license_detail.clientName}"/>
                         <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>
-                        <p:inputText id="package_name" value="#{license_detail.packageName}" placeholder="e.g EDGE0005"/>
+                        <p:selectOneMenu id="package_name" value="#{license_detail.packageName}">
+                            <f:selectItem itemLabel="--select package--"/>
+                            <f:selectItem itemLabel="EDGE0005" itemValue="EDGE0005"/>
+                            <f:selectItem itemLabel="EDGE0010" itemValue="EDGE0010"/>
+                            <f:selectItem itemLabel="EDGE0015" itemValue="EDGE0015"/>
+                            <f:selectItem itemLabel="EDGE0020" itemValue="EDGE0020"/>
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="Expiry Date(DDMMYYYY):" style="font-weight: bolder" for="expiry_date"/>
                         <p:inputText id="expiry_date" value="#{license_detail.expiryDate}"/>
 

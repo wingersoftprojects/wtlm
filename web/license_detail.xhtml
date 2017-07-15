@@ -31,7 +31,14 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>
-                    <p:inputText id="package_name" value="#{license_detailBean.license_detailObject.license_package}" required="true" requiredMessage="Client License Code field is required!"/>
+                    <p:selectOneMenu id="package_name" value="#{license_detailBean.license_detailObject.license_package}" required="true" requiredMessage="Package Name field is required!">
+                            <f:selectItem itemLabel="--select package--"/>
+                            <f:selectItem itemLabel="EDGE0005" itemValue="EDGE0005"/>
+                            <f:selectItem itemLabel="EDGE0010" itemValue="EDGE0010"/>
+                            <f:selectItem itemLabel="EDGE0015" itemValue="EDGE0015"/>
+                            <f:selectItem itemLabel="EDGE0020" itemValue="EDGE0020"/>
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>
                     <p:outputLabel value="Start Date:" style="font-weight: bolder"/>
                     <p:calendar styleClass="clsInput" id="start_date" value="#{license_detailBean.license_detailObject.start_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>

@@ -67,7 +67,7 @@
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_license_detail" value="View" action="#{license_detailBean.redirectView(item)}" process="@this">
+                        <p:commandLink id="view_license_detail" value="View" actionListener="#{license_detailBean.setLicense_detailObject(item)}" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{license_detailBean.redirectEdit(item)}">

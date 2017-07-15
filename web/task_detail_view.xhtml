@@ -93,7 +93,7 @@
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_task_detail" value="View" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">
+                        <p:commandLink id="view_task_detail" value="View" actionListener="#{task_detailBean.setTask_detailObject(item)}" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{task_detailBean.redirectEdit(item)}">

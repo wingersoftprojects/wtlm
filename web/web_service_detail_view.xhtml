@@ -82,7 +82,7 @@
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>                    
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_web_service" value="View" process="@this" actionListener="#{web_serviceBean.setWeb_serviceObject(web_serviceBean.getWeb_service(item.web_service_id))}" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
+                        <p:commandLink id="view_web_service" value="View" process="@this" actionListener="#{web_serviceBean.setWeb_serviceObject(item)}" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">
