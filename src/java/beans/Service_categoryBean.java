@@ -27,7 +27,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class Service_categoryBean implements Serializable{
+public class Service_categoryBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Service_category service_category = new Service_category();
@@ -121,6 +122,23 @@ public class Service_categoryBean implements Serializable{
             se.printStackTrace();
         }
         return service_categorys;
+    }
+
+    public Service_category getService_category(int aService_catID) {
+        Service_category service_category = null;
+        String sql = "SELECT * FROM service_category where service_category_id=" + aService_catID;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                service_category = new Service_category();
+                this.setService_categoryFromResultset(service_category, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return service_category;
     }
 
     public void setService_categoryFromResultset(Service_category aService_category, ResultSet rs) {

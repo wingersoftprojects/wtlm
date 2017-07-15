@@ -121,6 +121,23 @@ public class Host_platformBean implements Serializable{
         }
         return host_platforms;
     }
+    
+    public Host_platform getHost_platform(int aHostPlatId){
+        Host_platform host_platform = null;
+        String sql = "SELECT * FROM host_platform where host_platform_id=" + aHostPlatId;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                host_platform = new Host_platform();
+                this.setHost_platformFromResultset(host_platform, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return host_platform;
+    }
 
     public void setHost_platformFromResultset(Host_platform aHost_platform, ResultSet rs) {
         try {

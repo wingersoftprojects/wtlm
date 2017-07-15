@@ -26,9 +26,9 @@ public class License_detail {
     private String ExpiryDate;
     private String ClientName;
     private Date Start_date2;
-
     private int License_detail_id;
     private int Wtl_app_id;
+    private String Wtl_app_name;
     private long Transactor_id;
     private String License_client_id;
     private String License_client_name;
@@ -336,6 +336,20 @@ public class License_detail {
      */
     public void setStart_date2(Date Start_date2) {
         this.Start_date2 = Start_date2;
+    }
+
+    /**
+     * @return the Wtl_app_name
+     */
+    public String getWtl_app_name() {
+        return Wtl_app_name;
+    }
+
+    /**
+     * @param Wtl_app_name the Wtl_app_name to set
+     */
+    public void setWtl_app_name(String Wtl_app_name) {
+        this.Wtl_app_name = Wtl_app_name;
     }
 
 }

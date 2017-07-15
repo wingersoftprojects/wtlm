@@ -52,7 +52,7 @@
                         #{item.license_client_name}     
                     </p:column>
                     <p:column headerText="Application Name" style="width: 30px" >
-                        #{item.wtl_app_id}     
+                        #{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}     
                     </p:column>
                     <p:column headerText="Package Name" style="width: 30px" >
                         #{item.license_package}     
@@ -63,7 +63,9 @@
                     <p:column headerText="Expiry Date" style="width: 30px" >
                         #{item.expire_date}     
                     </p:column>
-
+                    <p:column headerText="Active" style="width: 5px">
+                        #{utilityBean.returnYesNoString(item.is_active)}     
+                    </p:column>
                     <p:column headerText="" style="width: 100px">
                         <p:commandLink id="view_license_detail" value="View" action="#{license_detailBean.redirectView(item)}" process="@this">
                         </p:commandLink>

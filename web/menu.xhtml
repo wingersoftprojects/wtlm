@@ -12,7 +12,7 @@
             <h:form id="form_menu">
                 <p:growl id="messages"/>
                 <p:menubar>
-                    <p:menuitem value="Home" icon="ui-icon-home"/>
+                    <p:menuitem value="Home" action="home?faces-redirect=true" icon="ui-icon-home"/>
                     <p:submenu label="Task Tracker" icon="ui-icon-document">
                         <p:menuitem value="New Task" action="#{task_detailBean.redirectNew()}" icon="ui-icon-plusthick"/>                      
                         <p:menuitem value="View Tasks" action="task_detail_view?faces-redirect=true" icon="ui-icon-folder-open"/>

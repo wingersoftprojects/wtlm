@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      template="./layout.xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -21,8 +22,10 @@
         <p:panel id="toprint">
             <h:panelGrid columns="4">
                 <h:panelGrid columns="1">
-                    <img src="../resources/images/LogoL.png" alt="" width="150"/>
-                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="Merging Technology With Business"/>
+                    <center>
+                        <img src="../resources/images/LogoL.png" alt="" width="150"/>
+                    </center>
+                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="Merging Your Business With Technology"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:outputLabel value="Plot 1812, Hill Crest Apartments" style="font-weight: bolder"/>                
@@ -42,7 +45,7 @@
             <hr/>
             <fieldset>
                 <legend>DOMAIN DETAILS</legend>               
-                <p:dataTable id="domain_item_table" resizableColumns="true" value="#{web_serviceBean.web_services}" var="item">
+                <p:dataTable id="domain_item_table" resizableColumns="true" value="#{web_serviceBean.web_serviceList}" var="item">
                     <p:column headerText="SERVICE ITEM" width="10">
                         <h:outputText value="Domain Number:" style="font-weight: bolder"/><br/>
                         <h:outputLabel value="Domain Name:" style="font-weight: bolder"/><br/>
@@ -56,35 +59,32 @@
                         <h:outputText value="Last Renew Date:" style="font-weight: bolder"/><br/>
                         <h:outputText value="Amount Payable:" style="font-weight: bolder"/><br/>
                         <h:outputText value="Years Payable:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Narration:" style="font-weight: bolder"/><br/>
                         <h:outputText value="Cpanel Login:" style="font-weight: bolder"/><br/>                       
-                        <h:outputText value="WP Login:" style="font-weight: bolder"/>                        
+                        <h:outputText value="WP Login:" style="font-weight: bolder"/><br/>                        
+                        <h:outputText value="Active?" style="font-weight: bolder"/><br/> 
+                        <h:outputText value="Narration:" style="font-weight: bolder"/>
                     </p:column>
                     <p:column headerText="SERVICE ITEM DETAILS">
                         <h:outputText value="#{item.web_service_id}"/><br/>
                         <h:outputText value="#{item.domain_name}"/><br/>
                         <h:outputText value="#{item.transactor_id}"/><br/>
                         <h:outputText value="#{item.account_manager}"/><br/>
-                        <h:outputText value="#{item.service_category_id}"/><br/>
-                        <h:outputText value="#{item.host_platform_id}"/><br/>
-                        <h:outputText value="#{item.package_detail_id}"/><br/>
+                        <h:outputText value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/><br/>
+                        <h:outputText value="#{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}"/><br/>
+                        <h:outputText value="#{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}"/><br/>
                         <h:outputText value="#{item.start_date}"/><br/>
                         <h:outputText value="#{item.expire_date}"/><br/>
                         <h:outputText value="#{item.last_renew_date}"/><br/>
                         <h:outputText value="#{item.amount_payable}"/><br/>
                         <h:outputText value="#{item.years_payable}"/><br/>
-                        <h:outputText value="#{item.narration}"/><br/>
                         <h:outputText value="#{item.cpanel_login}"/><br/>                       
                         <h:outputText value="#{item.wp_login}"/><br/>                                           
+                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/>
+                        <h:outputText value="#{item.narration}"/>
                     </p:column>
                 </p:dataTable>
             </fieldset>
         </p:panel>
-        <footer id="copyright">
-            <center>
-                <h:outputText value="Copyright ©2017 WINGERsoft Technologies Ltd" style="font-weight: bolder; color: #3E9BD5"/>               
-            </center>
-        </footer> 
     </ui:composition>
 </html>
 

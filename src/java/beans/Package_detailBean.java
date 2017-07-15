@@ -25,9 +25,10 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class Package_detailBean implements Serializable{
+public class Package_detailBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     private Package_detail package_detail = new Package_detail();
     PreparedStatement ps = null;
     Connection conn = null;
@@ -182,6 +183,23 @@ public class Package_detailBean implements Serializable{
             se.printStackTrace();
         }
         return package_details;
+    }
+
+    public Package_detail getPackage_detail(int aPackage_detail_id) {
+        Package_detail package_detail = null;
+        String sql = "SELECT * FROM package_detail where package_detail_id=" + aPackage_detail_id;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                package_detail = new Package_detail();
+                this.setPackage_detailFromResultset(package_detail, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return package_detail;
     }
 
     public void setPackage_detailFromResultset(Package_detail aPackage_detail, ResultSet rs) {

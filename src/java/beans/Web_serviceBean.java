@@ -8,14 +8,12 @@ package beans;
 import connections.DBConnection;
 import entities.Package_detail;
 import entities.Web_service;
-import entities.Web_service;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +21,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 import utilities.UtilityBean;
 
 /**
@@ -32,7 +29,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class Web_serviceBean implements Serializable{
+public class Web_serviceBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Web_service web_service = new Web_service();
@@ -61,13 +59,15 @@ public class Web_serviceBean implements Serializable{
         this.Web_serviceObject = aWeb_service;
         return "web_service_detail?faces-redirect=true";
     }
-
-    public void redirectView(Web_service aWeb_service) {
-        this.Web_serviceObject = aWeb_service;
-//        return "PF('Dialog_View_Web_Service_Detail').show()";
-       RequestContext.getCurrentInstance().execute("PF('Dialog_View_Web_Service_Detail').show()");
-
+        public void view_web_service(int web_service_id) {
+        try {
+            this.setWeb_serviceObject(getWeb_service(web_service_id));
+            Web_serviceList = new ArrayList<>(this.getWeb_serviceObject().getWeb_service_id());
+        } catch (Exception e) {
+            Logger.getLogger(Web_serviceBean.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
+
 
     public String redirectNew() {
         this.Web_serviceObject = new Web_service();
@@ -322,6 +322,7 @@ public class Web_serviceBean implements Serializable{
             se.printStackTrace();
         }
     }
+
     public void deleteWeb_service(Web_service web_service) {
         String sql = "";
         sql = "UPDATE web_service SET is_deleted=?,last_edit_date=?,last_edit_by=?"
@@ -359,7 +360,6 @@ public class Web_serviceBean implements Serializable{
         }
     }
 
-    
     public List<Web_service> getWeb_services() throws Exception {
         List<Web_service> web_services = new ArrayList<>();
         String sql = "SELECT * FROM web_service";
@@ -429,6 +429,23 @@ public class Web_serviceBean implements Serializable{
             aWeb_service.setLast_edit_by(0);
         }
     }
+        public Web_service getWeb_service(int aWeb_service_id) {
+        Web_service web_service = null;
+        String sql = "SELECT * FROM web_service where web_service_id=" + aWeb_service_id;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                web_service = new Web_service();
+                this.setWeb_serviceFromResultset(web_service, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return web_service;
+    }
+
 
     public void searchWeb_service(Web_service aWeb_service) {
         ResultSet res = null;
@@ -465,6 +482,7 @@ public class Web_serviceBean implements Serializable{
             System.out.println(sql);
         }
     }
+
     public int getTask_age() {
         return task_age;
     }

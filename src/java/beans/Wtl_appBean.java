@@ -26,16 +26,18 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class Wtl_appBean implements Serializable{
+public class Wtl_appBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     private Wtl_app wtl_app = new Wtl_app();
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
     private List<Wtl_app> Wtl_appList;
-    private Wtl_app Wtl_appObject;   
+    private Wtl_app Wtl_appObject;
+
     public Wtl_app getWtl_app() {
         return wtl_app;
     }
@@ -45,16 +47,16 @@ public class Wtl_appBean implements Serializable{
     }
 
     public Wtl_appBean() {
-        this.Wtl_appObject=new Wtl_app();
+        this.Wtl_appObject = new Wtl_app();
     }
-    
+
     public String redirectEdit(Wtl_app aWtl_app) {
-       this.Wtl_appObject=aWtl_app; 
+        this.Wtl_appObject = aWtl_app;
         return "wtl_app?faces-redirect=true";
     }
-    
+
     public String redirectNew() {
-       this.Wtl_appObject=new Wtl_app(); 
+        this.Wtl_appObject = new Wtl_app();
         return "wtl_app?faces-redirect=true";
     }
 
@@ -121,6 +123,23 @@ public class Wtl_appBean implements Serializable{
         return wtl_apps;
     }
 
+    public Wtl_app getWtl_app(int aWtl_app_id) {
+        Wtl_app wtl_app = null;
+        String sql = "SELECT * FROM wtl_app where wtl_app_id=" + aWtl_app_id;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                wtl_app = new Wtl_app();
+                this.setWtl_appFromResultset(wtl_app, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return wtl_app;
+    }
+
     public void setWtl_appFromResultset(Wtl_app aWtl_app, ResultSet rs) {
         try {
             aWtl_app.setWtl_app_id(rs.getInt("wtl_app_id"));
@@ -132,10 +151,10 @@ public class Wtl_appBean implements Serializable{
     }
 
     public void clearWtl_app(Wtl_app aWtl_app) {
-        if (null != aWtl_app) {            
+        if (null != aWtl_app) {
             aWtl_app.setWtl_app_id(0);
             aWtl_app.setWtl_app_name("");
-            
+
         }
     }
 

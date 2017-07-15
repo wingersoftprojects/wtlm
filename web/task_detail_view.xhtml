@@ -69,7 +69,7 @@
                         #{item.assigned_to}     
                     </p:column>
                     <p:column headerText="Task Category" style="width: 20px" >
-                        #{item.task_category_id}     
+                        #{task_categoryBean.getTask_category(item.task_category_id).task_category_name}     
                     </p:column>
                     <p:column headerText="Current Status" style="width: 5px">
                         #{item.current_status}     
@@ -88,6 +88,9 @@
                     </p:column>
                     <p:column headerText="Completed By" style="width: 20px">
                         #{item.completed_by}     
+                    </p:column>
+                    <p:column headerText="Active" style="width: 20px">
+                        #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>
                     <p:column headerText="" style="width: 100px">
                         <p:commandLink id="view_task_detail" value="View" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">

@@ -58,16 +58,16 @@
                         #{item.web_service_id}    
                     </p:column>
                     <p:column headerText="Host Platform" style="width: 30px" >
-                        #{item.host_platform_id}     
+                        #{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}     
                     </p:column>
                     <p:column headerText="Domain Name" style="width: 20px" >
                         #{item.domain_name}     
                     </p:column>
                     <p:column headerText="Package" style="width: 15px">
-                        #{item.package_detail_id}     
+                        #{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}     
                     </p:column> 
                     <p:column headerText="Category" filterMatchMode="contains"  style="width: 1px">
-                        #{item.service_category_id} 
+                        #{service_categoryBean.getService_category(item.service_category_id).service_category_name} 
                     </p:column> 
                     <p:column   headerText="Start Date" style="width: 20px">
                         #{item.start_date}     
@@ -78,11 +78,11 @@
                     <p:column headerText="Account Manager" style="width: 30px">
                         #{item.account_manager}     
                     </p:column >
-                    <p:column headerText="Is Active" style="width: 30px">
-                        #{item.is_active}     
-                    </p:column >
+                    <p:column headerText="Active" style="width: 5px">
+                        #{utilityBean.returnYesNoString(item.is_active)}     
+                    </p:column>                    
                     <p:column headerText="" style="width: 100px">
-                        <p:commandLink id="view_web_service" value="View" action="#{web_serviceBean.redirectView(item)}" process="@this">
+                        <p:commandLink id="view_web_service" value="View" process="@this" actionListener="#{web_serviceBean.setWeb_serviceObject(web_serviceBean.getWeb_service(item.web_service_id))}" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
                         </p:commandLink>
 
                         <p:commandLink  value=" | Edit" action="#{web_serviceBean.redirectEdit(item)}">

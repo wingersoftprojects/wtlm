@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      template="./layout.xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -21,8 +22,10 @@
         <p:panel id="toprint">
             <h:panelGrid columns="4">
                 <h:panelGrid columns="1">
-                    <img src="../resources/images/LogoL.png" alt="" width="150"/>
-                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="Merging Technology With Business"/>
+                    <center>
+                        <img src="../resources/images/LogoL.png" alt="" width="150"/>
+                    </center>
+                    <p:outputLabel style="font-weight: bold; font-style: italic;" value="Merging Your Business With Technology"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:outputLabel value="Plot 1812, Hill Crest Apartments" style="font-weight: bolder"/>                
@@ -42,7 +45,7 @@
             <hr/>
             <fieldset>
                 <legend>LICENSE DETAILS</legend>               
-                <p:dataTable id="license_item_table" resizableColumns="true" value="#{license_detailBean_copy.license_details}" var="item">
+                <p:dataTable id="license_item_table" resizableColumns="true" value="#{license_detailBean.license_details}" var="item">
                     <p:column headerText="LICENSE ITEM" width="10">
                         <h:outputText value="License Number:" style="font-weight: bolder"/><br/>
                         <h:outputText value="Client ID:" style="font-weight: bolder"/><br/>
@@ -56,13 +59,14 @@
                         <h:outputText value="Years Payable:" style="font-weight: bolder"/><br/>
                         <h:outputText value="Server Crendentials:" style="font-weight: bolder"/><br/>                       
                         <h:outputText value="Network Credentials:" style="font-weight: bolder"/><br/>                       
-                        <h:outputText value="License Code:" style="font-weight: bolder"/>                       
+                        <h:outputText value="Active?:" style="font-weight: bolder"/><br/>
+                        <h:outputText value="License Code:" style="font-weight: bolder"/>                                              
                     </p:column>
                     <p:column headerText="LICENSE ITEM DETAILS">
                         <h:outputText value="#{item.license_detail_id}"/><br/>
                         <h:outputText value="#{item.license_client_id}"/><br/>
                         <h:outputText value="#{item.license_client_name}"/><br/>
-                        <h:outputText value="#{item.wtl_app_id}"/><br/>
+                        <h:outputText value="#{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}"/><br/>
                         <h:outputText value="#{item.license_package}"/><br/>
                         <h:outputText value="#{item.start_date}"/><br/>
                         <h:outputText value="#{item.expire_date}"/><br/>
@@ -71,7 +75,8 @@
                         <h:outputText value="#{item.years_payable}"/><br/>                        
                         <h:outputText value="#{item.credentials_server}"/><br/>                       
                         <h:outputText value="#{item.credentials_network}"/><br/>
-                        <h:inputText value="#{item.license_code}"/>                                              
+                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/> 
+                        <h:inputText value="#{item.license_code}"/>                                                                      
                     </p:column>
                 </p:dataTable>
             </fieldset>

@@ -43,12 +43,13 @@ public class UtilityBean implements Serializable {
     }
 
     public String returnYesNoString(int aYesNo) {
-        if (aYesNo == 0) {
-            return "N";
-        } else if (aYesNo == 1) {
-            return "Y";
-        } else {
-            return "";
+        switch (aYesNo) {
+            case 0:
+                return "No";
+            case 1:
+                return "Yes";
+            default:
+                return "";
         }
     }
 

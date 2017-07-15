@@ -16,7 +16,7 @@
                 </p:panelGrid>
                 <br></br>
                 <p:panel style="background-color:bisque; width: 100%">
-                    <center>
+                    <center>"
                         <p:commandButton value="SAVE (ALT+S)" action="#{host_platformBean.insertHost_platform(host_platformBean.host_platformObject)}" accesskey="s" style="font-weight: bolder; font-size: 15px"  rendered="#{host_platformBean.host_platformObject.host_platform_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                             <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                                 <p:graphicImage name="/images/ajax-loader.gif"/>

@@ -27,6 +27,9 @@ public class Web_service {
     private String Domain_name;
     private int Service_category_id;
     private int Package_detail_id;
+    private String Package_detail_name;
+    private String Service_category_name;
+    private String Host_platform_name;
     private Date Start_date;
     private Date Start_date2;
     private Date Expire_date;
@@ -233,6 +236,48 @@ public class Web_service {
      */
     public void setStart_date2(Date Start_date2) {
         this.Start_date2 = Start_date2;
+    }
+
+    /**
+     * @return the Package_detail_name
+     */
+    public String getPackage_detail_name() {
+        return Package_detail_name;
+    }
+
+    /**
+     * @param Package_detail_name the Package_detail_name to set
+     */
+    public void setPackage_detail_name(String Package_detail_name) {
+        this.Package_detail_name = Package_detail_name;
+    }
+
+    /**
+     * @return the Service_category_name
+     */
+    public String getService_category_name() {
+        return Service_category_name;
+    }
+
+    /**
+     * @param Service_category_name the Service_category_name to set
+     */
+    public void setService_category_name(String Service_category_name) {
+        this.Service_category_name = Service_category_name;
+    }
+
+    /**
+     * @return the Host_platform_name
+     */
+    public String getHost_platform_name() {
+        return Host_platform_name;
+    }
+
+    /**
+     * @param Host_platform_name the Host_platform_name to set
+     */
+    public void setHost_platform_name(String Host_platform_name) {
+        this.Host_platform_name = Host_platform_name;
     }
 
 }

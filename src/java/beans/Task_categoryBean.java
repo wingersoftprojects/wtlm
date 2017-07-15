@@ -26,7 +26,8 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class Task_categoryBean implements Serializable{
+public class Task_categoryBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Task_category task_category = new Task_category();
@@ -120,6 +121,23 @@ public class Task_categoryBean implements Serializable{
             se.printStackTrace();
         }
         return task_categorys;
+    }
+
+    public Task_category getTask_category(int aTask_category_id) {
+        Task_category task_category = null;
+        String sql = "SELECT * FROM task_category where task_category_id=" + aTask_category_id;
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                task_category = new Task_category();
+                this.setTask_categoryFromResultset(task_category, rs);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return task_category;
     }
 
     public void setTask_categoryFromResultset(Task_category aTask_category, ResultSet rs) {

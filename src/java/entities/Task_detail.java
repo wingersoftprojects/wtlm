@@ -23,6 +23,7 @@ public class Task_detail {
     private int Assigned_to;
     private String Task_description;
     private int Task_category_id;
+    private String Task_category_name;
     private String Current_status;
     private String Priority;
     private String Raised_by;
@@ -203,6 +204,20 @@ public class Task_detail {
      */
     public void setRaise_date2(Date Raise_date2) {
         this.Raise_date2 = Raise_date2;
+    }
+
+    /**
+     * @return the Task_category_name
+     */
+    public String getTask_category_name() {
+        return Task_category_name;
+    }
+
+    /**
+     * @param Task_category_name the Task_category_name to set
+     */
+    public void setTask_category_name(String Task_category_name) {
+        this.Task_category_name = Task_category_name;
     }
 
 }
