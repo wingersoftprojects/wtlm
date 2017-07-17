@@ -15,7 +15,7 @@
                     <p:inputText  id="service_category_name" value="#{service_categoryBean.service_categoryObject.service_category_name}" required="true" requiredMessage="Service Category Name is required" />                        
                 </p:panelGrid>
                 <br></br>
-                <p:panel style="background-color:bisque; width: 100%">
+                <p:panel style="background-color:#D5E7F2; width: 100%">
                     <center>
                         <p:commandButton value="SAVE (ALT+S)" action="#{service_categoryBean.insertService_category(service_categoryBean.service_categoryObject)}" accesskey="s" style="font-weight: bolder; font-size: 15px"  rendered="#{service_categoryBean.service_categoryObject.service_category_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                             <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">

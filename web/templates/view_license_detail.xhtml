@@ -47,35 +47,35 @@
                 <legend>LICENSE DETAILS</legend>               
                 <p:dataTable id="license_item_table" resizableColumns="true" value="#{license_detailBean.license_detailObject}" var="item">
                     <p:column headerText="LICENSE ITEM" width="10">
-                        <h:outputText value="License Number:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Client ID:" style="font-weight: bolder"/><br/>
-                        <h:outputLabel value="Client Name:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Application Name:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Package Name:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Start Date:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Expiry Date:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Last Renew Date:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Amount Payable:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Years Payable:" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Server Crendentials:" style="font-weight: bolder"/><br/>                       
-                        <h:outputText value="Network Credentials:" style="font-weight: bolder"/><br/>                       
-                        <h:outputText value="Active?:" style="font-weight: bolder"/><br/>
+                        <h:outputText value="License Number:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Client ID:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputLabel value="Client Name:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Application Name:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Package Name:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Start Date:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Expiry Date:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Last Renew Date:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Amount Payable:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Years Payable:" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Server Crendentials:" style="font-weight: bolder"/><br/><br/>                       
+                        <h:outputText value="Network Credentials:" style="font-weight: bolder"/><br/><br/>                       
+                        <h:outputText value="Active?:" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="License Code:" style="font-weight: bolder"/>                                              
                     </p:column>
                     <p:column headerText="LICENSE ITEM DETAILS">
-                        <h:outputText value="#{item.license_detail_id}"/><br/>
-                        <h:outputText value="#{item.license_client_id}"/><br/>
-                        <h:outputText value="#{item.license_client_name}"/><br/>
-                        <h:outputText value="#{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}"/><br/>
-                        <h:outputText value="#{item.license_package}"/><br/>
-                        <h:outputText value="#{item.start_date}"/><br/>
-                        <h:outputText value="#{item.expire_date}"/><br/>
-                        <h:outputText value="#{item.last_renew_date}"/><br/>
-                        <h:outputText value="#{item.amount_payable}"/><br/>
-                        <h:outputText value="#{item.years_payable}"/><br/>                        
-                        <h:outputText value="#{item.credentials_server}"/><br/>                       
-                        <h:outputText value="#{item.credentials_network}"/><br/>
-                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/> 
+                        <h:outputText value="#{item.license_detail_id}"/><br/><br/>
+                        <h:outputText value="#{item.license_client_id}"/><br/><br/>
+                        <h:outputText value="#{item.license_client_name}"/><br/><br/>
+                        <h:outputText value="#{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}"/><br/><br/>
+                        <h:outputText value="#{item.license_package}"/><br/><br/>
+                        <h:outputText value="#{item.start_date}"/><br/><br/>
+                        <h:outputText value="#{item.expire_date}"/><br/><br/>
+                        <h:outputText value="#{item.last_renew_date}"/><br/><br/>
+                        <h:outputText value="#{item.amount_payable}"/><br/><br/>
+                        <h:outputText value="#{item.years_payable}"/><br/><br/>                        
+                        <h:outputText value="#{item.credentials_server}"/><br/><br/>                       
+                        <h:outputText value="#{item.credentials_network}"/><br/><br/>
+                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/><br/> 
                         <h:inputText value="#{item.license_code}"/>                                                                      
                     </p:column>
                 </p:dataTable>

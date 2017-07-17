@@ -47,31 +47,33 @@
                 <legend>TASK DETAILS</legend>               
                 <p:dataTable id="task_item_table" resizableColumns="true" value="#{task_detailBean.task_detailObject}" var="item">
                     <p:column headerText="TASK ITEM" width="10">
-                        <h:outputText value="Task Number" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Task Description" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Task Category" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Priority" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Raise Date" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Raised By" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Current Status" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Assigned To" style="font-weight: bolder"/><br/>
-                        <h:outputLabel value="Client Name: " style="font-weight: bolder"/><br/>
-                        <h:outputLabel value="Active?" style="font-weight: bolder"/><br/>
-                        <h:outputText value="Complete Date" rendered="#{item.current_status =='COMP'}" style="font-weight: bolder"/><br/>
+                        <h:outputText value="Task Number" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Task Description" style="font-weight: bolder"/><br/><br/><br/><br/><br/>
+                        <h:outputText value="Task Category" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Priority" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Raise Date" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Raised By" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Current Status" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Assigned To" style="font-weight: bolder"/><br/><br/>
+                        <h:outputLabel value="Client Name: " style="font-weight: bolder"/><br/><br/>
+                        <h:outputLabel value="Active?" style="font-weight: bolder"/><br/><br/>
+                        <h:outputLabel value="Remarks" style="font-weight: bolder"/><br/><br/>
+                        <h:outputText value="Complete Date" rendered="#{item.current_status =='COMP'}" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="Completed By" rendered="#{item.current_status =='COMP'}" style="font-weight: bolder"/>
                     </p:column>
                     <p:column headerText="TASK ITEM DETAILS">
-                        <h:outputText value="#{item.task_detail_id}"/><br/>
-                        <h:outputText value="#{item.task_description}"/><br/>
-                        <h:outputText value="#{task_categoryBean.getTask_category(item.task_category_id).task_category_name}"/><br/>
-                        <h:outputText value="#{item.priority}"/><br/>
-                        <h:outputText value="#{item.raise_date}"/><br/>
-                        <h:outputText value="#{item.raised_by}"/><br/>
-                        <h:outputText value="#{item.current_status}"/><br/>
-                        <h:outputText value="#{item.assigned_to}"/><br/>                       
-                        <h:outputText value="#{item.transactor_id}"/><br/>                       
-                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/>
-                        <h:outputText value="#{item.complete_date}" rendered="#{item.current_status =='COMP'}"/><br/>
+                        <h:outputText value="#{item.task_detail_id}"/><br/><br/>
+                        <h:inputTextarea value="#{item.task_description}" cols="70" rows="4"/><br/>
+                        <h:outputText value="#{task_categoryBean.getTask_category(item.task_category_id).task_category_name}"/><br/><br/>
+                        <h:outputText value="#{item.priority}"/><br/><br/>
+                        <h:outputText value="#{item.raise_date}"/><br/><br/>
+                        <h:outputText value="#{item.raised_by}"/><br/><br/>
+                        <h:outputText value="#{item.current_status}"/><br/><br/>
+                        <h:outputText value="#{item.assigned_to}"/><br/><br/>                       
+                        <h:outputText value="#{item.transactor_id}"/><br/><br/>                       
+                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/><br/>
+                        <h:outputText value="#{item.comment}"/><br/><br/>
+                        <h:outputText value="#{item.complete_date}" rendered="#{item.current_status =='COMP'}"/><br/><br/>
                         <h:outputText value="#{item.completed_by}" rendered="#{item.current_status =='COMP'}"/>                        
 
                     </p:column>

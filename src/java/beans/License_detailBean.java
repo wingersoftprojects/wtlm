@@ -497,7 +497,7 @@ public class License_detailBean implements Serializable{
             aLicense_detail.setLicense_detail_id(rs.getInt("license_detail_id"));
             aLicense_detail.setWtl_app_id(rs.getInt("wtl_app_id"));
             aLicense_detail.setTransactor_id(rs.getLong("transactor_id"));
-            aLicense_detail.setLicense_client_id(rs.getString("license_detail_id"));
+            aLicense_detail.setLicense_client_id(rs.getString("license_client_id"));
             aLicense_detail.setLicense_client_name(rs.getString("license_client_name"));
             aLicense_detail.setLicense_package(rs.getString("license_package"));
             aLicense_detail.setLicense_expire_code(rs.getString("license_expire_code"));

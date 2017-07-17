@@ -62,7 +62,7 @@
                         <h:outputText value="Cpanel Login:" style="font-weight: bolder"/><br/>                       
                         <h:outputText value="WP Login:" style="font-weight: bolder"/><br/>                        
                         <h:outputText value="Active?" style="font-weight: bolder"/><br/> 
-                        <h:outputText value="Narration:" style="font-weight: bolder"/>
+                        <h:outputText value="Narration:" style="font-weight: bolder"/><br/>
                     </p:column>
                     <p:column headerText="SERVICE ITEM DETAILS">
                         <h:outputText value="#{item.web_service_id}"/><br/>
@@ -80,7 +80,7 @@
                         <h:outputText value="#{item.cpanel_login}"/><br/>                       
                         <h:outputText value="#{item.wp_login}"/><br/>                                           
                         <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/>
-                        <h:outputText value="#{item.narration}"/>
+                        <h:outputText value="#{item.narration}"/><br/>
                     </p:column>
                 </p:dataTable>
             </fieldset>

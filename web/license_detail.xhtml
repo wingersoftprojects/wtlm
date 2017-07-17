@@ -69,7 +69,7 @@
                     </p:selectOneMenu>
                 </h:panelGrid>
             </p:fieldset>            
-            <p:panel style="background-color:bisque; width: 94%">
+            <p:panel style="background-color:#D5E7F2; width: 94%">
                 <center>
                     <p:commandButton value="SAVE (ALT+S)" action="#{license_detailBean.insertLicense_detail(license_detailBean.license_detailObject)}" accesskey="s" style="font-weight: bolder; font-size: 20px"  rendered="#{license_detailBean.license_detailObject.license_detail_id ==0}" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" update="@form">
                         <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
