@@ -19,7 +19,7 @@ import javax.faces.bean.SessionScoped;
 public class Web_service {
 
     private static final long serialVersionUID = 1L;
-    
+
     private int Web_service_id;
     private int Host_platform_id;
     private long Transactor_id;
@@ -46,6 +46,9 @@ public class Web_service {
     private int Add_by;
     private Date Last_edit_date;
     private int Last_edit_by;
+
+    private float total_payment_yearly;
+    private float total_payment_monthly;
 
     public int getWeb_service_id() {
         return Web_service_id;
@@ -119,7 +122,6 @@ public class Web_service {
         this.Expire_date = Expire_date;
     }
 
-    
     public Date getLast_renew_date() {
         return Last_renew_date;
     }
@@ -278,6 +280,34 @@ public class Web_service {
      */
     public void setHost_platform_name(String Host_platform_name) {
         this.Host_platform_name = Host_platform_name;
+    }
+
+    /**
+     * @return the total_payment_yearly
+     */
+    public float getTotal_payment_yearly() {
+        return total_payment_yearly;
+    }
+
+    /**
+     * @param total_payment_yearly the total_payment_yearly to set
+     */
+    public void setTotal_payment_yearly(float total_payment_yearly) {
+        this.total_payment_yearly = total_payment_yearly;
+    }
+
+    /**
+     * @return the total_payment_monthly
+     */
+    public float getTotal_payment_monthly() {
+        return total_payment_monthly;
+    }
+
+    /**
+     * @param total_payment_monthly the total_payment_monthly to set
+     */
+    public void setTotal_payment_monthly(float total_payment_monthly) {
+        this.total_payment_monthly = total_payment_monthly;
     }
 
 }

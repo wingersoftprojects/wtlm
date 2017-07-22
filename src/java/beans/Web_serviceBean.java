@@ -41,7 +41,8 @@ public class Web_serviceBean implements Serializable {
     ResultSet rs = null;
     private List<Web_service> Web_serviceList;
     private Web_service Web_serviceObject;
-    private int task_age;
+    private float total_payment_yearly;
+    private float average_payment_monthly;
 
     public Web_service getWeb_service() {
         return web_service;
@@ -59,7 +60,8 @@ public class Web_serviceBean implements Serializable {
         this.Web_serviceObject = aWeb_service;
         return "web_service_detail?faces-redirect=true";
     }
-        public void view_web_service(int web_service_id) {
+
+    public void view_web_service(int web_service_id) {
         try {
             this.setWeb_serviceObject(getWeb_service(web_service_id));
             Web_serviceList = new ArrayList<>(this.getWeb_serviceObject().getWeb_service_id());
@@ -67,7 +69,6 @@ public class Web_serviceBean implements Serializable {
             Logger.getLogger(Web_serviceBean.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
 
     public String redirectNew() {
         this.Web_serviceObject = new Web_service();
@@ -429,7 +430,8 @@ public class Web_serviceBean implements Serializable {
             aWeb_service.setLast_edit_by(0);
         }
     }
-        public Web_service getWeb_service(int aWeb_service_id) {
+
+    public Web_service getWeb_service(int aWeb_service_id) {
         Web_service web_service = null;
         String sql = "SELECT * FROM web_service where web_service_id=" + aWeb_service_id;
         try (
@@ -445,7 +447,6 @@ public class Web_serviceBean implements Serializable {
         }
         return web_service;
     }
-
 
     public void searchWeb_service(Web_service aWeb_service) {
         ResultSet res = null;
@@ -483,12 +484,40 @@ public class Web_serviceBean implements Serializable {
         }
     }
 
-    public int getTask_age() {
-        return task_age;
+    public void computeTotal_yearly_payment() {
+        ResultSet res = null;
+        String sql = "SELECT sum(amount_payable/years_payable)"
+                + " AS total_payment_yearly FROM web_service"
+                + " WHERE is_deleted=0 AND is_active=1;";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            System.out.println(sql);
+            res = ps.executeQuery(sql);
+            while (res.next()) {
+                this.total_payment_yearly = res.getFloat("total_payment_yearly");                
+            }
+        } catch (SQLException se) {
+            System.out.println(sql);
+        }
     }
 
-    public void setTask_age(int task_age) {
-        this.task_age = task_age;
+    public void computeAverage_monthly_payment() {
+        ResultSet res = null;
+        String sql = "SELECT sum(amount_payable/years_payable)/12"
+                + " AS total_payment_monthly FROM web_service"
+                + " WHERE is_deleted=0 AND is_active=1;";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            System.out.println(sql);
+            res = ps.executeQuery(sql);
+            while (res.next()) {
+                this.average_payment_monthly = res.getFloat("total_payment_monthly");
+            }
+        } catch (SQLException se) {
+            System.out.println(sql);
+        }
     }
 
     /**
@@ -531,6 +560,36 @@ public class Web_serviceBean implements Serializable {
      */
     public void setPackage_detail(Package_detail package_detail) {
         this.package_detail = package_detail;
+    }
+
+    /**
+     * @return the total_payment_yearly
+     */
+    public float getTotal_payment_yearly() {
+        computeTotal_yearly_payment();
+        return total_payment_yearly;
+    }
+
+    /**
+     * @param total_payment_yearly the Total_payment_yearly to set
+     */
+    public void setTotal_payment_yearly(float total_payment_yearly) {
+        this.total_payment_yearly = total_payment_yearly;
+    }
+
+    /**
+     * @return the Average_payment_monthly
+     */
+    public float getAvearage_payment_monthly() {
+        computeAverage_monthly_payment();
+        return average_payment_monthly;
+    }
+
+    /**
+     * @param average_payment_monthly the Total_payment_monthly to set
+     */
+    public void setAverage_payment_monthly(float average_payment_monthly) {
+        this.average_payment_monthly = average_payment_monthly;
     }
 
 }

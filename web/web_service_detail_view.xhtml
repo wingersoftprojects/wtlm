@@ -57,9 +57,6 @@
                     <p:column headerText="Domain ID" filterMatchMode="contains"  style="width: 10px">
                         #{item.web_service_id}    
                     </p:column>
-                    <p:column headerText="Host Platform" style="width: 30px" >
-                        #{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}     
-                    </p:column>
                     <p:column headerText="Domain Name" style="width: 20px" >
                         #{item.domain_name}     
                     </p:column>
@@ -78,6 +75,10 @@
                     <p:column headerText="Account Manager" style="width: 30px">
                         #{item.account_manager}     
                     </p:column >
+                    <p:column headerText="Annual Payment" style="width: 30px">
+
+                    </p:column >
+
                     <p:column headerText="Active" style="width: 5px">
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>                    
@@ -98,6 +99,26 @@
 
                     </p:column>
                 </p:dataTable>
+                <br></br>
+                <p:fieldset legend="FINANCIAL DETAILS" style="background-color: bisque">
+                    <center>
+                        <p:commandButton value="REFRESH FINANACIAL DETAILS" actionListener="#{web_serviceBean.computeTotal_yearly_payment()}" style="font-weight: bolder; font-size: 20px" update="total_payment_yearly,total_payment_monthly"/>
+                    </center>
+                    <br></br>
+                    <div class="ui-fluid">
+                        <h:panelGrid columns="6" style="width: 100%">
+                            <p:outputLabel value="TOTAL ANNUAL PAYMENT: " style="font-weight: bolder"/>
+                            <h:inputText value="#{web_serviceBean.total_payment_yearly}" id="total_payment_yearly" disabled="true" class="grayed_out">
+                                <f:convertNumber pattern="###,###.##"/>
+                            </h:inputText>
+
+                            <p:outputLabel value="AVERAGE MONTHLY PAYMENT: " id="total_payment_monthly" style="font-weight: bolder"/>
+                            <h:inputText value="#{web_serviceBean.total_payment_yearly/12}" disabled="true" class="grayed_out">
+                                <f:convertNumber pattern="###,###.##"/>
+                            </h:inputText>
+                        </h:panelGrid>
+                    </div>
+                </p:fieldset>
             </h:form>
         </f:view>
         <ui:include src="dialog_view_web_service_detail.xhtml"/>

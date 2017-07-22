@@ -45,9 +45,6 @@
                     <p:column headerText="License ID" style="width: 10px">
                         #{item.license_detail_id}    
                     </p:column>
-                    <p:column headerText="Client ID" style="width: 10px">
-                        #{item.license_client_id}    
-                    </p:column>
                     <p:column headerText="Client's Name" style="width: 30px" >
                         #{item.license_client_name}     
                     </p:column>
@@ -83,6 +80,26 @@
 
                     </p:column>
                 </p:dataTable>
+                <br></br>
+                <p:fieldset legend="FINANCIAL DETAILS" style="background-color: bisque">
+                    <center>
+                        <p:commandButton value="REFRESH FINANACIAL DETAILS" actionListener="#{license_detailBean.computeTotal_yearly_payment()}" style="font-weight: bolder; font-size: 20px" update="total_payment_yearly,total_payment_monthly"/>
+                    </center>
+                    <br></br>
+                    <div class="ui-fluid">
+                        <h:panelGrid columns="6" style="width: 100%">
+                            <p:outputLabel value="AVERAGE ANNUAL PAYMENT: " style="font-weight: bolder"/>
+                            <h:inputText value="#{license_detailBean.total_payment_yearly}" id="total_payment_yearly" disabled="true" class="grayed_out">
+                                <f:convertNumber pattern="###,###.##"/>
+                            </h:inputText>
+
+                            <p:outputLabel value="AVERAGE MONTHLY PAYMENT: " id="total_payment_monthly" style="font-weight: bolder"/>
+                            <h:inputText value="#{license_detailBean.total_payment_yearly/12}" disabled="true" class="grayed_out">
+                                <f:convertNumber pattern="###,###.##"/>
+                            </h:inputText>
+                        </h:panelGrid>
+                    </div>
+                </p:fieldset>
                 <p:messages/>
             </h:form>
         </f:view>

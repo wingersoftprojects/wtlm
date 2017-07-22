@@ -28,21 +28,21 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class License_detailBean implements Serializable{
+public class License_detailBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private License_detail license_detail = new License_detail();
     private Package_detail package_detail = new Package_detail();
-
     private entities.Wtl_app wtl_app;
-
     PreparedStatement ps = null;
     Connection conn = null;
     int i = 0;
     ResultSet rs = null;
     private List<License_detail> License_detailList;
     private License_detail License_detailObject;
-    private int task_age;
+    private float total_payment_yearly;
+    private float average_payment_monthly;
 
     public License_detail getLicense_detail() {
         return license_detail;
@@ -321,7 +321,6 @@ public class License_detailBean implements Serializable{
 //            se.printStackTrace();
 //        }
 //    }
-
     public void updateLicense_detail(License_detail license_detail) {
         String sql = "";
         sql = "UPDATE license_detail SET wtl_app_id=?,transactor_id=?,license_client_id=?,license_client_name=?,"
@@ -574,14 +573,59 @@ public class License_detailBean implements Serializable{
         }
     }
 
-    public int getTask_age() {
-        return task_age;
+    public void computeTotal_yearly_payment() {
+        ResultSet res = null;
+        String sql = "SELECT sum(amount_payable/years_payable)"
+                + " AS total_payment_yearly FROM license_detail"
+                + " WHERE is_deleted=0 AND is_active=1;";
+        try (
+                Connection conn = DBConnection.getMySQLConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);) {
+            System.out.println(sql);
+            res = ps.executeQuery(sql);
+            while (res.next()) {
+                this.total_payment_yearly = res.getFloat("total_payment_yearly");
+            }
+        } catch (SQLException se) {
+            System.out.println(sql);
+        }
     }
 
-    public void setTask_age(int task_age) {
-        this.task_age = task_age;
-    }
+//    public void computeAverage_monthly_payment() {
+//        ResultSet res = null;
+//        String sql = "SELECT sum(amount_payable/years_payable)/12"
+//                + " AS total_payment_monthly FROM license_detail"
+//                + " WHERE is_deleted=0 AND is_active=1;";
+//        try (
+//                Connection conn = DBConnection.getMySQLConnection();
+//                PreparedStatement ps = conn.prepareStatement(sql);) {
+//            System.out.println(sql);
+//            res = ps.executeQuery(sql);
+//            while (res.next()) {
+//                this.average_payment_monthly = res.getFloat("total_payment_monthly");
+//            }
+//        } catch (SQLException se) {
+//            System.out.println(sql);
+//        }
+//    }
 
+//        public void compute_total() {
+//        total_amount = 0;
+//        for (License_detail ld : License_detailList) {
+//            total_amount += ld.getYears_payable() / ld.getYears_payable();
+//        }
+//    }
+//
+//    private float total_amount;
+//
+//    public float getTotal_amount() {
+//        compute_total();
+//        return total_amount;
+//    }
+//
+//    public void setTotal_amount(float total_amount) {
+//        this.total_amount = total_amount;
+//    }
     /**
      * @return the License_detailList
      */
@@ -624,4 +668,37 @@ public class License_detailBean implements Serializable{
         this.package_detail = package_detail;
     }
 
+    /**
+     * @return the total_payment_yearly
+     */
+    public float getTotal_payment_yearly() {
+        computeTotal_yearly_payment();
+        return total_payment_yearly;
+    }
+
+    /**
+     * @param total_payment_yearly the total_payment_yearly to set
+     */
+    public void setTotal_payment_yearly(float total_payment_yearly) {
+        this.total_payment_yearly = total_payment_yearly;
+    }
+
+    /**
+     * @return the average_payment_monthly
+     */
+    public float getAverage_payment_monthly() {
+//        computeAverage_monthly_payment();
+        return average_payment_monthly;
+    }
+
+    /**
+     * @param average_payment_monthly the average_payment_monthly to set
+     */
+    public void setAverage_payment_monthly(float average_payment_monthly) {
+        this.average_payment_monthly = average_payment_monthly;
+    }
+
+    /**
+     * @return the annual_payment
+     */
 }
