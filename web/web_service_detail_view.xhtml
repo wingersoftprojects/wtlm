@@ -60,6 +60,9 @@
                     <p:column headerText="Domain Name" style="width: 20px" >
                         #{item.domain_name}     
                     </p:column>
+                    <p:column headerText="Domain Name" style="width: 20px" >
+                        #{transactorBean.getTransactor(item.transactor_id).transactorNames}     
+                    </p:column>
                     <p:column headerText="Package" style="width: 15px">
                         #{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}     
                     </p:column> 

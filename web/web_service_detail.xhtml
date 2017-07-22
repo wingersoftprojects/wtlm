@@ -11,13 +11,27 @@
             <p:growl id="messages" showDetail="true" />
             <p:fieldset  legend="Domain Details" style="width: 92%">                   
                 <h:panelGrid columns="4" id="domain_detail">                                                
-                    <p:outputLabel value="Client Name:" for="transactor_id" style="font-weight: bolder"/>
-                    <p:selectOneMenu id="transactor_id" value="#{web_serviceBean.web_serviceObject.transactor_id}" required="true" requiredMessage="Client Name field is required!">
-                        <f:selectItem itemLabel="" itemValue=""/>
-                        <f:selectItem itemLabel="Solomon" itemValue="1"/>
-                        <f:selectItem itemLabel="Phillip" itemValue="2"/>
-                        <f:ajax execute="@this"/>
-                    </p:selectOneMenu>
+                    <p:outputLabel value="Client Name:" for="autcTransactor" style="font-weight: bolder"/>
+                    <p:autoComplete id="autcTransactor" value="#{web_serviceBean.selectedTransactor}" 
+                                completeMethod="#{transactorBean.getTransactorObjectList}" 
+                                var="trct" 
+                                itemLabel="#{trct.transactorNames}" 
+                                itemValue="#{trct}" 
+                                converter="TransactorConverter" style="text-align: left" 
+                                forceSelection="true" queryDelay="0" 
+                                >
+                    <p:column headerText="Client Names" style="text-align: left" >  
+                        #{trct.transactorNames} 
+                    </p:column> 
+                    <p:column headerText="Type" style="text-align: left" >  
+                        #{trct.transactorType} 
+                    </p:column> 
+                    <p:column headerText="Contact Person" style="text-align: left">  
+                        #{trct.cpName} 
+                    </p:column> 
+                    <p:ajax event="itemSelect" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}"/>
+                    <p:ajax event="change" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}" rendered="#{web_serviceBean.selectedTransactor!=null}"/>
+                </p:autoComplete>
 
                     <p:outputLabel value="Domain Name:" for="web_service_id" style="font-weight: bolder"/>
                     <p:inputText id="web_service_id" value="#{web_serviceBean.web_serviceObject.domain_name}" required="true" requiredMessage="Domain Name field is required!"/>

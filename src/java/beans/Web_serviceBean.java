@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Package_detail;
+import entities.Transactor;
 import entities.Web_service;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -43,6 +44,7 @@ public class Web_serviceBean implements Serializable {
     private Web_service Web_serviceObject;
     private float total_payment_yearly;
     private float average_payment_monthly;
+    private Transactor SelectedTransactor;
 
     public Web_service getWeb_service() {
         return web_service;
@@ -195,6 +197,7 @@ public class Web_serviceBean implements Serializable {
             }
             i = ps.executeUpdate();
             this.clearWeb_service(web_service);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -317,6 +320,7 @@ public class Web_serviceBean implements Serializable {
             System.out.println(sql);
             i = ps.executeUpdate();
             this.clearWeb_service(web_service);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -428,9 +432,10 @@ public class Web_serviceBean implements Serializable {
             aWeb_service.setIs_deleted(0);
             aWeb_service.setLast_edit_date(null);
             aWeb_service.setLast_edit_by(0);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
         }
     }
-
+    
     public Web_service getWeb_service(int aWeb_service_id) {
         Web_service web_service = null;
         String sql = "SELECT * FROM web_service where web_service_id=" + aWeb_service_id;
@@ -590,6 +595,20 @@ public class Web_serviceBean implements Serializable {
      */
     public void setAverage_payment_monthly(float average_payment_monthly) {
         this.average_payment_monthly = average_payment_monthly;
+    }
+
+    /**
+     * @return the SelectedTransactor
+     */
+    public Transactor getSelectedTransactor() {
+        return SelectedTransactor;
+    }
+
+    /**
+     * @param SelectedTransactor the SelectedTransactor to set
+     */
+    public void setSelectedTransactor(Transactor SelectedTransactor) {
+        this.SelectedTransactor = SelectedTransactor;
     }
 
 }

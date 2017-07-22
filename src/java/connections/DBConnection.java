@@ -30,11 +30,11 @@ public class DBConnection implements Serializable {
     private static Connection MySQL_Conn;
 
     private static String INTER_BRANCH_MySQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static String INTER_BRANCH_MySQL_DB_HOST_IP_OR_NAME = "";
-    private static String INTER_BRANCH_MySQL_DB_NAME = "";
+    private static String INTER_BRANCH_MySQL_DB_HOST_IP_OR_NAME = "localhost";
+    private static String INTER_BRANCH_MySQL_DB_NAME = "wingerso_bms_branch";
     private static String INTER_BRANCH_MySQL_DB_URL = "";
-    private static String INTER_BRANCH_MySQL_USER = "";
-    private static String INTER_BRANCH_MySQL_PASSWORD = "";
+    private static String INTER_BRANCH_MySQL_USER = "root";
+    private static String INTER_BRANCH_MySQL_PASSWORD = "WTLura456";
     private static Connection INTER_BRANCH_MySQL_Conn;
 
     private static String PASSWORDS_ARE_ENCRYPTED;
