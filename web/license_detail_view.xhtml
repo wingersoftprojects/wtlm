@@ -45,8 +45,8 @@
                     <p:column headerText="License ID" style="width: 10px">
                         #{item.license_detail_id}    
                     </p:column>
-                    <p:column headerText="Client's Name" style="width: 30px" >
-                        #{item.license_client_name}     
+                    <p:column headerText="Client Name" style="width: 20px" >
+                        #{transactorBean.getTransactor(item.transactor_id).transactorNames}     
                     </p:column>
                     <p:column headerText="Application Name" style="width: 30px" >
                         #{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}     
@@ -63,14 +63,14 @@
                     <p:column headerText="Active" style="width: 5px">
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>
-                    <p:column headerText="" style="width: 100px">
+                    <p:column headerText="" style="width: 30px">
                         <p:commandLink id="view_license_detail" value="View" actionListener="#{license_detailBean.setLicense_detailObject(item)}" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Edit" action="#{license_detailBean.redirectEdit(item)}">
+                        <p:commandLink  value="   Edit" action="#{license_detailBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Delete" actionListener="#{license_detailBean.deleteLicense_detail(item)}" process="@this" update="@form">
+                        <p:commandLink  value="   Delete" actionListener="#{license_detailBean.deleteLicense_detail(item)}" process="@this" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to cancel this license?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

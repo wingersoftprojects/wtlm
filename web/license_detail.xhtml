@@ -12,17 +12,31 @@
             <p:fieldset  legend="License Details" style="width: 92%">                   
                 <h:panelGrid columns="4" id="license_detail">                                                
                     <p:outputLabel value="Client Name:" for="client_name" style="font-weight: bolder"/>
-                    <p:selectOneMenu id="client_name" value="#{license_detailBean.license_detailObject.transactor_id}" required="true" requiredMessage="Client Name field is required!">
-                        <f:selectItem itemLabel="--select client--" itemValue=""/>
-                        <f:selectItem itemLabel="Solomon" itemValue="1" />
-                        <f:selectItem itemLabel="Phillip" itemValue="2" />
-                    </p:selectOneMenu>
-
-                    <p:outputLabel value="Client ID:" for="client_id" style="font-weight: bolder"/>
+                    <p:autoComplete id="client_name" value="#{license_detailBean.selectedTransactor}" 
+                                    completeMethod="#{transactorBean.getTransactorObjectList}" 
+                                    var="trct" 
+                                    itemLabel="#{trct.transactorNames}" 
+                                    itemValue="#{trct}" 
+                                    converter="TransactorConverter" style="text-align: left" 
+                                    forceSelection="true" queryDelay="0" 
+                                    >
+                        <p:column headerText="Client Names" style="text-align: left" >  
+                            #{trct.transactorNames} 
+                        </p:column> 
+                        <p:column headerText="Type" style="text-align: left" >  
+                            #{trct.transactorType} 
+                        </p:column> 
+                        <p:column headerText="Contact Person" style="text-align: left">  
+                            #{trct.cpName} 
+                        </p:column> 
+                        <p:ajax event="itemSelect" listener="#{license_detailBean.license_detailObject.setTransactor_id(license_detailBean.selectedTransactor.transactorId)}"/>
+                        <p:ajax event="change" listener="#{license_detailBean.license_detailObject.setTransactor_id(license_detailBean.selectedTransactor.transactorId)}" rendered="#{license_detailBean.selectedTransactor!=null}"/>
+                    </p:autoComplete>
+                    <p:outputLabel value="License Client ID:" for="client_id" style="font-weight: bolder"/>
                     <p:inputText id="client_id" value="#{license_detailBean.license_detailObject.license_client_id}" required="true" requiredMessage="Client ID field is required!"/>
-                    <p:outputLabel value="Client License Code:" style="font-weight: bolder" for="client_license_code"/>
+                    <p:outputLabel value="License Client Code:" style="font-weight: bolder" for="client_license_code"/>
                     <p:inputText id="client_license_code" value="#{license_detailBean.license_detailObject.license_code}" required="true" requiredMessage="Client License Code field is required!"/>
-                    <p:outputLabel value="Client License Name:" style="font-weight: bolder" for="client_license_name"/>
+                    <p:outputLabel value="License Client Name:" style="font-weight: bolder" for="client_license_name"/>
                     <p:inputText id="client_license_name" value="#{license_detailBean.license_detailObject.license_client_name}" required="true" requiredMessage="Client License Code field is required!"/>
                     <p:outputLabel value="Application Name:" style="font-weight: bolder" for="app_name"/>
                     <p:selectOneMenu id="app_name" value="#{license_detailBean.license_detailObject.wtl_app_id}" required="true" requiredMessage="Application Name field is required!">
@@ -32,13 +46,13 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>
                     <p:selectOneMenu id="package_name" value="#{license_detailBean.license_detailObject.license_package}" required="true" requiredMessage="Package Name field is required!">
-                            <f:selectItem itemLabel="--select package--"/>
-                            <f:selectItem itemLabel="EDGE0005" itemValue="EDGE0005"/>
-                            <f:selectItem itemLabel="EDGE0010" itemValue="EDGE0010"/>
-                            <f:selectItem itemLabel="EDGE0015" itemValue="EDGE0015"/>
-                            <f:selectItem itemLabel="EDGE0020" itemValue="EDGE0020"/>
-                            <f:ajax execute="@this"/>
-                        </p:selectOneMenu>
+                        <f:selectItem itemLabel="--select package--"/>
+                        <f:selectItem itemLabel="EDGE0005" itemValue="EDGE0005"/>
+                        <f:selectItem itemLabel="EDGE0010" itemValue="EDGE0010"/>
+                        <f:selectItem itemLabel="EDGE0015" itemValue="EDGE0015"/>
+                        <f:selectItem itemLabel="EDGE0020" itemValue="EDGE0020"/>
+                        <f:ajax execute="@this"/>
+                    </p:selectOneMenu>
                     <p:outputLabel value="Start Date:" style="font-weight: bolder"/>
                     <p:calendar styleClass="clsInput" id="start_date" value="#{license_detailBean.license_detailObject.start_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>

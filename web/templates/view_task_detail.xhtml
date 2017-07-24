@@ -49,6 +49,7 @@
                     <p:column headerText="TASK ITEM" width="10">
                         <h:outputText value="Task Number" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="Task Description" style="font-weight: bolder"/><br/><br/><br/><br/><br/>
+                        <h:outputText value="Client Name" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="Task Category" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="Priority" style="font-weight: bolder"/><br/><br/>
                         <h:outputText value="Raise Date" style="font-weight: bolder"/><br/><br/>
@@ -64,6 +65,7 @@
                     <p:column headerText="TASK ITEM DETAILS">
                         <h:outputText value="#{item.task_detail_id}"/><br/><br/>
                         <h:inputTextarea value="#{item.task_description}" cols="70" rows="4"/><br/>
+                        <h:outputText value="#{transactorBean.getTransactor(item.transactor_id).transactorNames}"/><br/><br/>
                         <h:outputText value="#{task_categoryBean.getTask_category(item.task_category_id).task_category_name}"/><br/><br/>
                         <h:outputText value="#{item.priority}"/><br/><br/>
                         <h:outputText value="#{item.raise_date}"/><br/><br/>

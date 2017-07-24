@@ -23,6 +23,27 @@
                         <h:inputTextarea value="#{task_detailBean.task_detailObject.task_description}" cols="70" rows="2" required="true" requiredMessage="Description field is required">
                             <f:ajax execute="@this"/>.
                         </h:inputTextarea>
+                        <p:outputLabel value="Client Name:" for="client_name" style="font-weight: bolder"/>
+                        <p:autoComplete id="client_name" value="#{task_detailBean.selectedTransactor}" 
+                                        completeMethod="#{transactorBean.getTransactorObjectList}" 
+                                        var="trct" 
+                                        itemLabel="#{trct.transactorNames}" 
+                                        itemValue="#{trct}" 
+                                        converter="TransactorConverter" style="text-align: left" 
+                                        forceSelection="true" queryDelay="0" 
+                                        >
+                            <p:column headerText="Client Names" style="text-align: left" >  
+                                #{trct.transactorNames} 
+                            </p:column> 
+                            <p:column headerText="Type" style="text-align: left" >  
+                                #{trct.transactorType} 
+                            </p:column> 
+                            <p:column headerText="Contact Person" style="text-align: left">  
+                                #{trct.cpName} 
+                            </p:column> 
+                            <p:ajax event="itemSelect" listener="#{task_detailBean.task_detailObject.setTransactor_id(task_detailBean.selectedTransactor.transactorId)}"/>
+                            <p:ajax event="change" listener="#{task_detailBean.task_detailObject.setTransactor_id(task_detailBean.selectedTransactor.transactorId)}" rendered="#{task_detailBean.selectedTransactor!=null}"/>
+                        </p:autoComplete>
                         <h:outputText value="Task Category:" style="font-weight: bolder"/>                            
                         <p:selectOneMenu id="task_category" value="#{task_detailBean.task_detailObject.task_category_id}"  required="true" requiredMessage="Task Category field is required!">
                             <f:selectItem itemLabel="Please Select" />                                    

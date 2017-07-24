@@ -7,6 +7,7 @@ package beans;
 
 import connections.DBConnection;
 import entities.Task_detail;
+import entities.Transactor;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +38,7 @@ public class Task_detailBean implements Serializable{
     private List<Task_detail> Task_detailList;
     private Task_detail Task_detailObject;
     private int task_age;
+    private Transactor SelectedTransactor;
 
     public Task_detail getTask_detail() {
         return task_detail;
@@ -162,6 +164,7 @@ public class Task_detailBean implements Serializable{
             }
             i = ps.executeUpdate();
             this.clearTask_detail(task_detail);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -261,6 +264,7 @@ public class Task_detailBean implements Serializable{
             }
             i = ps.executeUpdate();
             this.clearTask_detail(task_detail);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -368,7 +372,7 @@ public class Task_detailBean implements Serializable{
             aTask_detail.setAdd_by(0);
             aTask_detail.setLast_edit_date(null);
             aTask_detail.setLast_edit_by(0);
-
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
         }
     }
 
@@ -441,6 +445,20 @@ public class Task_detailBean implements Serializable{
      */
     public void setTask_detailObject(Task_detail Task_detailObject) {
         this.Task_detailObject = Task_detailObject;
+    }
+
+    /**
+     * @return the SelectedTransactor
+     */
+    public Transactor getSelectedTransactor() {
+        return SelectedTransactor;
+    }
+
+    /**
+     * @param SelectedTransactor the SelectedTransactor to set
+     */
+    public void setSelectedTransactor(Transactor SelectedTransactor) {
+        this.SelectedTransactor = SelectedTransactor;
     }
 
 }

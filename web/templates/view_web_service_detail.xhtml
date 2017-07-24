@@ -67,7 +67,7 @@
                     <p:column headerText="SERVICE ITEM DETAILS">
                         <h:outputText value="#{item.web_service_id}"/><br/>
                         <h:outputText value="#{item.domain_name}"/><br/>
-                        <h:outputText value="#{item.transactor_id}"/><br/>
+                        <h:outputText value="#{transactorBean.getTransactor(item.transactor_id).transactorNames}"/><br/>
                         <h:outputText value="#{item.account_manager}"/><br/>
                         <h:outputText value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/><br/>
                         <h:outputText value="#{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}"/><br/>

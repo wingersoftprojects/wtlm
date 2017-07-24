@@ -65,6 +65,10 @@
                     <p:column headerText="Task No." style="width: 5px">
                         #{item.task_detail_id}    
                     </p:column>
+                    <p:column headerText="Client Name" style="width: 20px" >
+                        #{transactorBean.getTransactor(item.transactor_id).transactorNames}     
+                    </p:column>
+
                     <p:column headerText="Assigned To" style="width: 30px" >
                         #{item.assigned_to}     
                     </p:column>
@@ -92,14 +96,14 @@
                     <p:column headerText="Active" style="width: 20px">
                         #{utilityBean.returnYesNoString(item.is_active)}     
                     </p:column>
-                    <p:column headerText="" style="width: 100px">
+                    <p:column headerText="" style="width: 30px">
                         <p:commandLink id="view_task_detail" value="View" actionListener="#{task_detailBean.setTask_detailObject(item)}" process="@this" update=":form_view_task_detail" oncomplete="PF('Dialog_View_Task_Detail').show();">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Edit" action="#{task_detailBean.redirectEdit(item)}">
+                        <p:commandLink  value="   Edit" action="#{task_detailBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value=" | Delete" actionListener="#{task_detailBean.deleteTask_detail(item)}" update="@form">
+                        <p:commandLink  value="   Delete" actionListener="#{task_detailBean.deleteTask_detail(item)}" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

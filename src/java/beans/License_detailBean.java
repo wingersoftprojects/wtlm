@@ -8,6 +8,7 @@ package beans;
 import connections.DBConnection;
 import entities.Package_detail;
 import entities.License_detail;
+import entities.Transactor;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,6 +44,7 @@ public class License_detailBean implements Serializable {
     private License_detail License_detailObject;
     private float total_payment_yearly;
     private float average_payment_monthly;
+    private Transactor SelectedTransactor;
 
     public License_detail getLicense_detail() {
         return license_detail;
@@ -193,6 +195,7 @@ public class License_detailBean implements Serializable {
             }
             i = ps.executeUpdate();
             this.clearLicense_detail(license_detail);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -429,6 +432,7 @@ public class License_detailBean implements Serializable {
             }
             i = ps.executeUpdate();
             this.clearLicense_detail(license_detail);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -540,6 +544,7 @@ public class License_detailBean implements Serializable {
             aLicense_detail.setIs_deleted(0);
             aLicense_detail.setLast_edit_date(null);
             aLicense_detail.setLast_edit_by(0);
+            new TransactorBean().clearTransactor(this.SelectedTransactor);
         }
     }
 
@@ -608,7 +613,6 @@ public class License_detailBean implements Serializable {
 //            System.out.println(sql);
 //        }
 //    }
-
 //        public void compute_total() {
 //        total_amount = 0;
 //        for (License_detail ld : License_detailList) {
@@ -696,6 +700,20 @@ public class License_detailBean implements Serializable {
      */
     public void setAverage_payment_monthly(float average_payment_monthly) {
         this.average_payment_monthly = average_payment_monthly;
+    }
+
+    /**
+     * @return the SelectedTransactor
+     */
+    public Transactor getSelectedTransactor() {
+        return SelectedTransactor;
+    }
+
+    /**
+     * @param SelectedTransactor the SelectedTransactor to set
+     */
+    public void setSelectedTransactor(Transactor SelectedTransactor) {
+        this.SelectedTransactor = SelectedTransactor;
     }
 
     /**
