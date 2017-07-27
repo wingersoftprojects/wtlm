@@ -96,7 +96,7 @@
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <h:outputText value="Completed By:" rendered="#{task_detailBean.task_detailObject.current_status =='COMP'}" style="font-weight: bolder"/>                            
-                        <p:autoComplete id="autcCompletedBy" value="#{userDetailBean.selectedUserDetail}" 
+                        <p:autoComplete id="autcCompletedBy" value="#{userDetailBean.selectedUserDetail}" rendered="#{task_detailBean.task_detailObject.current_status =='COMP'}" 
                                         completeMethod="#{userDetailBean.getUserDetailObjectList}" 
                                         var="ud_comp" 
                                         itemLabel="#{ud_comp.firstName} #{ud_comp.secondName} #{ud_comp.thirdName}" 
@@ -120,7 +120,7 @@
                             <f:selectItem itemLabel="No" itemValue="0" />
                         </p:selectOneMenu>
                         <h:outputText value="Remarks:" style="font-weight: bolder"/>                                
-                        <h:inputTextarea value="#{task_detailBean.task_detailObject.comment}" cols="70" rows="4" required="false" requiredMessage="Remarks field is required">
+                        <h:inputTextarea value="#{task_detailBean.task_detailObject.comment}" cols="70" rows="2" required="false" requiredMessage="Remarks field is required">
                             <f:ajax execute="@this"/>.
                         </h:inputTextarea>
 

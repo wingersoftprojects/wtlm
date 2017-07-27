@@ -36,12 +36,14 @@
                                     <h:outputLabel value="WTL MANAGER LOG IN" style="font-size :30px; font-weight :bold; color: black" />                    
                                 </h:panelGrid>
                                 <br></br>
-                                <h:panelGrid columns="2">
-                                    <p:outputLabel value="Username:" for="username" style="font-weight: bolder; color: black"/>
-                                    <p:inputText id="username" placeholder="username" value="#{loginBean.username}" title="Username" required="true" requiredMessage="The Username is required"/>
-                                    <p:outputLabel value="Password:" for="password" style="font-weight: bolder; color: black"/>
-                                    <p:password id="password" placeholder="password" value="#{loginBean.password}" title="Password" required="true" requiredMessage="The Password is required"/>
-                                </h:panelGrid> 
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel value="Username:" for="username" style="font-weight: bolder; color: black"/>
+                                        <p:inputText id="username" placeholder="username" value="#{loginBean.username}" title="Username" required="true" requiredMessage="The Username is required"/>
+                                        <p:outputLabel value="Password:" for="password" style="font-weight: bolder; color: black"/>
+                                        <p:password id="password" placeholder="password" value="#{loginBean.password}" title="Password" required="true" requiredMessage="The Password is required"/>
+                                    </h:panelGrid>
+                                </div>
                                 <br></br>
                                 <p:commandButton value="Log in" style="background-color: whitesmoke; font-weight: bolder; font-size: 20px; color: #EC4A24" icon="ui-icon-key" action="#{loginBean.login()}" update="@form"/> 
                             </center>
@@ -68,7 +70,7 @@
                 <h:outputText value="Technologies Ltd" style="font-weight: bolder; color: black"/>               
             </center>
         </footer> 
-        
+
     </h:body>
 
 </html>

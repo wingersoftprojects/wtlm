@@ -114,6 +114,16 @@ public class loginBean implements Serializable {
     public String logout() {
         return "login?faces-redirect=true";
     }
+        public void redirectifnotloggedin() {
+        if (LoggedInUserDetail != null) {
+            logout();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("login?faces-redirect=true");
+
+        }
+    }
+
 
     /**
      * @return the ActionMessageSuccess

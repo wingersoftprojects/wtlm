@@ -36,41 +36,61 @@
                 </div>
                 <p:dataTable id="license_detail_table" value="#{license_detailBean.license_detailList}" widgetVar="widget_license_detail_table"  var="item" rows="10"
                              paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
                         LICENSE LISTING
                     </f:facet>
-
+                    <f:facet name="{Exporters}">
+                        <h:commandLink>
+                            <p:graphicImage name="images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="license_detail_table" fileName="License_Detail" />
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="license_detail_table" fileName="License_Detail"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="license_detail_table" fileName="License_Detail" />
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/xml.png" width="24"/>
+                            <p:dataExporter type="xml" target="license_detail_table" fileName="License_Detail" />
+                        </h:commandLink>
+                    </f:facet>
                     <p:column headerText="License ID" style="width: 10px">
-                        #{item.license_detail_id}    
+                        <p:outputLabel value="#{item.license_detail_id}"/>    
                     </p:column>
                     <p:column headerText="Client Name" style="width: 20px" >
-                        #{transactorBean.getTransactor(item.transactor_id).transactorNames}     
+                        <p:outputLabel value="#{transactorBean.getTransactor(item.transactor_id).transactorNames}"/>     
                     </p:column>
                     <p:column headerText="Application Name" style="width: 30px" >
-                        #{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}     
+                        <p:outputLabel value="#{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}"/>     
                     </p:column>
-                    <p:column headerText="Package Name" style="width: 30px" >
-                        #{item.license_package}     
+                    <p:column headerText="Package Name" style="width: 20px" >
+                        <p:outputLabel value="#{item.license_package}"/>     
                     </p:column>
-                    <p:column headerText="Start Date" style="width: 30px" >
-                        #{item.start_date}     
+                    <p:column headerText="Start Date" style="width: 40px" >
+                        <p:outputLabel value="#{item.start_date}"/>     
                     </p:column>
                     <p:column headerText="Expiry Date" style="width: 30px" >
-                        #{item.expire_date}     
+                        <p:outputLabel value="#{item.expire_date}"/>     
+                    </p:column>
+                    <p:column headerText="Last Renew Date" style="width: 30px" >
+                        <p:outputLabel value="#{item.last_renew_date}"/>     
                     </p:column>
                     <p:column headerText="Active" style="width: 5px">
-                        #{utilityBean.returnYesNoString(item.is_active)}     
+                        <p:outputLabel value="#{utilityBean.returnYesNoString(item.is_active)}"/>     
                     </p:column>
-                    <p:column headerText="" style="width: 30px">
+                    <p:column headerText="Action" style="width: 10px" exportable="false">
                         <p:commandLink id="view_license_detail" value="View" actionListener="#{license_detailBean.setLicense_detailObject(item)}" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">
                         </p:commandLink>
 
-                        <p:commandLink  value="   Edit" action="#{license_detailBean.redirectEdit(item)}">
+                        <p:commandLink  value="  | Edit" action="#{license_detailBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value="   Delete" actionListener="#{license_detailBean.deleteLicense_detail(item)}" process="@this" update="@form">
+                        <p:commandLink  value="  | Delete" actionListener="#{license_detailBean.deleteLicense_detail(item)}" process="@this" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to cancel this license?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

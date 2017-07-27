@@ -40,15 +40,6 @@
                         #{item.isUserLocked}
                     </center>
                 </p:column>
-                <p:column headerText="Action">
-                    <p:commandButton value="Edit" process="@this" update="@form" icon="ui-icon-pencil" title="View">
-                    </p:commandButton>
-                    <p:commandButton value="Delete" update="@form" process="@this"/>
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                </p:column>
             </p:dataTable>
         </h:form>
     </ui:define>
