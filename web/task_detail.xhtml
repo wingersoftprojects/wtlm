@@ -65,7 +65,7 @@
                         <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
                         <p:inputText value="#{task_detailBean.task_detailObject.raised_by}" required="true" requiredMessage="Raised by field is required" style="font-weight: bolder"/>
                         <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
-                        <p:autoComplete id="autcTransactionUser" value="#{userDetailBean.selectedUserDetail}" 
+                        <p:autoComplete id="autcAssignedTo" value="#{userDetailBean.selectedUserDetail}" 
                                         completeMethod="#{userDetailBean.getUserDetailObjectList}" 
                                         var="ud" 
                                         itemLabel="#{ud.firstName} #{ud.secondName} #{ud.thirdName}" 
@@ -96,7 +96,7 @@
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <h:outputText value="Completed By:" rendered="#{task_detailBean.task_detailObject.current_status =='COMP'}" style="font-weight: bolder"/>                            
-                        <p:autoComplete id="autcTransactionUser" value="#{userDetailBean.selectedUserDetail}" 
+                        <p:autoComplete id="autcCompletedBy" value="#{userDetailBean.selectedUserDetail}" 
                                         completeMethod="#{userDetailBean.getUserDetailObjectList}" 
                                         var="ud_comp" 
                                         itemLabel="#{ud_comp.firstName} #{ud_comp.secondName} #{ud_comp.thirdName}" 
