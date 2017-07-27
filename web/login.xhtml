@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/custom.css"/>
+        <h:outputStylesheet name="./css/style.css"/>
+
+        <title>WTL MANAGER</title>
+    </h:head>
+
+    <h:body class="pattern">
+        <div class="wrapper">
+            <div id="content" class="center_content">
+                <f:view>
+                    <h:form>
+                        <p:growl id="messages"/>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <p:panel style="background-color: buttonface">
+                            <center>
+                                <p:graphicImage value="../resources/images/LogoL.png" width="200" style=" margin: 0 auto;" cache="false"/>
+                                <br></br>
+                                <br></br>
+                                <h:panelGrid style="border-style: none">
+                                    <h:outputLabel value="WTL MANAGER LOG IN" style="font-size :30px; font-weight :bold; color: black" />                    
+                                </h:panelGrid>
+                                <br></br>
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Username:" for="username" style="font-weight: bolder; color: black"/>
+                                    <p:inputText id="username" placeholder="username" value="#{loginBean.username}" title="Username" required="true" requiredMessage="The Username is required"/>
+                                    <p:outputLabel value="Password:" for="password" style="font-weight: bolder; color: black"/>
+                                    <p:password id="password" placeholder="password" value="#{loginBean.password}" title="Password" required="true" requiredMessage="The Password is required"/>
+                                </h:panelGrid> 
+                                <br></br>
+                                <p:commandButton value="Log in" style="background-color: whitesmoke; font-weight: bolder; font-size: 20px; color: #EC4A24" icon="ui-icon-key" action="#{loginBean.login()}" update="@form"/> 
+                            </center>
+                        </p:panel>
+                    </h:form>
+                </f:view>
+            </div>            
+        </div>
+        <h:form>
+            <p:idleMonitor timeout="420000">
+                <p:ajax event="idle" listener="#{loginBean.redirectifnotloggedin()}" update="@all" oncomplete="logout()"/>
+            </p:idleMonitor>
+        </h:form>
+        <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;"/>
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="/images/ajax-loader.gif" />
+        </p:dialog>
+        <footer id="copyright">
+            <center>
+                <h:outputText value="Copyright ©2017 " style="font-weight: bolder; color: black"/>               
+                <h:outputText value="WINGER" style="font-weight: bolder; color: red"/>               
+                <h:outputText value="soft " style="font-weight: bolder; color: #2C92D0"/>               
+                <h:outputText value="Technologies Ltd" style="font-weight: bolder; color: black"/>               
+            </center>
+        </footer> 
+        
+    </h:body>
+
+</html>
+

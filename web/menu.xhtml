@@ -28,7 +28,7 @@
                     </p:submenu>
                     <p:submenu label="Settings" icon="ui-icon-gear">
                         <p:submenu label="User Management" icon="ui-icon-person">
-                            <p:menuitem value="User Details"/>
+                            <p:menuitem value="User Details" action="user_detail?faces-redirect=true"/>
                         </p:submenu>                      
                         <p:submenu label="Service Settings" icon="ui-icon-cart">
                             <p:menuitem value="Hosting Package Details" action="package_detail?faces-redirect=true"/>                                                                               
@@ -42,9 +42,9 @@
                     </p:submenu>
                     <f:facet name="options">
                         <p:menubar>
-                            <p:submenu label="Username" icon="ui-icon-person">              
+                            <p:submenu label="#{generalUserSetting.getCurrentUser().userName}" icon="ui-icon-person">              
                                 <p:menuitem value="Change Password"  icon="ui-icon-pencil"/>
-                                <p:menuitem value="Log Out" icon="ui-icon-extlink"/>
+                                <p:menuitem value="Log Out" action="#{loginBean.logout()}" icon="ui-icon-extlink"/>
                             </p:submenu>
                         </p:menubar>
                     </f:facet>

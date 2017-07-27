@@ -8,6 +8,7 @@ package beans;
 import connections.DBConnection;
 import entities.Task_detail;
 import entities.Transactor;
+import entities.UserDetail;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +40,7 @@ public class Task_detailBean implements Serializable{
     private Task_detail Task_detailObject;
     private int task_age;
     private Transactor SelectedTransactor;
+    private UserDetail SelectedUserDetail = null;
 
     public Task_detail getTask_detail() {
         return task_detail;
@@ -165,6 +167,7 @@ public class Task_detailBean implements Serializable{
             i = ps.executeUpdate();
             this.clearTask_detail(task_detail);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
+            new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -265,6 +268,7 @@ public class Task_detailBean implements Serializable{
             i = ps.executeUpdate();
             this.clearTask_detail(task_detail);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
+            new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -373,6 +377,7 @@ public class Task_detailBean implements Serializable{
             aTask_detail.setLast_edit_date(null);
             aTask_detail.setLast_edit_by(0);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
+            new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
         }
     }
 
@@ -459,6 +464,20 @@ public class Task_detailBean implements Serializable{
      */
     public void setSelectedTransactor(Transactor SelectedTransactor) {
         this.SelectedTransactor = SelectedTransactor;
+    }
+
+    /**
+     * @return the SelectedUserDetail
+     */
+    public UserDetail getSelectedUserDetail() {
+        return SelectedUserDetail;
+    }
+
+    /**
+     * @param SelectedUserDetail the SelectedUserDetail to set
+     */
+    public void setSelectedUserDetail(UserDetail SelectedUserDetail) {
+        this.SelectedUserDetail = SelectedUserDetail;
     }
 
 }

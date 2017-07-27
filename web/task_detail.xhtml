@@ -65,14 +65,24 @@
                         <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
                         <p:inputText value="#{task_detailBean.task_detailObject.raised_by}" required="true" requiredMessage="Raised by field is required" style="font-weight: bolder"/>
                         <p:outputLabel value="Assigned To: " style="font-weight: bolder"/>
-                        <p:selectOneMenu id="assigned_to" value="#{task_detailBean.task_detailObject.assigned_to}" label="Please Select" style="font-weight: bolder" required="true" requiredMessage="Assigned To field is required"> 
-                            <f:selectItem itemLabel="Please Select" /> 
-                            <f:selectItem itemLabel="Phillip" itemValue="1"/>
-                            <f:selectItem itemLabel="Solomon" itemValue="2"/>
-                            <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
-                            <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
-                            <f:ajax execute="@this"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="autcTransactionUser" value="#{userDetailBean.selectedUserDetail}" 
+                                        completeMethod="#{userDetailBean.getUserDetailObjectList}" 
+                                        var="ud" 
+                                        itemLabel="#{ud.firstName} #{ud.secondName} #{ud.thirdName}" 
+                                        itemValue="#{ud}" 
+                                        converter="UserDetailConverter" style="text-align: left" 
+                                        forceSelection="true" queryDelay="0" 
+                                        >
+                            <p:column headerText="User/Staff Names" style="text-align: left" >  
+                                #{ud.firstName} #{ud.secondName} #{ud.thirdName} 
+                            </p:column> 
+                            <p:column headerText="User Category" style="text-align: left" >  
+                                #{userCategoryBean.getUserCategory(ud.userCategoryId).userCategoryName} 
+                            </p:column> 
+
+                            <p:ajax event="itemSelect" listener="#{task_detailBean.task_detailObject.setAssigned_to(userDetailBean.selectedUserDetail.userDetailId)}"/>
+                            <p:ajax event="change" listener="#{task_detailBean.task_detailObject.setAssigned_to(userDetailBean.selectedUserDetail.userDetailId)}" rendered="#{userDetailBean.selectedUserDetail!=null}"/>
+                        </p:autoComplete>
                         <p:outputLabel value="Current Status: " style="font-weight: bolder"/>
                         <p:selectOneMenu id="status" value="#{task_detailBean.task_detailObject.current_status}" style="font-weight: bolder" required="true" requiredMessage="Current Status field is required"> 
                             <f:selectItem itemLabel="--select status" itemValue="--select status"/>
@@ -86,8 +96,23 @@
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <h:outputText value="Completed By:" rendered="#{task_detailBean.task_detailObject.current_status =='COMP'}" style="font-weight: bolder"/>                            
-                        <p:inputText value="#{task_detailBean.task_detailObject.completed_by}" rendered="#{task_detailBean.task_detailObject.current_status =='COMP'}" style="font-weight: bolder" required="true" requiredMessage="Complete By field is required"/>
-
+                        <p:autoComplete id="autcTransactionUser" value="#{userDetailBean.selectedUserDetail}" 
+                                        completeMethod="#{userDetailBean.getUserDetailObjectList}" 
+                                        var="ud_comp" 
+                                        itemLabel="#{ud_comp.firstName} #{ud_comp.secondName} #{ud_comp.thirdName}" 
+                                        itemValue="#{ud_comp}" 
+                                        converter="UserDetailConverter" style="text-align: left" 
+                                        forceSelection="true" queryDelay="0" 
+                                        >
+                            <p:column headerText="User/Staff Names" style="text-align: left" >  
+                                #{ud_comp.firstName} #{ud_comp.secondName} #{ud_comp.thirdName} 
+                            </p:column> 
+                            <p:column headerText="User Category" style="text-align: left" >  
+                                #{userCategoryBean.getUserCategory(ud.userCategoryId).userCategoryName} 
+                            </p:column> 
+                            <p:ajax event="itemSelect" listener="#{task_detailBean.task_detailObject.setCompleted_by(userDetailBean.selectedUserDetail.userDetailId)}"/>
+                            <p:ajax event="change" listener="#{task_detailBean.task_detailObject.setCompleted_by(userDetailBean.selectedUserDetail.userDetailId)}" rendered="#{userDetailBean.selectedUserDetail!=null}"/>
+                        </p:autoComplete>
                         <p:outputLabel value="Is Active?" for="is_active" style="font-weight: bolder"/>
                         <p:selectOneMenu id="is_active" value="#{task_detailBean.task_detailObject.is_active}" required="true" requiredMessage="Is active field is required">
                             <f:selectItem itemLabel="" itemValue=""/>
