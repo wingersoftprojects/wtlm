@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,7 +29,8 @@ import utilities.UtilityBean;
  */
 @ManagedBean
 @SessionScoped
-public class Task_detailBean implements Serializable{
+public class Task_detailBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Task_detail task_detail = new Task_detail();
@@ -38,7 +40,6 @@ public class Task_detailBean implements Serializable{
     ResultSet rs = null;
     private List<Task_detail> Task_detailList;
     private Task_detail Task_detailObject;
-    private int task_age;
     private Transactor SelectedTransactor;
     private UserDetail SelectedUserDetail = null;
 
@@ -69,7 +70,7 @@ public class Task_detailBean implements Serializable{
         return "task_detail?faces-redirect=true";
     }
 
-    public void insertTask_detail(Task_detail task_detail) {
+    public void insertTask_detail(Task_detail task_detail,UserDetail aUserDetail) {
         String sql = "";
         sql = "INSERT INTO task_detail(assigned_to,task_description,task_category_id,current_status,"
                 + "priority,raised_by,raise_date,completed_by,"
@@ -150,7 +151,7 @@ public class Task_detailBean implements Serializable{
                 ps.setDate(14, null);
             }
             try {
-                ps.setInt(15, task_detail.getAdd_by());
+                ps.setInt(15, this.SelectedUserDetail.getUserDetailId());
             } catch (NullPointerException npe) {
                 ps.setInt(15, 0);
             }
@@ -165,7 +166,7 @@ public class Task_detailBean implements Serializable{
                 ps.setInt(17, 0);
             }
             i = ps.executeUpdate();
-            this.clearTask_detail(task_detail);
+            this.clearTask_detail(task_detail,aUserDetail);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
             new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Saved succesfully"));
@@ -175,7 +176,7 @@ public class Task_detailBean implements Serializable{
         }
     }
 
-    public void updateTask_detail(Task_detail task_detail) {
+    public void updateTask_detail(Task_detail task_detail,UserDetail aUserDetail) {
         String sql = "";
         sql = "UPDATE task_detail SET assigned_to=?,task_description=?,task_category_id=?,current_status=?,"
                 + "priority=?,raised_by=?,raise_date=?,completed_by=?,"
@@ -266,9 +267,9 @@ public class Task_detailBean implements Serializable{
                 ps.setInt(16, 0);
             }
             i = ps.executeUpdate();
-            this.clearTask_detail(task_detail);
+            this.clearTask_detail(task_detail,aUserDetail);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
-            new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
+            new UserDetailBean().clearUserDetail(aUserDetail);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Updated succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -276,7 +277,7 @@ public class Task_detailBean implements Serializable{
         }
     }
 
-    public void deleteTask_detail(Task_detail task_detail) {
+    public void deleteTask_detail(Task_detail task_detail,UserDetail aUserDetail) {
         String sql = "";
         sql = "UPDATE task_detail SET is_deleted=?,last_edit_date=?,last_edit_by=?"
                 + " WHERE task_detail_id=?";
@@ -284,7 +285,7 @@ public class Task_detailBean implements Serializable{
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             try {
-                ps.setInt(1, 1);
+                ps.setInt(1, new UserDetailBean().getSelectedUserDetailId());
             } catch (NullPointerException npe) {
                 ps.setInt(1, 0);
             }
@@ -305,7 +306,7 @@ public class Task_detailBean implements Serializable{
             }
             System.out.println(sql);
             i = ps.executeUpdate();
-            this.clearTask_detail(task_detail);
+            this.clearTask_detail(task_detail,aUserDetail);
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Deleted succesfully"));
         } catch (SQLException se) {
             FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Error occured..."));
@@ -356,7 +357,7 @@ public class Task_detailBean implements Serializable{
         }
     }
 
-    public void clearTask_detail(Task_detail aTask_detail) {
+    public void clearTask_detail(Task_detail aTask_detail, UserDetail aUserDetail) {
         if (null != aTask_detail) {
             aTask_detail.setTask_detail_id(0);
             aTask_detail.setTask_description("");
@@ -377,7 +378,7 @@ public class Task_detailBean implements Serializable{
             aTask_detail.setLast_edit_date(null);
             aTask_detail.setLast_edit_by(0);
             new TransactorBean().clearTransactor(this.SelectedTransactor);
-            new UserDetailBean().clearUserDetail(this.SelectedUserDetail);
+            new UserDetailBean().clearUserDetail(aUserDetail);
         }
     }
 
@@ -416,14 +417,21 @@ public class Task_detailBean implements Serializable{
         }
     }
 
-    public int getTask_age() {
-        return task_age;
-    }
-
-    public void setTask_age(int task_age) {
-        this.task_age = task_age;
-    }
-
+//    public void DaysFromRaiseDateToCurrentDate() {
+//        Date d1 = null;
+//        Date d2 = null;
+//
+//        try {
+//            d1 = new UtilityBean().getCURRENT_SERVER_DATE();
+//            d2 = Task_detailObject.getRaise_date();
+//            //in milliseconds
+//            long diff = d1.getTime() - d2.getTime();
+//            setTask_age(diff / (24 * 60 * 60 * 1000));
+//            setTask_age(getTask_age() + 1);
+//        } catch (Exception e) {
+//            System.err.println(e.getMessage());
+//        }
+//    }
     /**
      * @return the Task_detailList
      */
@@ -479,5 +487,8 @@ public class Task_detailBean implements Serializable{
     public void setSelectedUserDetail(UserDetail SelectedUserDetail) {
         this.SelectedUserDetail = SelectedUserDetail;
     }
-
 }
+
+/**
+ * @return the task_age
+ */

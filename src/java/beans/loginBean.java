@@ -10,6 +10,7 @@ import entities.LoginSession;
 import entities.UserDetail;
 import java.io.Serializable;
 import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -95,20 +96,17 @@ public class loginBean implements Serializable {
 
                 //Navigate to the Menu or Home page
                 FacesContext fc = FacesContext.getCurrentInstance();
-                ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+                ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();               
                 nav.performNavigation("home?faces-redirect=true");
-//                } else {
-//                    this.ActionMessageSuccess = "";
-//                    this.ActionMessageFailure = "Invalid Store...";
-//                }
             } else {
                 this.setLoggedInUserDetail(null);
                 this.setActionMessageSuccess("");
                 this.setActionMessageFailure("Invalid Login");
+                FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Invalid Login.. Try again"));
             }
         } else {
             this.setActionMessageSuccess("");
-            this.setActionMessageFailure("Failed to Establish Connection");
+            this.setActionMessageFailure("Failed to Establish Connection. Contact Database Admin");
         }
     }
     public String logout() {
