@@ -101,7 +101,7 @@
                     </p:column>
                 </p:dataTable>
                 <br></br>
-                <p:fieldset legend="FINANCIAL DETAILS" style="background-color: bisque" rendered="#{userDetailBean.selectedUserDetail.isUserGenAdmin =='Yes'}">
+                <p:fieldset legend="FINANCIAL DETAILS" style="background-color: bisque">
                     <center>
                         <p:commandButton value="REFRESH FINANACIAL DETAILS" actionListener="#{license_detailBean.computeTotal_yearly_payment()}" style="font-weight: bolder; font-size: 20px" update="total_payment_yearly,total_payment_monthly"/>
                     </center>
