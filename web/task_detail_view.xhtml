@@ -30,15 +30,6 @@
                             <f:selectItem itemLabel="L" itemValue="L"/>                                   
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
-                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="assigned_to" value="Assigned To:" style="font-weight: bolder"/>
-                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.assigned_to}">
-                            <f:selectItem itemLabel="Please Select" /> 
-                            <f:selectItem itemLabel="Phillip" itemValue="1"/>
-                            <f:selectItem itemLabel="Solomon" itemValue="2"/>
-                            <f:selectItem itemLabel="Brian" itemValue="3"/>                                   
-                            <f:selectItem itemLabel="Racheal" itemValue="4"/>                                   
-                            <f:ajax execute="@this"/>
-                        </p:selectOneMenu>      
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="status" value="Current Status:" style="font-weight: bolder"/>
                         <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{task_detail.current_status}">
                             <f:selectItem itemLabel="--select status"/>

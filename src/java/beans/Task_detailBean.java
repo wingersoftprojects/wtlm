@@ -394,9 +394,9 @@ public class Task_detailBean implements Serializable {
             if (aTask_detail.getPriority().length() > 0) {
                 wheresql = wheresql + " AND priority='" + aTask_detail.getPriority() + "'";
             }
-            if (aTask_detail.getAssigned_to() > 0) {
-                wheresql = wheresql + " AND assigned_to=" + aTask_detail.getAssigned_to();
-            }
+//            if (aTask_detail.getAssigned_to() > 0) {
+//                wheresql = wheresql + " AND assigned_to=" + aUserDetail.getUserDetailId();
+//            }
             if (aTask_detail.getCurrent_status().length() > 0) {
                 wheresql = wheresql + " AND current_status='" + aTask_detail.getCurrent_status() + "'";
             }
