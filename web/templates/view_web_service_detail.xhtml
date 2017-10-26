@@ -72,14 +72,20 @@
                         <h:outputText value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/><br/>
                         <h:outputText value="#{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}"/><br/>
                         <h:outputText value="#{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}"/><br/>
-                        <h:outputText value="#{item.start_date}"/><br/>
-                        <h:outputText value="#{item.expire_date}"/><br/>
-                        <h:outputText value="#{item.last_renew_date}"/><br/>
+                        <h:outputText value="#{item.start_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </h:outputText><br/>
+                        <h:outputText value="#{item.expire_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </h:outputText><br/>
+                        <h:outputText value="#{item.last_renew_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </h:outputText><br/>
                         <h:outputText value="#{item.amount_payable}"/><br/>
                         <h:outputText value="#{item.years_payable}"/><br/>
                         <h:outputText value="#{item.cpanel_login}"/><br/>                       
                         <h:outputText value="#{item.wp_login}"/><br/>                                           
-                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/>
+                        <h:outputText value="#{item.is_active}"/><br/>
                         <h:outputText value="#{item.narration}"/><br/>
                     </p:column>
                 </p:dataTable>

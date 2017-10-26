@@ -40,7 +40,7 @@ public class Web_service {
     private String Cpanel_login;
     private String Account_manager;
     private String Wp_login;
-    private int Is_active;
+    private String Is_active;
     private int Is_deleted;
     private Date Add_date;
     private int Add_by;
@@ -178,11 +178,11 @@ public class Web_service {
         this.Wp_login = Wp_login;
     }
 
-    public int getIs_active() {
+    public String getIs_active() {
         return Is_active;
     }
 
-    public void setIs_active(int Is_active) {
+    public void setIs_active(String Is_active) {
         this.Is_active = Is_active;
     }
 

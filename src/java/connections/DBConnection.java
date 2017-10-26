@@ -22,16 +22,16 @@ public class DBConnection implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private static String MySQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static String MySQL_DB_HOST_IP_OR_NAME = "localhost";
-    private static String MySQL_DB_NAME = "wtlm";
+    private static String MySQL_DB_HOST_IP_OR_NAME = "";
+    private static String MySQL_DB_NAME = "";
     private static String MySQL_DB_URL = "";
-    private static String MySQL_USER = "root";
-    private static String MySQL_PASSWORD = "WTLura456";
+    private static String MySQL_USER = "";
+    private static String MySQL_PASSWORD = "";
     private static Connection MySQL_Conn;
 
     private static String INTER_BRANCH_MySQL_JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static String INTER_BRANCH_MySQL_DB_HOST_IP_OR_NAME = "localhost";
-    private static String INTER_BRANCH_MySQL_DB_NAME = "wingerso_bms_branch";
+    private static String INTER_BRANCH_MySQL_DB_NAME = "wingerso_bms_branch_test";
     private static String INTER_BRANCH_MySQL_DB_URL = "";
     private static String INTER_BRANCH_MySQL_USER = "root";
     private static String INTER_BRANCH_MySQL_PASSWORD = "WTLura456";

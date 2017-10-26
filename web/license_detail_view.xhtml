@@ -72,16 +72,22 @@
                         <p:outputLabel value="#{item.license_package}"/>     
                     </p:column>
                     <p:column headerText="Start Date" style="width: 40px" >
-                        <p:outputLabel value="#{item.start_date}"/>     
+                        <p:outputLabel value="#{item.start_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </p:outputLabel>           
                     </p:column>
                     <p:column headerText="Expiry Date" style="width: 30px" >
-                        <p:outputLabel value="#{item.expire_date}"/>     
+                        <p:outputLabel value="#{item.expire_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </p:outputLabel>           
                     </p:column>
                     <p:column headerText="Last Renew Date" style="width: 30px" >
-                        <p:outputLabel value="#{item.last_renew_date}"/>     
+                        <p:outputLabel value="#{item.last_renew_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </p:outputLabel>           
                     </p:column>
                     <p:column headerText="Active" style="width: 5px">
-                        <p:outputLabel value="#{utilityBean.returnYesNoString(item.is_active)}"/>     
+                        <p:outputLabel value="#{item.is_active}"/>                     
                     </p:column>
                     <p:column headerText="Action" style="width: 10px" exportable="false">
                         <p:commandLink id="view_license_detail" value="View" actionListener="#{license_detailBean.setLicense_detailObject(item)}" process="@this" update=":form_view_license_detail" oncomplete="PF('Dialog_View_License_Detail').show();">

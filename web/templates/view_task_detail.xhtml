@@ -68,13 +68,17 @@
                         <h:outputText value="#{transactorBean.getTransactor(item.transactor_id).transactorNames}"/><br/><br/>
                         <h:outputText value="#{task_categoryBean.getTask_category(item.task_category_id).task_category_name}"/><br/><br/>
                         <h:outputText value="#{item.priority}"/><br/><br/>
-                        <h:outputText value="#{item.raise_date}"/><br/><br/>
+                        <h:outputText value="#{item.raise_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </h:outputText><br/><br/>
                         <h:outputText value="#{item.raised_by}"/><br/><br/>
                         <h:outputText value="#{item.current_status}"/><br/><br/>
                         <h:outputText value="#{userDetailBean.getUserDetail(item.assigned_to).firstName} #{userDetailBean.getUserDetail(item.assigned_to).secondName} #{userDetailBean.getUserDetail(item.assigned_to).thirdName}"/><br/><br/>                       
-                        <h:outputText value="#{utilityBean.returnYesNoString(item.is_active)}"/><br/><br/>
+                        <h:outputText value="#{item.is_active}"/><br/><br/>
                         <h:outputText value="#{item.comment}"/><br/><br/>
-                        <h:outputText value="#{item.complete_date}" rendered="#{item.current_status =='COMP'}"/><br/><br/>
+                        <h:outputText value="#{item.complete_date}" rendered="#{item.current_status =='COMP'}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </h:outputText><br/><br/>
                         <h:outputText value="#{userDetailBean.getUserDetail(item.completed_by).firstName} #{userDetailBean.getUserDetail(item.completed_by).secondName} #{userDetailBean.getUserDetail(item.completed_by).thirdName}}" rendered="#{item.current_status =='COMP'}"/>                        
 
                     </p:column>

@@ -164,9 +164,9 @@ public class License_detailBean implements Serializable {
                 ps.setString(15, "");
             }
             try {
-                ps.setInt(16, license_detail.getIs_active());
+                ps.setString(16, license_detail.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(16, 0);
+                ps.setString(16, "");
             }
             try {
                 ps.setInt(17, license_detail.getIs_deleted());
@@ -411,9 +411,9 @@ public class License_detailBean implements Serializable {
                 ps.setString(15, "");
             }
             try {
-                ps.setInt(16, license_detail.getIs_active());
+                ps.setString(16, license_detail.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(16, 0);
+                ps.setString(16, "");
             }
             try {
                 ps.setTimestamp(17, new java.sql.Timestamp(new UtilityBean().getCURRENT_SERVER_DATE().getTime()));
@@ -513,7 +513,7 @@ public class License_detailBean implements Serializable {
             aLicense_detail.setCredentials_server(rs.getString("credentials_server"));
             aLicense_detail.setCredentials_network(rs.getString("credentials_network"));
             aLicense_detail.setNarration(rs.getString("narration"));
-            aLicense_detail.setIs_active(rs.getInt("is_active"));
+            aLicense_detail.setIs_active(rs.getString("is_active"));
             aLicense_detail.setIs_deleted(rs.getInt("is_deleted"));
             aLicense_detail.setLast_edit_date(rs.getDate("last_edit_date"));
             aLicense_detail.setLast_edit_by(rs.getInt("last_edit_by"));
@@ -540,7 +540,7 @@ public class License_detailBean implements Serializable {
             aLicense_detail.setCredentials_server("");
             aLicense_detail.setCredentials_network("");
             aLicense_detail.setNarration("");
-            aLicense_detail.setIs_active(0);
+            aLicense_detail.setIs_active("");
             aLicense_detail.setIs_deleted(0);
             aLicense_detail.setLast_edit_date(null);
             aLicense_detail.setLast_edit_by(0);
@@ -551,7 +551,7 @@ public class License_detailBean implements Serializable {
     public void searchLicense_detail(License_detail aLicense_detail) {
         ResultSet res = null;
         this.License_detailList = new ArrayList<>();
-        String sql = "SELECT * FROM license_detail WHERE is_deleted=0 AND is_active=1";
+        String sql = "SELECT * FROM license_detail WHERE is_deleted=0 AND is_active ='Yes'";
         String wheresql = "";
         String orderby = "";
         try (
@@ -582,7 +582,7 @@ public class License_detailBean implements Serializable {
         ResultSet res = null;
         String sql = "SELECT sum(amount_payable/years_payable)"
                 + " AS total_payment_yearly FROM license_detail"
-                + " WHERE is_deleted=0 AND is_active=1;";
+                + " WHERE is_deleted=0 AND is_active='Yes';";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {

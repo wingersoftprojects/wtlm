@@ -145,9 +145,9 @@ public class Web_serviceBean implements Serializable {
                 ps.setInt(11, 0);
             }
             try {
-                ps.setInt(12, web_service.getIs_active());
+                ps.setString(12, web_service.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(12, 0);
+                ps.setString(12, "");
             }
             try {
                 ps.setString(13, web_service.getNarration());
@@ -272,9 +272,9 @@ public class Web_serviceBean implements Serializable {
                 ps.setInt(11, 0);
             }
             try {
-                ps.setInt(12, web_service.getIs_active());
+                ps.setString(12, web_service.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(12, 0);
+                ps.setString(12, "");
             }
             try {
                 ps.setString(13, web_service.getNarration());
@@ -397,7 +397,7 @@ public class Web_serviceBean implements Serializable {
             aWeb_service.setLast_renew_date(rs.getDate("last_renew_date"));
             aWeb_service.setAmount_payable(rs.getFloat("amount_payable"));
             aWeb_service.setYears_payable(rs.getInt("years_payable"));
-            aWeb_service.setIs_active(rs.getInt("is_active"));
+            aWeb_service.setIs_active(rs.getString("is_active"));
             aWeb_service.setNarration(rs.getString("narration"));
             aWeb_service.setAccount_manager(rs.getString("account_manager"));
             aWeb_service.setWp_login(rs.getString("wp_login"));
@@ -424,7 +424,7 @@ public class Web_serviceBean implements Serializable {
             aWeb_service.setLast_renew_date(null);
             aWeb_service.setAmount_payable(0);
             aWeb_service.setYears_payable(0);
-            aWeb_service.setIs_active(0);
+            aWeb_service.setIs_active("");
             aWeb_service.setNarration("");
             aWeb_service.setAccount_manager("");
             aWeb_service.setWp_login("");
@@ -493,7 +493,7 @@ public class Web_serviceBean implements Serializable {
         ResultSet res = null;
         String sql = "SELECT sum(amount_payable/years_payable)"
                 + " AS total_payment_yearly FROM web_service"
-                + " WHERE is_deleted=0 AND is_active=1;";
+                + " WHERE is_deleted=0 AND is_active='Yes';";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -511,7 +511,7 @@ public class Web_serviceBean implements Serializable {
         ResultSet res = null;
         String sql = "SELECT sum(amount_payable/years_payable)/12"
                 + " AS total_payment_monthly FROM web_service"
-                + " WHERE is_deleted=0 AND is_active=1;";
+                + " WHERE is_deleted=0 AND is_active='Yes';";
         try (
                 Connection conn = DBConnection.getMySQLConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);) {

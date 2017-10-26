@@ -32,7 +32,7 @@ public class Task_detail {
     private Date Complete_date;
     private String Comment;
     private long Transactor_id;
-    private int Is_active;
+    private String Is_active;
     private int Is_deleted;
     private Date Add_date;
     private int Add_by;
@@ -130,11 +130,11 @@ public class Task_detail {
         this.Comment = Comment;
     }
 
-    public int getIs_active() {
+    public String getIs_active() {
         return Is_active;
     }
 
-    public void setIs_active(int Is_active) {
+    public void setIs_active(String Is_active) {
         this.Is_active = Is_active;
     }
 

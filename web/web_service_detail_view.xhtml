@@ -87,22 +87,26 @@
                         <p:outputLabel value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/>  
                     </p:column> 
                     <p:column   headerText="Start Date" style="width: 20px">
-                        <p:outputLabel value="#{item.start_date}"/>      
+                        <p:outputLabel value="#{item.start_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </p:outputLabel>      
                     </p:column>
                     <p:column headerText="Expiry Date" style="width: 20px">
-                        <p:outputLabel value="#{item.expire_date}"/>      
+                        <p:outputLabel value="#{item.expire_date}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
+                        </p:outputLabel>      
                     </p:column>
                     <p:column headerText="Active" style="width: 5px">
-                        <p:outputLabel value="#{utilityBean.returnYesNoString(item.is_active)}"/>      
+                        <p:outputLabel value="#{item.is_active}"/>      
                     </p:column>                    
                     <p:column headerText="Action" style="width: 30px" exportable="false">
                         <p:commandLink id="view_web_service" value="View" process="@this" actionListener="#{web_serviceBean.setWeb_serviceObject(item)}" update=":form_view_web_service_detail" oncomplete="PF('Dialog_View_Web_Service_Detail').show();">
                         </p:commandLink>
 
-                        <p:commandLink  value="   Edit" action="#{web_serviceBean.redirectEdit(item)}">
+                        <p:commandLink  value="  | Edit" action="#{web_serviceBean.redirectEdit(item)}">
                         </p:commandLink>
 
-                        <p:commandLink  value="   Delete" actionListener="#{web_serviceBean.deleteWeb_service(item)}" update="@form">
+                        <p:commandLink  value="  | Delete" actionListener="#{web_serviceBean.deleteWeb_service(item)}" update="@form">
                             <p:confirm header="Confirmation" message="Are you sure you want to delete this domain?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

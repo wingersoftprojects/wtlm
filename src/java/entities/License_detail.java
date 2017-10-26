@@ -43,7 +43,7 @@ public class License_detail {
     private String Credentials_server;
     private String Credentials_network;
     private String Narration;
-    private int Is_active;
+    private String Is_active;
     private int Is_deleted;
     private Date Add_date;
     private int Add_by;
@@ -138,11 +138,11 @@ public class License_detail {
         this.Narration = Narration;
     }
 
-    public int getIs_active() {
+    public String getIs_active() {
         return Is_active;
     }
 
-    public void setIs_active(int Is_active) {
+    public void setIs_active(String Is_active) {
         this.Is_active = Is_active;
     }
 

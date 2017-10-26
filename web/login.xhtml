@@ -14,8 +14,9 @@
         <h:outputStylesheet name="./css/style.css"/>
 
         <title>WTL MANAGER</title>
+        <link href="resources/images/wtlicon.ico" rel="shortcut icon" type="image/x-icon" />
     </h:head>
-
+    <f:event listener="#{dBConnection.readConnectionConfigurations('configurations.ConfigFile')}" type="preRenderView"/>
     <h:body class="pattern">
         <div class="wrapper">
             <div id="content" class="center_content">
@@ -46,7 +47,11 @@
                                     </h:panelGrid>
                                 </div>
                                 <br></br>
-                                <p:commandButton value="Log in" style="background-color: whitesmoke; font-weight: bolder; font-size: 20px; color: #EC4A24" icon="ui-icon-key" action="#{loginBean.login()}" update="@form"/> 
+                                <p:commandButton value="Log in" style="background-color: whitesmoke; font-weight: bolder; font-size: 20px; color: #EC4A24" icon="ui-icon-key" action="#{loginBean.login()}" update="@form" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">
+                                    <p:dialog widgetVar="statusDialog" height="100" position="center" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                        <p:graphicImage name="/images/ajax-loader.gif"/>
+                                    </p:dialog>
+                                </p:commandButton>
                             </center>
                         </p:panel>
                     </h:form>

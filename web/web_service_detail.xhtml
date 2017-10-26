@@ -9,30 +9,36 @@
     <ui:define name="content">
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
-            <p:fieldset  legend="Domain Details" style="width: 92%">                   
-                <h:panelGrid columns="4" id="domain_detail">                                                
-                    <p:outputLabel value="Client Name:" for="autcTransactor" style="font-weight: bolder"/>
+            <p:fieldset  legend="Domain Details" style="width: 92%">
+                <panel rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}">
+                    <center>
+                        <h:outputText value="Client Name: " style="font-weight: bolder; color: black" rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}"/>
+                        <h:outputText value="#{transactorBean.getTransactor(web_serviceBean.web_serviceObject.transactor_id).transactorNames}" style="font-weight: bolder; color: red" rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}"/>
+                    </center>
+                </panel>
+                <h:panelGrid columns="4" id="domain_detail">
+                    <p:outputLabel value="Client Name:" for="autcTransactor" style="font-weight: bolder" rendered="#{web_serviceBean.web_serviceObject.web_service_id ==0}"/>
+                    <p:outputLabel value="Change Client Name:" for="autcTransactor" style="font-weight: bolder" rendered="#{web_serviceBean.web_serviceObject.web_service_id >=1}"/>
                     <p:autoComplete id="autcTransactor" value="#{web_serviceBean.selectedTransactor}" 
-                                completeMethod="#{transactorBean.getTransactorObjectList}" 
-                                var="trct" 
-                                itemLabel="#{trct.transactorNames}" 
-                                itemValue="#{trct}" 
-                                converter="TransactorConverter" style="text-align: left" 
-                                forceSelection="true" queryDelay="0" 
-                                >
-                    <p:column headerText="Client Names" style="text-align: left" >  
-                        #{trct.transactorNames} 
-                    </p:column> 
-                    <p:column headerText="Type" style="text-align: left" >  
-                        #{trct.transactorType} 
-                    </p:column> 
-                    <p:column headerText="Contact Person" style="text-align: left">  
-                        #{trct.cpName} 
-                    </p:column> 
-                    <p:ajax event="itemSelect" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}"/>
-                    <p:ajax event="change" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}" rendered="#{web_serviceBean.selectedTransactor!=null}"/>
-                </p:autoComplete>
-
+                                    completeMethod="#{transactorBean.getTransactorObjectList}" 
+                                    var="trct" 
+                                    itemLabel="#{trct.transactorNames}" 
+                                    itemValue="#{trct}" 
+                                    converter="TransactorConverter" style="text-align: left" 
+                                    forceSelection="true" queryDelay="0" 
+                                    >
+                        <p:column headerText="Client Names" style="text-align: left" >  
+                            #{trct.transactorNames} 
+                        </p:column> 
+                        <p:column headerText="Type" style="text-align: left" >  
+                            #{trct.transactorType} 
+                        </p:column> 
+                        <p:column headerText="Contact Person" style="text-align: left">  
+                            #{trct.cpName} 
+                        </p:column> 
+                        <p:ajax event="itemSelect" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}"/>
+                        <p:ajax event="change" listener="#{web_serviceBean.web_serviceObject.setTransactor_id(web_serviceBean.selectedTransactor.transactorId)}" rendered="#{web_serviceBean.selectedTransactor!=null}"/>
+                    </p:autoComplete>
                     <p:outputLabel value="Domain Name:" for="web_service_id" style="font-weight: bolder"/>
                     <p:inputText id="web_service_id" value="#{web_serviceBean.web_serviceObject.domain_name}" required="true" requiredMessage="Domain Name field is required!"/>
 
@@ -86,15 +92,14 @@
 
                     <p:outputLabel value="Wp Login:" for="wp_login" style="font-weight: bolder"/>
                     <p:inputTextarea id="wp_login" value="#{web_serviceBean.web_serviceObject.wp_login}"/>
-                    
+
                     <p:outputLabel value="Account Manager:" for="account_manager" style="font-weight: bolder"/>
                     <p:inputText id="account_manager" value="#{web_serviceBean.web_serviceObject.account_manager}" required="true" requiredMessage="Account Manager field is required!"/>
 
                     <p:outputLabel value="Is Active?:" for="is_active" style="font-weight: bolder"/>
                     <p:selectOneMenu id="is_active" required="true" requiredMessage="Is active field is required" value="#{web_serviceBean.web_serviceObject.is_active}">
-                        <f:selectItem itemLabel="" itemValue=""/>
-                        <f:selectItem itemLabel="Yes" itemValue="1" />
-                        <f:selectItem itemLabel="No" itemValue="0" />
+                        <f:selectItem itemLabel="Yes" itemValue="Yes" />
+                        <f:selectItem itemLabel="No" itemValue="No" />
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                 </h:panelGrid>

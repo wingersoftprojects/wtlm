@@ -106,7 +106,8 @@ public class loginBean implements Serializable {
             }
         } else {
             this.setActionMessageSuccess("");
-            this.setActionMessageFailure("Failed to Establish Connection. Contact Database Admin");
+            this.setActionMessageFailure("Database Connection Failure");
+            FacesContext.getCurrentInstance().addMessage("Save", new FacesMessage("Failed to Establish Connection. Contact Database Admin"));
         }
     }
     public String logout() {

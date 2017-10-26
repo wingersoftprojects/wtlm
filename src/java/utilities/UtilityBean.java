@@ -45,9 +45,9 @@ public class UtilityBean implements Serializable {
     public String returnYesNoString(int aYesNo) {
         switch (aYesNo) {
             case 0:
-                return "No";
-            case 1:
                 return "Yes";
+            case 1:
+                return "No";
             default:
                 return "";
         }

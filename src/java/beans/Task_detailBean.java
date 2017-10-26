@@ -136,9 +136,9 @@ public class Task_detailBean implements Serializable {
                 ps.setLong(11, 0);
             }
             try {
-                ps.setInt(12, task_detail.getIs_active());
+                ps.setString(12, task_detail.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(12, 0);
+                ps.setString(12, "");
             }
             try {
                 ps.setInt(13, task_detail.getIs_deleted());
@@ -242,9 +242,9 @@ public class Task_detailBean implements Serializable {
                 ps.setLong(11, 0);
             }
             try {
-                ps.setInt(12, task_detail.getIs_active());
+                ps.setString(12, task_detail.getIs_active());
             } catch (NullPointerException npe) {
-                ps.setInt(12, 0);
+                ps.setString(12, "");
             }
             try {
                 ps.setInt(13, task_detail.getIs_deleted());
@@ -346,7 +346,7 @@ public class Task_detailBean implements Serializable {
             aTask_detail.setCompleted_by(rs.getInt("completed_by"));
             aTask_detail.setComment(rs.getString("comment"));
             aTask_detail.setTransactor_id(rs.getLong("transactor_id"));
-            aTask_detail.setIs_active(rs.getInt("is_active"));
+            aTask_detail.setIs_active(rs.getString("is_active"));
             aTask_detail.setIs_deleted(rs.getInt("is_deleted"));
             aTask_detail.setAdd_date(rs.getDate("add_date"));
             aTask_detail.setAdd_by(rs.getInt("add_by"));
@@ -371,7 +371,7 @@ public class Task_detailBean implements Serializable {
             aTask_detail.setCompleted_by(0);
             aTask_detail.setComment("");
             aTask_detail.setTransactor_id(0);
-            aTask_detail.setIs_active(0);
+            aTask_detail.setIs_active("");
             aTask_detail.setIs_deleted(0);
             aTask_detail.setAdd_date(null);
             aTask_detail.setAdd_by(0);
@@ -385,7 +385,7 @@ public class Task_detailBean implements Serializable {
     public void searchTask_detail(Task_detail aTask_detail) {
         ResultSet res = null;
         this.Task_detailList = new ArrayList<>();
-        String sql = "SELECT * FROM task_detail WHERE is_deleted=0 AND is_active=1";
+        String sql = "SELECT * FROM task_detail WHERE is_deleted=0 AND is_active='Yes'";
         String wheresql = "";
         String orderby = "";
         try (
