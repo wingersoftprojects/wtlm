@@ -47,6 +47,7 @@
                     <p:outputLabel value="Package Name:" style="font-weight: bolder" for="package_name"/>
                     <p:selectOneMenu id="package_name" value="#{license_detailBean.license_detailObject.license_package}" required="true" requiredMessage="Package Name field is required!">
                         <f:selectItem itemLabel="--select package--"/>
+                        <f:selectItem itemLabel="EDGE0001" itemValue="EDGE0001"/>
                         <f:selectItem itemLabel="EDGE0005" itemValue="EDGE0005"/>
                         <f:selectItem itemLabel="EDGE0010" itemValue="EDGE0010"/>
                         <f:selectItem itemLabel="EDGE0015" itemValue="EDGE0015"/>
@@ -54,15 +55,15 @@
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Start Date:" style="font-weight: bolder"/>
-                    <p:calendar styleClass="clsInput" id="start_date" value="#{license_detailBean.license_detailObject.start_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
+                    <p:calendar styleClass="clsInput" id="start_date" value="#{license_detailBean.license_detailObject.start_date}" pattern="dd-MM-yyyy" timeZone="EAT"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Start Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
                     <p:outputLabel value="Expiry Date:" style="font-weight: bolder"/>
-                    <p:calendar styleClass="clsInput" id="expire_date" value="#{license_detailBean.license_detailObject.expire_date}"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Expiry Date field is required!">
+                    <p:calendar styleClass="clsInput" id="expire_date" value="#{license_detailBean.license_detailObject.expire_date}" pattern="dd-MM-yyyy" timeZone="EAT"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Expiry Date field is required!">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
                     <p:outputLabel value="Last Renew Date:" style="font-weight: bolder"/>
-                    <p:calendar styleClass="clsInput" id="last_renew_date" value="#{license_detailBean.license_detailObject.last_renew_date}"  navigator="true" showButtonPanel="true" readonlyInput="true">
+                    <p:calendar styleClass="clsInput" id="last_renew_date" value="#{license_detailBean.license_detailObject.last_renew_date}" pattern="dd-MM-yyyy" timeZone="EAT"  navigator="true" showButtonPanel="true" readonlyInput="true">
                         <p:ajax event="dateSelect" process="@this"/>
                     </p:calendar>
                     <p:outputLabel value="Amount Payable:" style="font-weight: bolder" for="amount_payable"/>

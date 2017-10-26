@@ -59,7 +59,7 @@
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
                         <h:outputText value="Raised Date:" style="font-weight: bolder"/>                            
-                        <p:calendar value="#{task_detailBean.task_detailObject.raise_date}" styleClass="clsInput" id="expiry_date"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Rsaised Date field is required">
+                        <p:calendar value="#{task_detailBean.task_detailObject.raise_date}" styleClass="clsInput" id="expiry_date" pattern="dd-MM-yyyy" timeZone="EAT"  navigator="true" showButtonPanel="true" readonlyInput="true" required="true" requiredMessage="Rsaised Date field is required">
                             <p:ajax event="dateSelect" process="@this"/>
                         </p:calendar>
                         <h:outputText value="Raised By:" style="font-weight: bolder"/>                            
