@@ -11,19 +11,19 @@
             <p:growl id="messages" showDetail="true" />                                          
             <p:fieldset legend="Package Detail">
                 <p:panelGrid columns="4" id="cover_type">                                                
-                    <p:outputLabel value="Package Name:" for="package_name"/>
+                    <p:outputLabel value="Package Name:" for="package_name" style="font-weight: bolder"/>
                     <p:inputText  id="package_name" value="#{package_detailBean.package_detailObject.package_detail_name}" required="true" requiredMessage="Package Name field is required" />
-                    <p:outputLabel value="Quota MBs:" for="quota_mbs"/>
+                    <p:outputLabel value="Quota MBs:" for="quota_mbs" style="font-weight: bolder"/>
                     <p:inputText  id="quota_mbs" value="#{package_detailBean.package_detailObject.quota_mbs}" required="true" requiredMessage="Quota MBs field is required" />
-                    <p:outputLabel value="BW MBs:" for="bw_mbs"/>
+                    <p:outputLabel value="BW MBs:" for="bw_mbs" style="font-weight: bolder"/>
                     <p:inputText  id="bw_mbs" value="#{package_detailBean.package_detailObject.bw_mbs}" required="true" requiredMessage="BW MBs field is required" />
-                    <p:outputLabel value="Emails:" for="emails"/>
+                    <p:outputLabel value="Emails:" for="emails" style="font-weight: bolder"/>
                     <p:inputText  id="emails" value="#{package_detailBean.package_detailObject.emails}" required="true" requiredMessage="Emails field is required" />
-                    <p:outputLabel value="FTP:" for="ftp"/>
+                    <p:outputLabel value="FTP:" for="ftp" style="font-weight: bolder"/>
                     <p:inputText  id="ftp" value="#{package_detailBean.package_detailObject.ftp}" required="true" requiredMessage="FTP field is required" />
-                    <p:outputLabel value="DBS:" for="dbs"/>
+                    <p:outputLabel value="DBS:" for="dbs" style="font-weight: bolder"/>
                     <p:inputText  id="dbs" value="#{package_detailBean.package_detailObject.dbs}" required="true" requiredMessage="DBS field is required" />
-                    <p:outputLabel value="Other Details:" for="other_details"/>
+                    <p:outputLabel value="Other Details:" for="other_details" style="font-weight: bolder"/>
                     <p:inputText  id="other_details" value="#{package_detailBean.package_detailObject.other_details}" required="false" requiredMessage="Other Details field is required" />
                 </p:panelGrid>
                 <br></br>

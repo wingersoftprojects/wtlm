@@ -30,13 +30,13 @@
                         </p:selectOneMenu>
                         <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Host Platform:" style="font-weight: bolder"/>
                         <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{web_service.host_platform_id}">
-                            <f:selectItem itemLabel="--select category--" />
+                            <f:selectItem itemLabel="--select Platform--" />
                             <f:selectItems value="#{host_platformBean.host_platforms}" var="item" itemValue="#{item.host_platform_id}" itemLabel="#{item.host_platform_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
-                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Service Category:" for="service_category_id" style="font-weight: bolder"/>
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" value="Domain Platform:" for="service_category_id" style="font-weight: bolder"/>
                         <p:selectOneMenu id="service_category_id" value="#{web_service.service_category_id}" required="false">
-                            <f:selectItem itemLabel="--select service"/>
+                            <f:selectItem itemLabel="--select Platform--"/>
                             <f:selectItems value="#{service_categoryBean.service_categorys}" var="item" itemValue="#{item.service_category_id}" itemLabel="#{item.service_category_name}"/>
                             <f:ajax execute="@this"/>
                         </p:selectOneMenu>
@@ -52,6 +52,9 @@
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
                         DOMAIN LISTING
+                        #{web_serviceBean.web_serviceList.size()} Records Found
+                        <p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="web_service_table" trigger="toggler" />
                     </f:facet>
                     <f:facet name="{Exporters}">
                         <h:commandLink>
@@ -74,16 +77,16 @@
                     <p:column headerText="Domain ID" filterMatchMode="contains"  style="width: 10px">
                         <p:outputLabel value="#{item.web_service_id}"/>    
                     </p:column>
-                    <p:column headerText="Domain Name" style="width: 20px">
+                    <p:column headerText="Domain Name" filterMatchMode="contains" filterBy="#{item.domain_name}" style="width: 20px">
                         <p:outputLabel value="#{item.domain_name}"/>      
-                    </p:column>
-                    <p:column headerText="Client Name" style="width: 20px" >
-                        <p:outputLabel value="#{transactorBean.getTransactor(item.transactor_id).transactorNames}"/>      
                     </p:column>
                     <p:column headerText="Package" style="width: 15px">
                         <p:outputLabel value="#{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}"/>      
                     </p:column> 
-                    <p:column headerText="Category" filterMatchMode="contains"  style="width: 1px">
+                    <p:column headerText="Host Platform" filterMatchMode="contains"  style="width: 1px">
+                        <p:outputLabel value="#{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}"/>  
+                    </p:column> 
+                    <p:column headerText="Domain Platform" filterMatchMode="contains"  style="width: 1px">
                         <p:outputLabel value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/>  
                     </p:column> 
                     <p:column   headerText="Start Date" style="width: 20px">
@@ -129,8 +132,8 @@
                                 <f:convertNumber pattern="###,###.##"/>
                             </h:inputText>
 
-                            <p:outputLabel value="AVERAGE MONTHLY PAYMENT: " id="total_payment_monthly" style="font-weight: bolder"/>
-                            <h:inputText value="#{web_serviceBean.total_payment_yearly/12}" disabled="true" class="grayed_out">
+                            <p:outputLabel value="AVERAGE MONTHLY PAYMENT: " style="font-weight: bolder"/>
+                            <h:inputText value="#{web_serviceBean.total_payment_yearly/12}" id="total_payment_monthly" disabled="true" class="grayed_out">
                                 <f:convertNumber pattern="###,###.##"/>
                             </h:inputText>
                         </h:panelGrid>

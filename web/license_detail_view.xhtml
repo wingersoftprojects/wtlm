@@ -39,7 +39,9 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
-                        LICENSE LISTING
+                        LICENSE LISTING, #{license_detailBean.license_detailList.size()} Records Found
+                        <p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="license_detail_table" trigger="toggler" />
                     </f:facet>
                     <f:facet name="{Exporters}">
                         <h:commandLink>
@@ -103,7 +105,6 @@
                             <p:commandButton value="Yes"  type="button" actionListener="#{license_detailBean.deleteLicense_detail(item)}" update="@form" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                         </p:confirmDialog>                                               
-
                     </p:column>
                 </p:dataTable>
                 <br></br>

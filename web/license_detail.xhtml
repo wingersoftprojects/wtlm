@@ -10,7 +10,7 @@
         <h:form id="main_form">
             <p:growl id="messages" showDetail="true" />
             <p:fieldset  legend="License Details" style="width: 92%">                   
-                <h:panelGrid columns="4" id="license_detail">                                                
+                <p:panelGrid columns="4" id="license_detail">                                                
                     <p:outputLabel value="Client Name:" for="client_name" style="font-weight: bolder"/>
                     <p:autoComplete id="client_name" value="#{license_detailBean.selectedTransactor}" 
                                     completeMethod="#{transactorBean.getTransactorObjectList}" 
@@ -81,7 +81,7 @@
                         <f:selectItem itemLabel="Yes" itemValue="Yes" />
                         <f:selectItem itemLabel="No" itemValue="No" />
                     </p:selectOneMenu>
-                </h:panelGrid>
+                </p:panelGrid>
             </p:fieldset>            
             <p:panel style="background-color:#D5E7F2; width: 94%">
                 <center>

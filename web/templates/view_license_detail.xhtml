@@ -70,13 +70,13 @@
                         <h:outputText value="#{item.license_client_name}"/><br/><br/>
                         <h:outputText value="#{wtl_appBean.getWtl_app(item.wtl_app_id).wtl_app_name}"/><br/><br/>
                         <h:outputText value="#{item.license_package}"/><br/><br/>
-                        <h:outputText value="#{item.start_date}"/>>
+                        <h:outputText value="#{item.start_date}">
                             <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
                         </h:outputText><br/><br/>
-                        <h:outputText value="#{item.expire_date}"/>>
+                        <h:outputText value="#{item.expire_date}">
                             <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
                         </h:outputText><br/><br/>
-                        <h:outputText value="#{item.last_renew_date}"/>>
+                        <h:outputText value="#{item.last_renew_date}">
                             <f:convertDateTime pattern="dd-MM-yyyy" timeZone="EAT"/>
                         </h:outputText><br/><br/>
                         <h:outputText value="#{item.amount_payable}"/><br/><br/>

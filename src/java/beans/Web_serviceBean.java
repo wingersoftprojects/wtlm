@@ -43,7 +43,6 @@ public class Web_serviceBean implements Serializable {
     private List<Web_service> Web_serviceList;
     private Web_service Web_serviceObject;
     private float total_payment_yearly;
-    private float average_payment_monthly;
     private Transactor SelectedTransactor;
 
     public Web_service getWeb_service() {
@@ -474,7 +473,7 @@ public class Web_serviceBean implements Serializable {
             if (aWeb_service.getStart_date() != null && aWeb_service.getStart_date2() != null) {
                 wheresql = wheresql + " AND start_date BETWEEN '" + new java.sql.Date(aWeb_service.getStart_date().getTime()) + "' AND '" + new java.sql.Date(aWeb_service.getStart_date2().getTime()) + "'";
             }
-            orderby = " ORDER BY start_date DESC";
+            orderby = " ORDER BY add_date DESC";
             sql = sql + wheresql + orderby;
             System.out.println(sql);
             res = ps.executeQuery(sql);
@@ -485,7 +484,7 @@ public class Web_serviceBean implements Serializable {
                 this.Web_serviceList.add(ws);
             }
         } catch (SQLException se) {
-            System.out.println(sql);
+            System.out.println(se);
         }
     }
 
@@ -503,25 +502,7 @@ public class Web_serviceBean implements Serializable {
                 this.total_payment_yearly = res.getFloat("total_payment_yearly");                
             }
         } catch (SQLException se) {
-            System.out.println(sql);
-        }
-    }
-
-    public void computeAverage_monthly_payment() {
-        ResultSet res = null;
-        String sql = "SELECT sum(amount_payable/years_payable)/12"
-                + " AS total_payment_monthly FROM web_service"
-                + " WHERE is_deleted=0 AND is_active='Yes';";
-        try (
-                Connection conn = DBConnection.getMySQLConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);) {
-            System.out.println(sql);
-            res = ps.executeQuery(sql);
-            while (res.next()) {
-                this.average_payment_monthly = res.getFloat("total_payment_monthly");
-            }
-        } catch (SQLException se) {
-            System.out.println(sql);
+            System.out.println(se);
         }
     }
 
@@ -571,7 +552,7 @@ public class Web_serviceBean implements Serializable {
      * @return the total_payment_yearly
      */
     public float getTotal_payment_yearly() {
-        computeTotal_yearly_payment();
+//        computeTotal_yearly_payment();
         return total_payment_yearly;
     }
 
@@ -581,22 +562,7 @@ public class Web_serviceBean implements Serializable {
     public void setTotal_payment_yearly(float total_payment_yearly) {
         this.total_payment_yearly = total_payment_yearly;
     }
-
-    /**
-     * @return the Average_payment_monthly
-     */
-    public float getAvearage_payment_monthly() {
-        computeAverage_monthly_payment();
-        return average_payment_monthly;
-    }
-
-    /**
-     * @param average_payment_monthly the Total_payment_monthly to set
-     */
-    public void setAverage_payment_monthly(float average_payment_monthly) {
-        this.average_payment_monthly = average_payment_monthly;
-    }
-
+    
     /**
      * @return the SelectedTransactor
      */

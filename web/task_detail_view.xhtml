@@ -50,7 +50,9 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                              rowsPerPageTemplate="5,10,15,30,50,100">
                     <f:facet name="header">
-                        TASKS VIEW
+                        TASKS LISTING, #{task_detailBean.task_detailList.size()} Records Found
+                        <p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="task_detail_table" trigger="toggler" />
                     </f:facet>
                     <f:facet name="{Exporters}">
                         <h:commandLink>

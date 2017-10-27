@@ -44,14 +44,14 @@
 
                     <p:outputLabel value="Host Platform:" for="host_platform_id" style="font-weight: bolder"/>
                     <p:selectOneMenu id="host_platform_id" value="#{web_serviceBean.web_serviceObject.host_platform_id}" required="true" requiredMessage="Host Platform field is required!">
-                        <f:selectItem itemLabel="--select host"/>
+                        <f:selectItem itemLabel="--select Platform"/>
                         <f:selectItems value="#{host_platformBean.host_platforms}" var="item" itemValue="#{item.host_platform_id}" itemLabel="#{item.host_platform_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Service Category:" for="service_category_id" style="font-weight: bolder"/>
-                    <p:selectOneMenu id="service_category_id" value="#{web_serviceBean.web_serviceObject.service_category_id}" required="true" requiredMessage="Service Category field is required!">
-                        <f:selectItem itemLabel="--select service"/>
+                    <p:outputLabel value="Domain Platform:" for="service_category_id" style="font-weight: bolder"/>
+                    <p:selectOneMenu id="service_category_id" value="#{web_serviceBean.web_serviceObject.service_category_id}" required="true" requiredMessage="Domain Platform field is required!">
+                        <f:selectItem itemLabel="--select Platform"/>
                         <f:selectItems value="#{service_categoryBean.service_categorys}" var="item" itemValue="#{item.service_category_id}" itemLabel="#{item.service_category_name}"/>
                         <f:ajax execute="@this"/>
                     </p:selectOneMenu>

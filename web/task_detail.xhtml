@@ -18,7 +18,7 @@
                 </p:panel>
                 <br></br>
                 <p:fieldset legend="Task Details" style="width: 95%">
-                    <h:panelGrid columns="2">
+                    <p:panelGrid columns="2">
                         <h:outputText value="Description" style="font-weight: bolder"/>                                
                         <h:inputTextarea value="#{task_detailBean.task_detailObject.task_description}" cols="70" rows="2" required="true" requiredMessage="Description field is required">
                             <f:ajax execute="@this"/>.
@@ -123,7 +123,7 @@
                             <f:ajax execute="@this"/>.
                         </h:inputTextarea>
 
-                    </h:panelGrid>
+                    </p:panelGrid>
                 </p:fieldset>
                 <p:panel style="background-color:#D5E7F2; width: 100%">
                     <center>
