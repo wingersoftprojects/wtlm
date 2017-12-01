@@ -74,7 +74,7 @@
                             <p:dataExporter type="xml" target="web_service_table" fileName="Domain_Detail" />
                         </h:commandLink>
                     </f:facet>
-                    <p:column headerText="Domain ID" filterMatchMode="contains"  style="width: 10px">
+                    <p:column headerText="Domain ID" style="width: 10px">
                         <p:outputLabel value="#{item.web_service_id}"/>    
                     </p:column>
                     <p:column headerText="Domain Name" filterMatchMode="contains" filterBy="#{item.domain_name}" style="width: 20px">
@@ -83,10 +83,10 @@
                     <p:column headerText="Package" style="width: 15px">
                         <p:outputLabel value="#{package_detailBean.getPackage_detail(item.package_detail_id).package_detail_name}"/>      
                     </p:column> 
-                    <p:column headerText="Host Platform" filterMatchMode="contains"  style="width: 1px">
+                    <p:column headerText="Host Platform" style="width: 1px">
                         <p:outputLabel value="#{host_platformBean.getHost_platform(item.host_platform_id).host_platform_name}"/>  
                     </p:column> 
-                    <p:column headerText="Domain Platform" filterMatchMode="contains"  style="width: 1px">
+                    <p:column headerText="Domain Platform" style="width: 1px">
                         <p:outputLabel value="#{service_categoryBean.getService_category(item.service_category_id).service_category_name}"/>  
                     </p:column> 
                     <p:column   headerText="Start Date" style="width: 20px">

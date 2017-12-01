@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="./layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <f:view>
+            <h:form id="form_task_detail_view">
+                <p:growl showDetail="true" id="task_detail_view_messages"/>
+                <h:panelGrid id="title"  styleClass="clsPanelTaskFilterTitle" style="background-color:gray">
+                    <p:outputLabel value="Domain Expiry Report" style="font-weight: bolder; font-size: 20px; color: white" styleClass="clsLabelTaskFilterTitle"/>                    
+                </h:panelGrid>
+                <div class="ui-fluid">
+                    <h:panelGrid id="search_filter" columns="6" styleClass="clsPanelTaskFilterTitle" style="width: 100%">                  
+                        <p:outputLabel styleClass="clsLabelTaskFilterTitle" id="expiry" value="Expiry Period:" style="font-weight: bolder"/>
+                        <p:selectOneMenu styleClass="clsPanelTaskFilterTitle" value="#{web_service.expire_date}">
+                            <f:selectItem itemLabel="--select status--"/>
+                            <f:selectItem itemLabel="3 Months" itemValue="1"/>
+                            <f:selectItem itemLabel="2 Months" itemValue="2"/>
+                            <f:selectItem itemLabel="1 Months" itemValue="3"/> 
+                            <f:selectItem itemLabel="2 Weeks" itemValue="4"/>
+                            <f:selectItem itemLabel="1 Week" itemValue="5"/>
+                            <f:selectItem itemLabel="1 Day" itemValue="6"/> 
+                            <f:selectItem itemLabel="Today" itemValue="7"/> 
+                            <f:ajax execute="@this"/>
+                        </p:selectOneMenu>                         
+                        <p:commandButton styleClass="clsButtonTaskFilter" id="cmdbSearch" value="View Report" style="font-size: 20px">
+                        </p:commandButton>
+                    </h:panelGrid>
+                </div>
+                <p:dataTable id="domain_table" widgetVar="widget_task_detail_table"  var="item" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                             rowsPerPageTemplate="5,10,15,30,50,100">
+                    <f:facet name="header">
+                        DOMAIN LISTING Records Found
+                        <p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator"/>
+                    </f:facet>
+                    <f:facet name="{Exporters}">
+                        <h:commandLink>
+                            <p:graphicImage name="images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="domain_table" fileName="Task_Detail"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="domain_table" fileName="Task_Detail"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/csv.png" width="24"/>
+                            <p:dataExporter type="csv" target="domain_table" fileName="Task_Detail" />
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage name="images/xml.png" width="24"/>
+                            <p:dataExporter type="xml" target="domain_table" fileName="Task_Detail" />
+                        </h:commandLink>
+                    </f:facet>
+                    <p:column headerText="Domain Name." style="width: 5px">
+
+                    </p:column>
+                    <p:column headerText="Client Name" style="width: 20px">
+
+                    </p:column>
+
+                    <p:column headerText="Last Renew Date" style="width: 5px">
+
+                    </p:column> 
+                    <p:column headerText="Action" style="width: 30px" exportable="false">
+                        <p:commandButton  value="Renew" icon="ui-icon-pencil">
+                        </p:commandButton>
+
+                        <p:commandButton  value="Delete" icon="ui-icon-alert" update="@form">
+                            <p:confirm header="Confirmation" message="Are you sure you want to cancel this task?" icon="ui-icon-alert"/>
+                        </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Yes" update="@form" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                           
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>                                               
+                    </p:column>
+                </p:dataTable>
+            </h:form> 
+        </f:view>
+
+        <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+            <f:facet name="default">
+                <h:outputText value="Status: StandBy"/>
+            </f:facet>
+
+            <f:facet name="start">
+
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="Status: Completed"/>
+            </f:facet>
+        </p:ajaxStatus>
+
+    </ui:define>
+</ui:composition>
+
